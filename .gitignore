@@ -1,0 +1,34 @@
+# logs
+*.log
+*.debuglog
+*.stderr
+*.stdout
+
+# ignore build files
+/build
+/build_*
+/build-*
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+CTestTestfile.cmake
+*.a
+*.o
+*.so
+*.dll
+*.lib
+*.dylib
+cmake-build-*
+
+# Netbeans project files
+nbproject/*
+
+# JetBrains project files
+.idea
+
+# Microsoft Visual Studio
+.vs
+
+# Microsoft Visual Studio Code
+.vscode
