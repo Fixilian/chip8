@@ -1,4 +1,6 @@
 set(SOURCES
+  base/BitOperationsTest.cpp
+  
   HexRomParserTest.cpp
 )
 

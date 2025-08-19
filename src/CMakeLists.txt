@@ -1,4 +1,6 @@
 set(SOURCES
+  base/BitOperations.cpp
+
   exception/Exception.cpp
   exception/OutOfRangeException.cpp
   exception/SemanticException.cpp
