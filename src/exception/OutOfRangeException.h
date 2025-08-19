@@ -16,7 +16,12 @@ class OutOfRangeException : public Exception {
   OutOfRangeException& operator=(const OutOfRangeException&) = default;
   OutOfRangeException(OutOfRangeException&&) = default;
   OutOfRangeException& operator=(OutOfRangeException&&) = default;
+
+  friend std::ostream& operator<< (std::ostream& out, 
+                                    const OutOfRangeException& ex);
 };
+
+std::ostream& operator<< (std::ostream& out, const OutOfRangeException& ex);
 
 } // namespace chip8
 
