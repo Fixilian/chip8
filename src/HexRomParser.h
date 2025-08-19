@@ -33,7 +33,7 @@ class HexRomParser : public Parser {
    * Returns next opcode from hexadecimal ROM.
    * After Syntax error behavior is undefined.
    * @returns next opcode or 0 if ROM is ended.
-   * @throws SyntaxError when ROM contains unexpected characters. 
+   * @throws SyntaxException when ROM contains unexpected characters. 
    */
   word next();
   

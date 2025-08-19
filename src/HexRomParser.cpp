@@ -1,6 +1,6 @@
 #include "HexRomParser.h"
 
-#include "SyntaxError.h"
+#include "exception/SyntaxException.h"
 
 using namespace std;
 
@@ -68,11 +68,11 @@ word HexRomParser::next() {
       }
     }
 
-    throw SyntaxError(line_, col_, "Unexpected character");
+    throw SyntaxException(line_, col_, "Unexpected character");
   }
 
   if (cword_len != 0 && cword_len != kCharWordSize) {
-    throw SyntaxError(line_, col_, "Unexpected characters at the end");
+    throw SyntaxException(line_, col_, "Unexpected characters at the end");
   }
   
   pos_ += 1;
@@ -131,7 +131,7 @@ void HexRomParser::skipMultiLineComment() {
   }
 
   if (pos_ + 1 >= text_.length()) {
-    throw SyntaxError(line_, col_, "Incorrect end of multiline comment");
+    throw SyntaxException(line_, col_, "Incorrect end of multiline comment");
   }
 
   pos_ += 2; // move to next char after "*/"
