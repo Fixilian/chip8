@@ -10,7 +10,7 @@ using namespace std;
 using namespace chip8;
 
 
-TEST(Correctness, Simple) {
+TEST(HexRomParserTest, Correctness) {
   // Arrange
   string text = "0011AABB0022CCDD0033EEFF";
   vector<word> expected = { 0x0011, 0xAABB, 0x0022, 0xCCDD, 0x0033, 0xEEFF};
@@ -30,7 +30,7 @@ TEST(Correctness, Simple) {
 }
 
 
-TEST(Correctness, OpcodePosition) {
+TEST(HexRomParserTest, OpcodePosition) {
   // Arrange
   string text = "0011 AABB\n0022 CCDD 0033\nEEFF\n";
   vector<pair<int, int>> expected = { {1, 1}, {1, 6}, 
@@ -51,7 +51,7 @@ TEST(Correctness, OpcodePosition) {
 }
 
 
-TEST(Ignore, Whitespace) {
+TEST(HexRomParserTest, IgnoreWhitespace) {
   // Arrange
   string text = "0011 AABB\n0022\tCCDD 0033\nEEFF\n";
   vector<word> expected = { 0x0011, 0xAABB, 0x0022, 0xCCDD, 0x0033, 0xEEFF};
@@ -71,7 +71,7 @@ TEST(Ignore, Whitespace) {
 }
 
 
-TEST(Ignore, OneLineComment) {
+TEST(HexRomParserTest, IgnoreOneLineComment) {
   // Arrange
   string text = "0011 AABB// Hello, World!!!\n0022\tCCDD 0033\nEEFF\n";
   vector<word> expected = { 0x0011, 0xAABB, 0x0022, 0xCCDD, 0x0033, 0xEEFF};
@@ -91,7 +91,7 @@ TEST(Ignore, OneLineComment) {
 }
 
 
-TEST(Ignore, MultilineComment) {
+TEST(HexRomParserTest, IgnoreMultilineComment) {
   // Arrange
   string text = "0011 /* Hello, \n0011\n World!!! */ AABB\n0022\tCCDD 0033\n";
   vector<word> expected = { 0x0011, 0xAABB, 0x0022, 0xCCDD, 0x0033};
@@ -111,7 +111,7 @@ TEST(Ignore, MultilineComment) {
 }
 
 
-TEST(Exceptions, UnexpectedChar) {
+TEST(HexRomParserTest, UnexpectedChar) {
   // Arrange
   string text = "00ZZ";
   HexRomParser parser(text);
@@ -124,7 +124,7 @@ TEST(Exceptions, UnexpectedChar) {
 }
 
 
-TEST(Exceptions, IncorrectOpcode) {
+TEST(HexRomParserTest, IncorrectOpcode) {
   // Arrange
   string text = "00A";
   HexRomParser parser(text);
