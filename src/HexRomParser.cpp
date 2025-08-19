@@ -90,13 +90,17 @@ bool HexRomParser::isWhitespace(char ch) {
 
 
 word HexRomParser::charToDigit(char ch) {
+  int digit = -1;
   if (ch >= '0' && ch <= '9') {
-    return ch - '0';
+    digit = ch - '0';
   }
   if (ch >= 'a' && ch <= 'z') {
-    return ch - 'a' + 10;
+    digit = ch - 'a' + 10;
   }
-  return ch - 'A' + 10;
+  if (ch >= 'A' && ch <= 'Z') {
+    digit = ch - 'A' + 10;
+  }
+  return static_cast<word>(digit);
 }
 
 

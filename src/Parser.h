@@ -1,7 +1,7 @@
 #ifndef CHIP8_PARSER_H
 #define CHIP8_PARSER_H
 
-#include "Aliases.h"
+#include "base/Aliases.h"
 
 namespace chip8 {
 

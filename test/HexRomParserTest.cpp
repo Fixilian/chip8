@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "exception/SyntaxException.h"
 #include "HexRomParser.h"
-#include "SyntaxError.h"
 
 using namespace std;
 using namespace chip8;
@@ -120,7 +120,7 @@ TEST(Exceptions, UnexpectedChar) {
   // Assert
   EXPECT_THROW( { 
     parser.next();
-  }, SyntaxError);
+  }, SyntaxException);
 }
 
 
@@ -133,5 +133,5 @@ TEST(Exceptions, IncorrectOpcode) {
   // Assert
   EXPECT_THROW( { 
     parser.next();
-  }, SyntaxError);
+  }, SyntaxException);
 }

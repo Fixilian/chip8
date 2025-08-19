@@ -5,7 +5,7 @@
 #include <vector>
 #include <unordered_set>
 
-#include "Aliases.h"
+#include "base/Aliases.h"
 #include "Parser.h"
 
 namespace chip8 {
