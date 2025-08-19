@@ -1,6 +1,10 @@
 set(SOURCES
+  exception/Exception.cpp
+  exception/OutOfRangeException.cpp
+  exception/SemanticException.cpp
+  exception/SyntaxException.cpp
+
   HexRomParser.cpp
-  SyntaxError.cpp
 )
 
 add_library(libchip8 ${SOURCES})
