@@ -1,12 +1,12 @@
-#ifndef CHIP8_HEXROMPARSER_H
-#define CHIP8_HEXROMPARSER_H
+#ifndef CHIP8_COMPILER_HEXROMPARSER_H
+#define CHIP8_COMPILER_HEXROMPARSER_H
 
 #include <string>
 #include <vector>
 #include <unordered_set>
 
 #include "base/Aliases.h"
-#include "Parser.h"
+#include "compiler/Parser.h"
 
 namespace chip8 {
 
@@ -50,7 +50,7 @@ class HexRomParser : public Parser {
   int getColumn() { return opcode_col_; }
 
  private:
-  static std::unordered_set<char> alphabet;
+  static std::unordered_set<char> alphabet_;
   std::string_view text_;
   std::size_t pos_;
   int opcode_line_;
@@ -71,4 +71,4 @@ class HexRomParser : public Parser {
 
 } // namespace chip8
 
-#endif // CHIP8_HEXROMPARSER_H
+#endif // CHIP8_COMPILER_HEXROMPARSER_H

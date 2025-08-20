@@ -1,7 +1,9 @@
 set(SOURCES
   base/BitOperationsTest.cpp
   
-  HexRomParserTest.cpp
+  compiler/CompilerTest.cpp
+  compiler/HexRomParserTest.cpp
+  compiler/RomBuilderTest.cpp
 )
 
 add_executable(chiptests ${SOURCES})

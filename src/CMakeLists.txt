@@ -1,12 +1,16 @@
 set(SOURCES
   base/BitOperations.cpp
+  base/Rom.cpp
+  base/RomView.cpp
+
+  compiler/Compiler.cpp
+  compiler/HexRomParser.cpp
+  compiler/RomBuilder.cpp
 
   exception/Exception.cpp
   exception/OutOfRangeException.cpp
   exception/SemanticException.cpp
   exception/SyntaxException.cpp
-
-  HexRomParser.cpp
 )
 
 add_library(libchip8 ${SOURCES})

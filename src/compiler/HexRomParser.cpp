@@ -7,7 +7,7 @@ using namespace std;
 namespace chip8 {
 
 
-unordered_set<char> HexRomParser::alphabet = {
+unordered_set<char> HexRomParser::alphabet_ = {
   '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
   'a', 'b', 'c', 'd', 'e', 'f',
   'A', 'B', 'C', 'D', 'E', 'F'};
@@ -42,7 +42,7 @@ word HexRomParser::next() {
       continue;
     }
 
-    if (alphabet.contains(ch)) {
+    if (alphabet_.contains(ch)) {
       if (cword_len == 0) {
         opcode_line_ = line_;
         opcode_col_ = col_;

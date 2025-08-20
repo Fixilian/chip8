@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "compiler/HexRomParser.h"
 #include "exception/SyntaxException.h"
-#include "HexRomParser.h"
 
 using namespace std;
 using namespace chip8;

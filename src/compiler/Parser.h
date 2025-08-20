@@ -1,5 +1,5 @@
-#ifndef CHIP8_PARSER_H
-#define CHIP8_PARSER_H
+#ifndef CHIP8_COMPILER_PARSER_H
+#define CHIP8_COMPILER_PARSER_H
 
 #include "base/Aliases.h"
 
@@ -16,7 +16,7 @@ class Parser {
    * Returns next opcode from ROM.
    * @returns next opcode or 0 if ROM is ended.
    */
-  word next();
+  virtual word next() = 0;
   
   /**
    * Returns line in ROM of previous opcode (of next() result).
@@ -33,4 +33,4 @@ class Parser {
 
 }
 
-#endif // CHIP8_PARSER_H
+#endif // CHIP8_COMPILER_PARSER_H
