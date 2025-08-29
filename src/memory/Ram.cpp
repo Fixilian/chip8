@@ -1,0 +1,103 @@
+#include "Ram.h"
+
+#include <cstring>
+
+#include "exception/SegFaultException.h"
+#include "exception/OutOfRangeException.h"
+
+namespace chip8 {
+
+
+Ram::Ram(int size, int reserve)
+    : size_(size),
+      reserve_(reserve),
+      user_mem_begin_(reserve),
+      mem_(new byte[size]),
+      rom_begin_(nullptr),
+      rom_end_(nullptr),
+      sprites_(nullptr)
+{
+  constexpr int kSourceSize = 80; 
+  byte source[kSourceSize] = {
+    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
+    0x20, 0x60, 0x20, 0x20, 0x70, // 1
+    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
+    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
+    0x90, 0x90, 0xF0, 0x10, 0x10, // 4
+    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
+    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
+    0xF0, 0x10, 0x20, 0x40, 0x40, // 7
+    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
+    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
+    0xF0, 0x90, 0xF0, 0x90, 0x90, // A
+    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
+    0xF0, 0x80, 0x80, 0x80, 0xF0, // C
+    0xE0, 0x90, 0x90, 0x90, 0xE0, // D
+    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
+    0xF0, 0x80, 0xF0, 0x80, 0x80, // F
+  };
+  sprites_ = mem_;
+  for (int i = 0; i < kSourceSize; i += 1) {
+    sprites_[i] = source[i];
+  }
+}
+
+
+Ram::~Ram() {
+  delete[] mem_;
+  mem_ = nullptr;
+}
+
+
+void Ram::load(const Rom& rom) {
+  rom_begin_ = reinterpret_cast<word*>(mem_ + reserve_);
+  rom_end_ = reinterpret_cast<word*>(mem_ + reserve_ + rom.size());
+  user_mem_begin_ += rom.size();
+  memcpy(rom_begin_, rom.raw(), rom.size());
+}
+
+
+const word* Ram::getRomBegin() {
+  return rom_begin_;
+}
+
+
+const word* Ram::getRomEnd() {
+  return rom_end_;
+}
+
+
+byte& Ram::operator[](int index) {
+  if (index < user_mem_begin_ || index >= size_) {
+    throw SegFaultException("Attempt to access system memory");
+  }
+  return mem_[index];
+}
+
+
+const byte& Ram::operator[](int index) const {
+  if (index < user_mem_begin_ || index >= size_) {
+    throw SegFaultException("Attempt to access system memory");
+  }
+  return mem_[index];
+}
+
+
+const byte* Ram::getDigitSprite(int digit) {
+  if (digit < 0 || digit > 0xF) {
+    throw OutOfRangeException("Unexpected value for hex digit");
+  }
+  return sprites_ + (digit * kDigitSpriteSize);
+}
+
+
+void Ram::setSprite(byte* p, byte b0, byte b1, byte b2, byte b3, byte b4) {
+  p[0] = b0;
+  p[1] = b1;
+  p[2] = b2;
+  p[3] = b3;
+  p[4] = b4;
+}
+  
+
+} // namespace chip8

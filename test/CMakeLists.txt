@@ -6,6 +6,8 @@ set(SOURCES
   compiler/RomBuilderTest.cpp
 
   graphics/FrameTest.cpp
+
+  memory/RamTest.cpp
 )
 
 add_executable(chiptests ${SOURCES})
