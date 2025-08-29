@@ -31,6 +31,6 @@ class Parser {
   virtual int getColumn() = 0;
 };
 
-}
+} // namespace chip8
 
 #endif // CHIP8_COMPILER_PARSER_H
