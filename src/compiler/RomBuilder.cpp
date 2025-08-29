@@ -7,7 +7,7 @@ using namespace std;
 namespace chip8 {
 
 
-RomBuilder::RomBuilder(size_t size) 
+RomBuilder::RomBuilder(int size) 
     : size_(size),
       insert_index_(0),
       capacity_(size / sizeof(word))

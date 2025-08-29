@@ -7,7 +7,7 @@ using namespace std;
 namespace chip8 {
 
 
-Rom::Rom(const word* opcodes, size_t size)
+Rom::Rom(const word* opcodes, int size)
     : size_(size)
 {
   opcodes_ = new word[size_ / sizeof(word)];
@@ -64,7 +64,7 @@ const word* Rom::raw() const {
 }
 
 
-std::size_t Rom::size() const {
+int Rom::size() const {
   return size_;
 }
 

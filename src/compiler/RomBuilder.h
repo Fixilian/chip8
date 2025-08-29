@@ -1,8 +1,6 @@
 #ifndef CHIP8_COMPILER_ROMBUILDER_H
 #define CHIP8_COMPILER_ROMBUILDER_H
 
-#include <memory>
-
 #include "base/Aliases.h"
 #include "base/Rom.h"
 
@@ -17,7 +15,7 @@ class RomBuilder {
    * Creates empty Rom.
    * @param size - rom size in bytes.
    */
-  RomBuilder(std::size_t size);
+  RomBuilder(int size);
   
   ~RomBuilder();
 
@@ -39,9 +37,9 @@ class RomBuilder {
   Rom build();
  
  private:
-  std::size_t size_;
-  std::size_t insert_index_;
-  std::size_t capacity_;
+  int size_;
+  int insert_index_;
+  int capacity_;
   word* rom_;
 };
 

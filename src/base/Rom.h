@@ -1,8 +1,6 @@
 #ifndef CHIP8_BASE_ROM_H
 #define CHIP8_BASE_ROM_H
 
-#include <memory>
-
 #include "Aliases.h"
 
 namespace chip8 {
@@ -17,7 +15,7 @@ class Rom {
    * @param opcodes - array of opcodes.
    * @param size - size in bytes.
    */
-  Rom(const word* opcodes, std::size_t size);
+  Rom(const word* opcodes, int size);
 
   ~Rom();
 
@@ -28,11 +26,11 @@ class Rom {
 
   const word* raw() const;
 
-  std::size_t size() const;
+  int size() const;
 
  private:
   word* opcodes_;
-  std::size_t size_;
+  int size_;
 };
 
 } // namespace chip8
