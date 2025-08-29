@@ -26,9 +26,9 @@ class Rom {
   Rom(Rom&&);
   Rom& operator=(Rom&&);
 
-  const word* raw();
+  const word* raw() const;
 
-  std::size_t size();
+  std::size_t size() const;
 
  private:
   word* opcodes_;

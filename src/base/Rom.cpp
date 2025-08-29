@@ -59,12 +59,12 @@ Rom& Rom::operator=(Rom&& other) {
 }
 
 
-const word* Rom::raw() {
+const word* Rom::raw() const {
   return opcodes_;
 }
 
 
-std::size_t Rom::size() {
+std::size_t Rom::size() const {
   return size_;
 }
 

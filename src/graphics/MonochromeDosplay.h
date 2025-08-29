@@ -12,6 +12,11 @@ class MonochromeDisplay : Display {
 
   virtual ~MonochromeDisplay() {}
 
+  MonochromeDisplay(const MonochromeDisplay&) = default;
+  MonochromeDisplay& operator=(const MonochromeDisplay&) = default;
+  MonochromeDisplay(MonochromeDisplay&&) = default;
+  MonochromeDisplay& operator=(MonochromeDisplay&&) = default;
+
   virtual int getHeight() override;
   virtual int getWidth() override;
 
