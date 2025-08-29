@@ -5,6 +5,8 @@ namespace chip8 {
 
 using word = unsigned short;
 
+using byte = unsigned char;
+
 } // namespace chip8
 
 #endif // CHIP8_BASE_ALIASES_H

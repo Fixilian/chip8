@@ -4,6 +4,8 @@ set(SOURCES
   compiler/CompilerTest.cpp
   compiler/HexRomParserTest.cpp
   compiler/RomBuilderTest.cpp
+
+  graphics/FrameTest.cpp
 )
 
 add_executable(chiptests ${SOURCES})

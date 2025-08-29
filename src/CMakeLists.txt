@@ -11,6 +11,9 @@ set(SOURCES
   exception/OutOfRangeException.cpp
   exception/SemanticException.cpp
   exception/SyntaxException.cpp
+
+  graphics/Frame.cpp
+  graphics/MonochromeDisplay.cpp
 )
 
 add_library(libchip8 ${SOURCES})

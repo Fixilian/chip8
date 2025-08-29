@@ -1,9 +1,13 @@
 #ifndef CHIP8_BITOPERATIONS_H
 #define CHIP8_BITOPERATIONS_H
 
+#include <stddef.h>
+
 #include "Aliases.h"
 
 namespace chip8 {
+
+constexpr size_t kBits = 8;
 
 word highest4BitsOf(word op);
 

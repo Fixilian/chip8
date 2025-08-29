@@ -1,12 +1,8 @@
 #include "BitOperations.h"
 
-#include <stddef.h>
-
 using namespace std;
 
 namespace chip8 {
-
-constexpr size_t kBits = 8;
 
 
 static word get4Bits(word op, size_t shift) {
