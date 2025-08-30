@@ -15,6 +15,10 @@ set(SOURCES
   graphics/Frame.cpp
   graphics/MonochromeDisplay.cpp
 
+  instruction/ExecutionContext.cpp
+  instruction/Instruction.cpp
+  instruction/SysJumpInstruction.cpp
+
   memory/FixedMemory.cpp
 )
 
