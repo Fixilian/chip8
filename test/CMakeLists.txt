@@ -1,5 +1,6 @@
 set(SOURCES
   base/BitOperationsTest.cpp
+  base/StackTest.cpp
   
   compiler/CompilerTest.cpp
   compiler/HexRomParserTest.cpp

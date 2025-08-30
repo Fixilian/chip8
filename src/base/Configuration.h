@@ -9,6 +9,8 @@ class Configuration {
 
   static constexpr int kReservedMemorySize = 512;
 
+  static constexpr int kStackSize = 16;
+
   Configuration() {}
 
   Configuration(const Configuration&) = default;
