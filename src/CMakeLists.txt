@@ -18,6 +18,7 @@ set(SOURCES
   instruction/ClearDisplayInstruction.cpp
   instruction/ExecutionContext.cpp
   instruction/Instruction.cpp
+  instruction/JumpInstruction.cpp
   instruction/ReturnInstruction.cpp
   instruction/SysJumpInstruction.cpp
 
