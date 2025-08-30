@@ -7,7 +7,7 @@ set(SOURCES
 
   graphics/FrameTest.cpp
 
-  memory/RamTest.cpp
+  memory/FixedMemoryTest.cpp
 )
 
 add_executable(chiptests ${SOURCES})

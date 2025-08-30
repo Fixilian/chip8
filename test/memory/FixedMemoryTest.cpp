@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "memory/Ram.h"
+#include "memory/FixedMemory.h"
 
 using namespace std;
 using namespace chip8;
@@ -15,7 +15,7 @@ TEST(RamTest, Load) {
   Rom rom(rom_source, kRomSize * sizeof(word));
   int reserve = 512;
   int size = 1024;
-  Ram ram(size, reserve);
+  FixedMemory ram(size, reserve);
 
   // Act
   ram.load(rom);
@@ -39,7 +39,7 @@ TEST(RamTest, RandomAccess) {
   Rom rom(rom_source, kRomSize * sizeof(word));
   int reserve = 512;
   int size = 1024;
-  Ram ram(size, reserve);
+  FixedMemory ram(size, reserve);
   ram.load(rom);
   int start = reserve + kRomSize * sizeof(word);
 
@@ -52,7 +52,7 @@ TEST(RamTest, RandomAccess) {
   for (int i = 0; i < expected_len; i += 1) {
     EXPECT_EQ(ram[start + i], expected[i]);
   }
-  const Ram& r = ram;
+  const FixedMemory& r = ram;
   for (int i = 0; i < expected_len; i += 1) {
     EXPECT_EQ(r[start + i], expected[i]);
   }
@@ -63,7 +63,7 @@ TEST(RamTest, Sprites) {
   // Arrange
   int reserve = 512;
   int size = 1024;
-  Ram ram(size, reserve);
+  FixedMemory ram(size, reserve);
   vector<chip8::byte> sprite1 = { 0x20, 0x60, 0x20, 0x20, 0x70 };
 
   // Act

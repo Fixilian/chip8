@@ -1,41 +1,30 @@
 #ifndef CHIP8_MEMORY_RAM_H
 #define CHIP8_MEMORY_RAM_H
 
-#include <vector>
-
-#include "Memory.h"
+#include "base/Aliases.h"
 
 namespace chip8 {
 
+constexpr int kDigitSpriteSize = 5; // sprite is 5 byte long.
+
 /**
- * Random access memory.
+ * Random access memory interface.
  */
-class Ram : public Memory {
+class Ram {
  public:
-  Ram(int size, int reserve);
+  virtual ~Ram() {}
 
-  virtual ~Ram();
+  /**
+   * @throws SegFaultException when trying to access read only memory.
+   */
+  virtual byte& operator[](int index) = 0;
+  virtual const byte& operator[](int index) const = 0;
 
-  virtual void load(const Rom& rom) override;
-
-  virtual const word* getRomBegin() override;
-  virtual const word* getRomEnd() override;
-
-  virtual byte& operator[](int index) override;
-  virtual const byte& operator[](int index) const override;
-
-  virtual const byte* getDigitSprite(int digit) override;
-
- private:
-  int size_;
-  int reserve_;
-  int user_mem_begin_;
-  byte* mem_;
-  word* rom_begin_;
-  word* rom_end_;
-  byte* sprites_;
-
-  void setSprite(byte* p, byte b1, byte b2, byte b3, byte b4, byte b5);
+  /**
+   * Returns digit sprite begin pointer. 
+   * @returns digit sprite begin pointer.
+   */
+  virtual const byte* getDigitSprite(int digit) = 0;
 };
 
 } // namespace chip8

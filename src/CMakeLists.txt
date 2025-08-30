@@ -1,7 +1,6 @@
 set(SOURCES
   base/BitOperations.cpp
   base/Rom.cpp
-  base/RomView.cpp
 
   compiler/Compiler.cpp
   compiler/HexRomParser.cpp
@@ -16,7 +15,7 @@ set(SOURCES
   graphics/Frame.cpp
   graphics/MonochromeDisplay.cpp
 
-  memory/Ram.cpp
+  memory/FixedMemory.cpp
 )
 
 add_library(libchip8 ${SOURCES})

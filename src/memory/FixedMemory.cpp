@@ -1,4 +1,4 @@
-#include "Ram.h"
+#include "FixedMemory.h"
 
 #include <cstring>
 
@@ -8,7 +8,7 @@
 namespace chip8 {
 
 
-Ram::Ram(int size, int reserve)
+FixedMemory::FixedMemory(int size, int reserve)
     : size_(size),
       reserve_(reserve),
       user_mem_begin_(reserve),
@@ -43,13 +43,13 @@ Ram::Ram(int size, int reserve)
 }
 
 
-Ram::~Ram() {
+FixedMemory::~FixedMemory() {
   delete[] mem_;
   mem_ = nullptr;
 }
 
 
-void Ram::load(const Rom& rom) {
+void FixedMemory::load(const Rom& rom) {
   rom_begin_ = reinterpret_cast<word*>(mem_ + reserve_);
   rom_end_ = reinterpret_cast<word*>(mem_ + reserve_ + rom.size());
   user_mem_begin_ += rom.size();
@@ -57,17 +57,17 @@ void Ram::load(const Rom& rom) {
 }
 
 
-const word* Ram::getRomBegin() {
+const word* FixedMemory::getRomBegin() {
   return rom_begin_;
 }
 
 
-const word* Ram::getRomEnd() {
+const word* FixedMemory::getRomEnd() {
   return rom_end_;
 }
 
 
-byte& Ram::operator[](int index) {
+byte& FixedMemory::operator[](int index) {
   if (index < user_mem_begin_ || index >= size_) {
     throw SegFaultException("Attempt to access system memory");
   }
@@ -75,7 +75,7 @@ byte& Ram::operator[](int index) {
 }
 
 
-const byte& Ram::operator[](int index) const {
+const byte& FixedMemory::operator[](int index) const {
   if (index < user_mem_begin_ || index >= size_) {
     throw SegFaultException("Attempt to access system memory");
   }
@@ -83,7 +83,7 @@ const byte& Ram::operator[](int index) const {
 }
 
 
-const byte* Ram::getDigitSprite(int digit) {
+const byte* FixedMemory::getDigitSprite(int digit) {
   if (digit < 0 || digit > 0xF) {
     throw OutOfRangeException("Unexpected value for hex digit");
   }
@@ -91,7 +91,7 @@ const byte* Ram::getDigitSprite(int digit) {
 }
 
 
-void Ram::setSprite(byte* p, byte b0, byte b1, byte b2, byte b3, byte b4) {
+void FixedMemory::setSprite(byte* p, byte b0, byte b1, byte b2, byte b3, byte b4) {
   p[0] = b0;
   p[1] = b1;
   p[2] = b2;
