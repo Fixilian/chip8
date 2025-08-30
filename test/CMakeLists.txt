@@ -9,6 +9,7 @@ set(SOURCES
   graphics/FrameTest.cpp
 
   instruction/ClearDisplayInstructionTest.cpp
+  instruction/ReturnInstructionTest.cpp
 
   memory/FixedMemoryTest.cpp
 )

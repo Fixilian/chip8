@@ -91,6 +91,11 @@ const byte* FixedMemory::getDigitSprite(int digit) {
 }
 
 
+const byte* FixedMemory::mem() const {
+  return mem_;
+}
+
+
 void FixedMemory::setSprite(byte* p, byte b0, byte b1, byte b2, byte b3, byte b4) {
   p[0] = b0;
   p[1] = b1;

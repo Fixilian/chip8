@@ -26,6 +26,8 @@ class FixedMemory : public Memory {
 
   virtual const byte* getDigitSprite(int digit) override;
 
+  virtual const byte* mem() const override;
+
  private:
   int size_;
   int reserve_;

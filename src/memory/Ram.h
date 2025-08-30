@@ -25,6 +25,12 @@ class Ram {
    * @returns digit sprite begin pointer.
    */
   virtual const byte* getDigitSprite(int digit) = 0;
+
+  /**
+   * Returns raw pointer to memory start.
+   * @returns raw pointer to memory start.
+   */
+  virtual const byte* mem() const = 0;
 };
 
 } // namespace chip8
