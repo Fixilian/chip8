@@ -46,4 +46,11 @@ void Frame::setPixel(int x, int y, byte val) {
 }
 
 
+void Frame::clear() {
+  for (auto& x : frame_) {
+    x = 0;
+  }
+}
+
+
 } // namespace chip8

@@ -30,6 +30,8 @@ class Frame {
   byte getPixel(int x, int y) const;
   void setPixel(int x, int y, byte val);
 
+  void clear();
+
  private:
   std::vector<byte> frame_;
   int width_;
