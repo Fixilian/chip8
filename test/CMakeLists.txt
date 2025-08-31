@@ -13,6 +13,7 @@ set(SOURCES
   instruction/JumpInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp
   instruction/SkipIfEqValueInstructionTest.cpp
+  instruction/SkipIfNeValueInstructionTest.cpp
 
   memory/FixedMemoryTest.cpp
 )
