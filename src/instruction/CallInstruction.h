@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 2nnn CALL addr instruction.
  */
-class CallInstruction : Instruction {
+class CallInstruction : public Instruction {
  public:
   CallInstruction(word opcode);
 

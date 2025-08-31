@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 00E0 CLS instruction.
  */
-class ClearDisplayInstruction : Instruction {
+class ClearDisplayInstruction : public Instruction {
  public:
   ClearDisplayInstruction(word opcode);
 

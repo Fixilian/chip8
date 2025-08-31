@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 00EE RET instruction.
  */
-class ReturnInstruction : Instruction {
+class ReturnInstruction : public Instruction {
  public:
   ReturnInstruction(word opcode);
 

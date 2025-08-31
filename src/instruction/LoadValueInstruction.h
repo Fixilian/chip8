@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 6xkk LD Vx, byte instruction.
  */
-class LoadValueInstruction : Instruction {
+class LoadValueInstruction : public Instruction {
  public:
   LoadValueInstruction(word opcode);
 

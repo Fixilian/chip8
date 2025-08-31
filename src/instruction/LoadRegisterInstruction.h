@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 8xy0 LD Vx, Vy instruction.
  */
-class LoadRegisterInstruction : Instruction {
+class LoadRegisterInstruction : public Instruction {
  public:
   LoadRegisterInstruction(word opcode);
 

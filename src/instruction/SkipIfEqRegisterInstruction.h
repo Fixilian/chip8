@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 5xy0 SE Vx, Vy instruction.
  */
-class SkipIfEqRegisterInstruction : Instruction {
+class SkipIfEqRegisterInstruction : public Instruction {
  public:
   SkipIfEqRegisterInstruction(word opcode);
 

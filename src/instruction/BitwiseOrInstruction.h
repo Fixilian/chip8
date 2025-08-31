@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 8xy1 OR Vx, Vy instruction.
  */
-class BitwiseOrInstruction : Instruction {
+class BitwiseOrInstruction : public Instruction {
  public:
   BitwiseOrInstruction(word opcode);
 

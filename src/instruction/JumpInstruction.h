@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 1nnn JP addr instruction.
  */
-class JumpInstruction : Instruction {
+class JumpInstruction : public Instruction {
  public:
   JumpInstruction(word opcode);
 

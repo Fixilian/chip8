@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 0nnn SYS instruction.
  */
-class SysJumpInstruction : Instruction {
+class SysJumpInstruction : public Instruction {
  public:
   SysJumpInstruction(word opcode);
 

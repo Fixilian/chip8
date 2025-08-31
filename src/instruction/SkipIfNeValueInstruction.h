@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 4xkk SNE Vx, byte instruction.
  */
-class SkipIfNeValueInstruction : Instruction {
+class SkipIfNeValueInstruction : public Instruction {
  public:
   SkipIfNeValueInstruction(word opcode);
 

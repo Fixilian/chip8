@@ -8,7 +8,7 @@ namespace chip8 {
 /**
  * 7xkk ADD Vx, byte instruction.
  */
-class AddValueInstruction : Instruction {
+class AddValueInstruction : public Instruction {
  public:
   AddValueInstruction(word opcode);
 
