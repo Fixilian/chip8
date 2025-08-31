@@ -12,6 +12,7 @@ set(SOURCES
   instruction/ClearDisplayInstructionTest.cpp
   instruction/JumpInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp
+  instruction/SkipIfEqRegisterInstructionTest.cpp
   instruction/SkipIfEqValueInstructionTest.cpp
   instruction/SkipIfNeValueInstructionTest.cpp
 

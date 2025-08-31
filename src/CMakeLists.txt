@@ -21,6 +21,7 @@ set(SOURCES
   instruction/Instruction.cpp
   instruction/JumpInstruction.cpp
   instruction/ReturnInstruction.cpp
+  instruction/SkipIfEqRegisterInstruction.cpp
   instruction/SkipIfEqValueInstruction.cpp
   instruction/SkipIfNeValueInstruction.cpp
   instruction/SysJumpInstruction.cpp
