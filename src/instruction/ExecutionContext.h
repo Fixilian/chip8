@@ -10,6 +10,8 @@
 
 namespace chip8 {
 
+constexpr int kPcStep = 2; // programm counter step
+
 /**
  * Program execution context.
  */

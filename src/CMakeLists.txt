@@ -21,6 +21,7 @@ set(SOURCES
   instruction/Instruction.cpp
   instruction/JumpInstruction.cpp
   instruction/ReturnInstruction.cpp
+  instruction/SkipIfEqValueInstruction.cpp
   instruction/SysJumpInstruction.cpp
 
   memory/FixedMemory.cpp
