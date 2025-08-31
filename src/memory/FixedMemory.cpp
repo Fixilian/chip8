@@ -50,19 +50,19 @@ FixedMemory::~FixedMemory() {
 
 
 void FixedMemory::load(const Rom& rom) {
-  rom_begin_ = reinterpret_cast<word*>(mem_ + reserve_);
-  rom_end_ = reinterpret_cast<word*>(mem_ + reserve_ + rom.size());
+  rom_begin_ = mem_ + reserve_;
+  rom_end_ = mem_ + reserve_ + rom.size();
   user_mem_begin_ += rom.size();
   memcpy(rom_begin_, rom.raw(), rom.size());
 }
 
 
-const word* FixedMemory::getRomBegin() {
+const byte* FixedMemory::getRomBegin() {
   return rom_begin_;
 }
 
 
-const word* FixedMemory::getRomEnd() {
+const byte* FixedMemory::getRomEnd() {
   return rom_end_;
 }
 

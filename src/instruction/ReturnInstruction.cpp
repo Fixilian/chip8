@@ -9,8 +9,7 @@ ReturnInstruction::ReturnInstruction(word opcode)
 
 
 void ReturnInstruction::execute(ExecutionContext& ctx) {
-  const byte* p = ctx.ram.mem() + ctx.stack.pop();
-  ctx.pc = reinterpret_cast<const word*>(p);
+  ctx.pc = ctx.ram.mem() + ctx.stack.pop();
 }
 
 

@@ -21,9 +21,9 @@ TEST(RamTest, Load) {
   ram.load(rom);
 
   // Assert
-  auto actual_rom_size = ram.getRomEnd() - ram.getRomBegin();
+  auto actual_rom_size = (ram.getRomEnd() - ram.getRomBegin()) / sizeof(word);
   EXPECT_EQ(actual_rom_size, kRomSize);
-  auto actual = ram.getRomBegin();
+  auto actual = reinterpret_cast<const word*>(ram.getRomBegin());
   for (int i = 0; i < kRomSize; i += 1) {
     EXPECT_EQ(actual[i], rom_source[i]);
   }

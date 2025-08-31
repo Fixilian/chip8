@@ -23,7 +23,7 @@ class ExecutionContext {
   ExecutionContext& operator=(ExecutionContext&&) = delete;
 
   std::vector<byte> registers; // v0 - vF registers
-  const word* pc; // program counter
+  const byte* pc; // program counter
   word i; // register I
   Ram& ram;
   Frame frame;

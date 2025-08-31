@@ -18,8 +18,8 @@ class FixedMemory : public Memory {
 
   virtual void load(const Rom& rom) override;
 
-  virtual const word* getRomBegin() override;
-  virtual const word* getRomEnd() override;
+  virtual const byte* getRomBegin() override;
+  virtual const byte* getRomEnd() override;
 
   virtual byte& operator[](int index) override;
   virtual const byte& operator[](int index) const override;
@@ -33,8 +33,8 @@ class FixedMemory : public Memory {
   int reserve_;
   int user_mem_begin_;
   byte* mem_;
-  word* rom_begin_;
-  word* rom_end_;
+  byte* rom_begin_;
+  byte* rom_end_;
   byte* sprites_;
 
   void setSprite(byte* p, byte b1, byte b2, byte b3, byte b4, byte b5);

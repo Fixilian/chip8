@@ -12,10 +12,9 @@ CallInstruction::CallInstruction(word opcode)
 
 void CallInstruction::execute(ExecutionContext& ctx) {
   word addr = lowest12BitsOf(opcode_);
-  auto diff = reinterpret_cast<const byte*>(ctx.pc) - ctx.ram.mem();
+  auto diff = ctx.pc - ctx.ram.mem();
   ctx.stack.push(static_cast<word>(diff));
-  const byte* p = ctx.ram.mem() + addr;
-  ctx.pc = reinterpret_cast<const word*>(p);
+  ctx.pc = ctx.ram.mem() + addr;
 }
 
 

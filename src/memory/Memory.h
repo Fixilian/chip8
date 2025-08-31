@@ -23,13 +23,13 @@ class Memory : public Ram {
    * Returns ROM begin pointer. 
    * @returns ROM begin pointer.
    */
-  virtual const word* getRomBegin() = 0;
+  virtual const byte* getRomBegin() = 0;
 
   /**
    * Returns ROM end pointer. 
    * @returns ROM end pointer.
    */
-  virtual const word* getRomEnd() = 0;
+  virtual const byte* getRomEnd() = 0;
 };
 
 } // namespace chip8

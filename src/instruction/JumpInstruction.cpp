@@ -12,8 +12,7 @@ JumpInstruction::JumpInstruction(word opcode)
 
 void JumpInstruction::execute(ExecutionContext& ctx) {
   word addr = lowest12BitsOf(opcode_);
-  const byte* p = ctx.ram.mem() + addr;
-  ctx.pc = reinterpret_cast<const word*>(p);
+  ctx.pc = ctx.ram.mem() + addr;
 }
 
 

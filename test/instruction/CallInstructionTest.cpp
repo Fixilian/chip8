@@ -18,17 +18,17 @@ TEST(CallInstructionTest, Call) {
   int mem_size = 1024;
   int mem_reserve = 512;
   int stack_size = 16;
-  vector<const word*> expected(input.size());
+  vector<const chip8::byte*> expected(input.size());
   vector<word> expected_stack(input.size());
-  vector<const word*> actual(input.size());
+  vector<const chip8::byte*> actual(input.size());
   vector<unique_ptr<CallInstruction>> ins(input.size());
   FixedMemory mem(mem_size, mem_reserve);
   ExecutionContext ctx(stack_size, mem, w, h);
-  ctx.pc = reinterpret_cast<const word*>(mem.mem() + mem_reserve);
+  ctx.pc = mem.mem() + mem_reserve;
   for (size_t i = 0; i < input.size(); i += 1) {
     ins[i] = make_unique<CallInstruction>(input[i]);
     word jmp = lowest12BitsOf(input[i]);
-    expected[i] = reinterpret_cast<const word*>(mem.mem() + jmp);
+    expected[i] = mem.mem() + jmp;
   }
   for (size_t i = 0; i < input.size() - 1; i += 1) {
     expected_stack[input.size() - 2 - i] = lowest12BitsOf(input[i]);
