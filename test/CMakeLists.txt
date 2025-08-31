@@ -8,6 +8,7 @@ set(SOURCES
 
   graphics/FrameTest.cpp
 
+  instruction/CallInstructionTest.cpp
   instruction/ClearDisplayInstructionTest.cpp
   instruction/JumpInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp

@@ -15,6 +15,7 @@ set(SOURCES
   graphics/Frame.cpp
   graphics/MonochromeDisplay.cpp
 
+  instruction/CallInstruction.cpp
   instruction/ClearDisplayInstruction.cpp
   instruction/ExecutionContext.cpp
   instruction/Instruction.cpp
