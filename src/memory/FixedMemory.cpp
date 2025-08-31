@@ -57,6 +57,11 @@ void FixedMemory::load(const Rom& rom) {
 }
 
 
+const byte* FixedMemory::getUserSpaceBegin() {
+  return mem_ + user_mem_begin_;
+}
+
+
 const byte* FixedMemory::getRomBegin() {
   return rom_begin_;
 }

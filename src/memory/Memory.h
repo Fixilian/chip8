@@ -20,6 +20,12 @@ class Memory : public Ram {
   virtual void load(const Rom& rom) = 0;
 
   /**
+   * Returns user space begin pointer. 
+   * @returns user space begin pointer.
+   */
+  virtual const byte* getUserSpaceBegin() = 0;
+
+  /**
    * Returns ROM begin pointer. 
    * @returns ROM begin pointer.
    */

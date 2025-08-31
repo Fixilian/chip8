@@ -12,6 +12,7 @@ set(SOURCES
   instruction/BitwiseOrInstructionTest.cpp
   instruction/CallInstructionTest.cpp
   instruction/ClearDisplayInstructionTest.cpp
+  instruction/InstructionTestBase.cpp
   instruction/JumpInstructionTest.cpp
   instruction/LoadRegisterInstructionTest.cpp
   instruction/LoadValueInstructionTest.cpp

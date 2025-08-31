@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "instruction/ReturnInstruction.h"
-#include "memory/FixedMemory.h"
+#include "InstructionTestBase.h"
 
 using namespace std;
 using namespace chip8;
@@ -12,30 +12,27 @@ using namespace chip8;
 TEST(ReturnInstructionTest, Return) {
   // Arrange
   vector<word> input = { 600, 700, 800, 900, 1000 };
-  int w = 16;
-  int h = 5;
-  int mem_size = 1024;
-  int mem_reserve = 512;
-  int stack_size = 16;
   vector<const chip8::byte*> expected(input.size());
   vector<const chip8::byte*> actual(input.size());
-  FixedMemory mem(mem_size, mem_reserve);
-  ExecutionContext ctx(stack_size, mem, w, h);
-  ctx.pc = mem.mem() + mem_reserve;
-  for (size_t i = 0; i < input.size(); i += 1) {
-    ctx.stack.push(input[i]);
-    expected[i] = mem.mem() + input[i];
-  }
+  size_t n = input.size();
+
+  auto mem = generateMemory();
+  auto ctx = generateContext(*mem);
   ReturnInstruction ret_ins(0x00EE);
 
+  for (size_t i = 0; i < n; i += 1) {
+    ctx->stack.push(input[i]);
+    expected[i] = mem->mem() + input[i];
+  }
+
   // Act
-  for (size_t i = 0; i < input.size(); i += 1) {
-    ret_ins.execute(ctx);
-    actual[i] = ctx.pc;
+  for (size_t i = 0; i < n; i += 1) {
+    ret_ins.execute(*ctx);
+    actual[i] = ctx->pc;
   }
 
   // Assert
-  for (size_t i = 0; i < input.size(); i += 1) {
-    EXPECT_EQ(actual[i], expected[input.size() - 1 - i]);
+  for (size_t i = 0; i < n; i += 1) {
+    EXPECT_EQ(actual[i], expected[n - 1 - i]);
   }
 }

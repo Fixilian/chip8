@@ -18,6 +18,7 @@ class FixedMemory : public Memory {
 
   virtual void load(const Rom& rom) override;
 
+  virtual const byte* getUserSpaceBegin() override;
   virtual const byte* getRomBegin() override;
   virtual const byte* getRomEnd() override;
 
