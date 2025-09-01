@@ -18,6 +18,7 @@ set(SOURCES
   instruction/AddValueInstruction.cpp
   instruction/BitwiseAndInstruction.cpp
   instruction/BitwiseOrInstruction.cpp
+  instruction/BitwiseXorInstruction.cpp
   instruction/CallInstruction.cpp
   instruction/ClearDisplayInstruction.cpp
   instruction/ExecutionContext.cpp
