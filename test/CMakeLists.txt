@@ -23,6 +23,7 @@ set(SOURCES
   instruction/SkipIfEqRegisterInstructionTest.cpp
   instruction/SkipIfEqValueInstructionTest.cpp
   instruction/SkipIfNeValueInstructionTest.cpp
+  instruction/SubRegisterInstructionTest.cpp
 
   memory/FixedMemoryTest.cpp
 )
