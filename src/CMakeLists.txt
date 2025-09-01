@@ -25,6 +25,7 @@ set(SOURCES
   instruction/ExecutionContext.cpp
   instruction/Instruction.cpp
   instruction/JumpInstruction.cpp
+  instruction/LoadIRegisterInstruction.cpp
   instruction/LoadRegisterInstruction.cpp
   instruction/LoadValueInstruction.cpp
   instruction/ReturnInstruction.cpp
