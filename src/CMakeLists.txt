@@ -32,6 +32,7 @@ set(SOURCES
   instruction/SkipIfEqRegisterInstruction.cpp
   instruction/SkipIfEqValueInstruction.cpp
   instruction/SkipIfNeValueInstruction.cpp
+  instruction/SubnInstruction.cpp
   instruction/SubRegisterInstruction.cpp
   instruction/SysJumpInstruction.cpp
 
