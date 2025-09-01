@@ -32,6 +32,7 @@ set(SOURCES
   instruction/ShiftRightInstruction.cpp
   instruction/SkipIfEqRegisterInstruction.cpp
   instruction/SkipIfEqValueInstruction.cpp
+  instruction/SkipIfNeRegisterInstruction.cpp
   instruction/SkipIfNeValueInstruction.cpp
   instruction/SubnInstruction.cpp
   instruction/SubRegisterInstruction.cpp

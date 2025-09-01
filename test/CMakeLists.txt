@@ -24,6 +24,7 @@ set(SOURCES
   instruction/ShiftRightInstructionTest.cpp
   instruction/SkipIfEqRegisterInstructionTest.cpp
   instruction/SkipIfEqValueInstructionTest.cpp
+  instruction/SkipIfNeRegisterInstructionTest.cpp
   instruction/SkipIfNeValueInstructionTest.cpp
   instruction/SubnInstructionTest.cpp
   instruction/SubRegisterInstructionTest.cpp
