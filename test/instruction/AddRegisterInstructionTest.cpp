@@ -37,3 +37,28 @@ TEST(AddRegisterInstructionTest, Add) {
     EXPECT_EQ(actual[i], expected[i]);
   }
 }
+
+
+TEST(AddRegisterInstructionTest, Flag) {
+  // Arrange
+  vector<word> opcodes = { 0x8014, 0x8124, 0x8234, 0x8344, 0x8454 };
+  vector<chip8::byte> regs = { 0xF0, 0xF0, 0x01, 0x40, 0xD0, 0x60};
+  vector<chip8::byte> expected = { 1, 0, 0, 1, 1};
+  vector<chip8::byte> actual(opcodes.size());
+  size_t n = opcodes.size();
+
+  auto mem = generateMemory();
+  auto ctx = generateContextWithRegisters(regs, *mem);
+  auto ins = generateInstructions<AddRegisterInstruction>(opcodes);
+
+  // Act
+  for (size_t i = 0; i < n; i += 1) {
+    ins[i]->execute(*ctx);
+    actual[i] = ctx->registers[kFlagRegister];
+  }
+
+  // Assert
+  for (size_t i = 0; i < n; i += 1) {
+    EXPECT_EQ(actual[i], expected[i]);
+  }
+}

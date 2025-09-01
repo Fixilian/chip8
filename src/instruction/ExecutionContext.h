@@ -12,6 +12,8 @@ namespace chip8 {
 
 constexpr int kPcStep = 2; // programm counter step
 
+constexpr int kFlagRegister = 0xF; // flag register
+
 /**
  * Program execution context.
  */
