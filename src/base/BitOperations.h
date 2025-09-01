@@ -29,6 +29,11 @@ word getXFrom(word op);
  */
 word getYFrom(word op);
 
+byte leastSignificantBitOf(byte b);
+
+byte mostSignificantBitOf(byte b);
+
+
 } // namespace chip8
 
 #endif // CHIP8_BITOPERATIONS_H

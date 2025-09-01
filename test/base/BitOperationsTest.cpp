@@ -120,3 +120,41 @@ TEST(getYFrom, Correctness) {
     EXPECT_EQ(actual[i], expected[i]);
   }
 }
+
+
+TEST(leastSignificantBitOf, Correctness) {
+  // Arrange
+  vector<chip8::byte> input = { 0b0000, 0b1111, 0b1010, 0b0101 };
+  vector<chip8::byte> expected = { 0, 1, 0, 1 };
+  vector<chip8::byte> actual;
+
+  // Act
+  for (auto w : input) {
+    auto result = leastSignificantBitOf(w);
+    actual.push_back(result);
+  }
+
+  // Assert
+  for (size_t i = 0; i < expected.size(); i += 1) {
+    EXPECT_EQ(actual[i], expected[i]);
+  }
+}
+
+
+TEST(mostSignificantBitOf, Correctness) {
+  // Arrange
+  vector<chip8::byte> input = { 0b00000000, 0b11111111, 0b10101010, 0b01010101 };
+  vector<chip8::byte> expected = { 0, 1, 1, 0 };
+  vector<chip8::byte> actual;
+
+  // Act
+  for (auto w : input) {
+    auto result = mostSignificantBitOf(w);
+    actual.push_back(result);
+  }
+
+  // Assert
+  for (size_t i = 0; i < expected.size(); i += 1) {
+    EXPECT_EQ(actual[i], expected[i]);
+  }
+}

@@ -44,4 +44,16 @@ word getYFrom(word op) {
 }
 
 
+byte leastSignificantBitOf(byte b) {
+  return b & 1;
+}
+
+
+byte mostSignificantBitOf(byte b) {
+  size_t shift = sizeof(byte) * kBits - 1;
+  byte val = b >> shift;
+  return val & 1;
+}
+
+
 } // namespace chip8
