@@ -21,6 +21,7 @@ set(SOURCES
   instruction/LoadIRegisterInstructionTest.cpp
   instruction/LoadRegisterInstructionTest.cpp
   instruction/LoadValueInstructionTest.cpp
+  instruction/RandomInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp
   instruction/ShiftLeftInstructionTest.cpp
   instruction/ShiftRightInstructionTest.cpp

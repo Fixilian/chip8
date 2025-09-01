@@ -29,6 +29,7 @@ set(SOURCES
   instruction/LoadIRegisterInstruction.cpp
   instruction/LoadRegisterInstruction.cpp
   instruction/LoadValueInstruction.cpp
+  instruction/RandomInstruction.cpp
   instruction/ReturnInstruction.cpp
   instruction/ShiftLeftInstruction.cpp
   instruction/ShiftRightInstruction.cpp
