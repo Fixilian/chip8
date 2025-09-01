@@ -28,6 +28,7 @@ set(SOURCES
   instruction/LoadRegisterInstruction.cpp
   instruction/LoadValueInstruction.cpp
   instruction/ReturnInstruction.cpp
+  instruction/ShiftLeftInstruction.cpp
   instruction/ShiftRightInstruction.cpp
   instruction/SkipIfEqRegisterInstruction.cpp
   instruction/SkipIfEqValueInstruction.cpp
