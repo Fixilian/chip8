@@ -10,7 +10,7 @@ using namespace std;
 using namespace chip8;
 
 
-TEST(BitwiseAndInstructionTest, BitwiseOr) {
+TEST(BitwiseAndInstructionTest, BitwiseAnd) {
   // Arrange
   vector<word> opcodes = { 0x8012, 0x8122, 0x8232, 0x8342, 0x8452 };
   vector<chip8::byte> regs = { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60};

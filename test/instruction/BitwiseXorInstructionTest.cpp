@@ -12,7 +12,7 @@ using namespace chip8;
 
 TEST(BitwiseXorInstructionTest, BitwiseXor) {
   // Arrange
-  vector<word> opcodes = { 0x8012, 0x8122, 0x8232, 0x8342, 0x8452 };
+  vector<word> opcodes = { 0x8013, 0x8123, 0x8233, 0x8343, 0x8453 };
   vector<chip8::byte> regs = { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60};
   vector<chip8::byte> expected(opcodes.size());
   vector<chip8::byte> actual(opcodes.size());
