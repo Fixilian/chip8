@@ -9,6 +9,7 @@ set(SOURCES
   graphics/FrameTest.cpp
 
   instruction/AddValueInstructionTest.cpp
+  instruction/BitwiseAndInstructionTest.cpp
   instruction/BitwiseOrInstructionTest.cpp
   instruction/CallInstructionTest.cpp
   instruction/ClearDisplayInstructionTest.cpp

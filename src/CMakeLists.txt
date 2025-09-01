@@ -16,6 +16,7 @@ set(SOURCES
   graphics/MonochromeDisplay.cpp
 
   instruction/AddValueInstruction.cpp
+  instruction/BitwiseAndInstruction.cpp
   instruction/BitwiseOrInstruction.cpp
   instruction/CallInstruction.cpp
   instruction/ClearDisplayInstruction.cpp
