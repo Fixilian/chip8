@@ -1,6 +1,7 @@
 set(SOURCES
   base/BitOperations.cpp
   base/Rom.cpp
+  base/Spinlock.cpp
 
   compiler/Compiler.cpp
   compiler/HexRomParser.cpp

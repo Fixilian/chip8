@@ -1,5 +1,7 @@
 #include "ExecutionContext.h"
 
+using namespace std;
+
 namespace chip8 {
 
 constexpr int kCommonRegistersNumber = 16;
@@ -19,22 +21,38 @@ ExecutionContext::ExecutionContext(int stack_size, Ram& ram,
  
 
 byte ExecutionContext::dt() {
-  return dt_;
+  return dt_.load(memory_order_relaxed);
+}
+
+
+void ExecutionContext::setDt(byte val) {
+  spin.lock();
+  dt_.store(val, memory_order_relaxed);
+  spin.unlock();
 }
 
 
 byte ExecutionContext::st() {
-  return st_;
+  return st_.load(memory_order_relaxed);
+}
+
+
+void ExecutionContext::setSt(byte val) {
+  spin.lock();
+  st_.store(val, memory_order_relaxed);
+  spin.unlock();
 }
 
 
 void ExecutionContext::updateTimers() {
+  spin.lock();
   if (st_ > 0) {
     st_ -= 1;
   }
   if (dt_ > 0) {
     dt_ -= 1;
   }
+  spin.unlock();
 }
 
 

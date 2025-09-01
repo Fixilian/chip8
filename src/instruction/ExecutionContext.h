@@ -1,9 +1,11 @@
 #ifndef CHIP8_INSTRUCTION_EXECUTIONCONTEXT_H
 #define CHIP8_INSTRUCTION_EXECUTIONCONTEXT_H
 
+#include <atomic>
 #include <vector>
 
 #include "base/Aliases.h"
+#include "base/Spinlock.h"
 #include "base/Stack.h"
 #include "graphics/Frame.h"
 #include "memory/Ram.h"
@@ -34,13 +36,17 @@ class ExecutionContext {
   Stack<word> stack;
 
   byte dt(); // delay timer register
+  void setDt(byte val);
+
   byte st(); // sound timer register
+  void setSt(byte val);
 
   void updateTimers();
 
  private:
-  byte dt_;
-  byte st_;
+  std::atomic<byte> dt_;
+  std::atomic<byte> st_;
+  Spinlock spin;
 };
 
 } // namespace chip8
