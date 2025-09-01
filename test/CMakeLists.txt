@@ -20,6 +20,7 @@ set(SOURCES
   instruction/LoadRegisterInstructionTest.cpp
   instruction/LoadValueInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp
+  instruction/ShiftRightInstructionTest.cpp
   instruction/SkipIfEqRegisterInstructionTest.cpp
   instruction/SkipIfEqValueInstructionTest.cpp
   instruction/SkipIfNeValueInstructionTest.cpp
