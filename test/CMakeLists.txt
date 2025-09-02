@@ -25,6 +25,7 @@ set(SOURCES
   instruction/LoadValueInstructionTest.cpp
   instruction/RandomInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp
+  instruction/SetDelayTimerInstructionTest.cpp
   instruction/ShiftLeftInstructionTest.cpp
   instruction/ShiftRightInstructionTest.cpp
   instruction/SkipIfEqRegisterInstructionTest.cpp
