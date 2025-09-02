@@ -1,5 +1,6 @@
 #include "InstructionTestBase.h"
 
+#include "keyboard/HexKeyboardMonitor.h"
 #include "memory/FixedMemory.h"
 
 using namespace std;
@@ -14,23 +15,39 @@ unique_ptr<Memory> generateMemory() {
 }
 
 
-unique_ptr<ExecutionContext> generateContext(Memory& mem) {
+unique_ptr<KeyboardMonitor> generateKeyboardMonitor() {
+  return make_unique<HexKeyboardMonitor>();
+}
+
+
+unique_ptr<ExecutionContext> generateContext(
+  Memory& mem, 
+  KeyboardMonitor& keyboard) 
+{
   int w = 16;
   int h = 5;
   int stack_size = 16;
-  return make_unique<ExecutionContext>(stack_size, mem, w, h);
+  return make_unique<ExecutionContext>(stack_size, w, h, mem, keyboard);
 }
 
 
-unique_ptr<ExecutionContext> generateContext(int w, int h, Memory& mem) {
+unique_ptr<ExecutionContext> generateContext(
+  int w, 
+  int h, 
+  Memory& mem, 
+  KeyboardMonitor& keyboard) 
+{
   int stack_size = 16;
-  return make_unique<ExecutionContext>(stack_size, mem, w, h);
+  return make_unique<ExecutionContext>(stack_size, w, h, mem, keyboard);
 }
 
 
-unique_ptr<ExecutionContext> 
-generateContextWithRegisters(vector<byte> regs, Memory& mem) {
-  auto ctx = generateContext(mem);
+unique_ptr<ExecutionContext> generateContextWithRegisters(
+  vector<byte> regs, 
+  Memory& mem, 
+  KeyboardMonitor& keyboard) 
+{
+  auto ctx = generateContext(mem, keyboard);
   for (size_t i = 0; i < regs.size(); i += 1) {
     ctx->registers[i] = regs[i];
   }

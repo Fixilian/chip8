@@ -17,8 +17,9 @@ TEST(SkipIfNeRegisterInstructionTest, Skip) {
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem);
+  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
   auto ins = generateInstructions<SkipIfNeRegisterInstruction>(opcodes);
   
   vector<const chip8::byte*> expected = {

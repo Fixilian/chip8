@@ -18,8 +18,9 @@ TEST(RandomInstruction, Jump) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem);
+  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
   auto ins = generateInstructions<RandomInstruction>(opcodes);
 
   // Act

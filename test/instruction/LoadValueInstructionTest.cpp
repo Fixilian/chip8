@@ -17,8 +17,9 @@ TEST(LoadValueInstructionTest, Load) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContext(*mem);
+  auto ctx = generateContext(*mem, *keyboard);
   auto ins = generateInstructions<LoadValueInstruction>(opcodes);
 
   // Act

@@ -6,6 +6,7 @@
 
 #include "instruction/ExecutionContext.h"
 #include "instruction/Instruction.h"
+#include "keyboard/KeyboardMonitor.h"
 #include "memory/Memory.h"
 
 namespace chip8 {
@@ -16,12 +17,22 @@ generateInstructions(std::vector<word> opcodes);
 
 std::unique_ptr<Memory> generateMemory();
 
-std::unique_ptr<ExecutionContext> generateContext(Memory& mem);
+std::unique_ptr<KeyboardMonitor> generateKeyboardMonitor();
 
-std::unique_ptr<ExecutionContext> generateContext(int w, int h, Memory& mem);
+std::unique_ptr<ExecutionContext> generateContext(
+  Memory& mem, 
+  KeyboardMonitor& keyboard);
 
-std::unique_ptr<ExecutionContext> 
-generateContextWithRegisters(std::vector<byte> regs, Memory& mem);
+std::unique_ptr<ExecutionContext> generateContext(
+  int w, 
+  int h, 
+  Memory& mem, 
+  KeyboardMonitor& keyboard);
+
+std::unique_ptr<ExecutionContext> generateContextWithRegisters(
+  std::vector<byte> regs, 
+  Memory& mem, 
+  KeyboardMonitor& keyboard);
 
 
 template <typename T>

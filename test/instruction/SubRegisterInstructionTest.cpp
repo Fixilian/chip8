@@ -18,8 +18,9 @@ TEST(SubRegisterInstructionTest, Sub) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem);
+  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
   auto ins = generateInstructions<SubRegisterInstruction>(opcodes);
 
   for (size_t i = 0; i < n; i += 1) {
@@ -47,8 +48,9 @@ TEST(SubRegisterInstructionTest, Flag) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem);
+  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
   auto ins = generateInstructions<SubRegisterInstruction>(opcodes);
 
   // Act

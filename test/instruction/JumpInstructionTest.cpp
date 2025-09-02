@@ -17,8 +17,9 @@ TEST(JumpInstructionTest, Jump) {
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContext(*mem);
+  auto ctx = generateContext(*mem, *keyboard);
   auto ins = generateInstructions<JumpInstruction>(opcodes);
   
   for (size_t i = 0; i < n; i += 1) {

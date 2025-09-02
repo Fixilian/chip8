@@ -17,8 +17,9 @@ TEST(LoadIRegisterInstructionTest, Load) {
   vector<word> actual(opcodes.size());
   size_t n = opcodes.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContext(*mem);
+  auto ctx = generateContext(*mem, *keyboard);
   auto ins = generateInstructions<LoadIRegisterInstruction>(opcodes);
 
   // Act

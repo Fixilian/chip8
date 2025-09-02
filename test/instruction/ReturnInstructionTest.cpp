@@ -16,8 +16,9 @@ TEST(ReturnInstructionTest, Return) {
   vector<const chip8::byte*> actual(input.size());
   size_t n = input.size();
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContext(*mem);
+  auto ctx = generateContext(*mem, *keyboard);
   ReturnInstruction ret_ins(0x00EE);
 
   for (size_t i = 0; i < n; i += 1) {

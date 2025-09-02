@@ -17,8 +17,9 @@ TEST(AddValueInstructionTest, Add) {
   vector<chip8::byte> expected = { 0x20, 0x40, 0x60, 0x80, 0xA0 };
   vector<chip8::byte> actual(opcodes.size());
 
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem);
+  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
   auto ins = generateInstructions<AddValueInstruction>(opcodes);
 
   // Act

@@ -14,8 +14,9 @@ TEST(ClearDisplayInstructionTest, ClearFrame) {
   // Arrange
   int w = 2;
   int h = 5;
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContext(w * kBits, h, *mem);
+  auto ctx = generateContext(w * kBits, h, *mem, *keyboard);
   ClearDisplayInstruction cls_ins(0x00E0);
   
   vector<chip8::byte> input = { 

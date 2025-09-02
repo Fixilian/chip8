@@ -17,8 +17,9 @@ TEST(DrawInstructionTest, Draw) {
   int h = 10;
   int sw = kBits;
   int sh = 5;
+  auto keyboard = generateKeyboardMonitor();
   auto mem = generateMemory();
-  auto ctx = generateContext(w, h, *mem);
+  auto ctx = generateContext(w, h, *mem, *keyboard);
   DrawInstruction draw_ins(0xD015);
   auto sprite = mem->getDigitSprite(spriteNumber);
   chip8::byte x0 = 3;

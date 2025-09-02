@@ -8,6 +8,7 @@
 #include "base/Spinlock.h"
 #include "base/Stack.h"
 #include "graphics/Frame.h"
+#include "keyboard/KeyboardMonitor.h"
 #include "memory/Ram.h"
 
 namespace chip8 {
@@ -21,7 +22,12 @@ constexpr int kFlagRegister = 0xF; // flag register
  */
 class ExecutionContext {
  public:
-  ExecutionContext(int stack_size, Ram& ram, int frame_w, int frame_h);
+  ExecutionContext(
+    int stack_size, 
+    int frame_w, 
+    int frame_h, 
+    Ram& ram, 
+    KeyboardMonitor& keyboard);
 
   ExecutionContext(const ExecutionContext&) = delete;
   ExecutionContext& operator=(const ExecutionContext&) = delete;
@@ -34,6 +40,7 @@ class ExecutionContext {
   Ram& ram;
   Frame frame;
   Stack<word> stack;
+  KeyboardMonitor& keyboard;
 
   byte dt(); // delay timer register
   void setDt(byte val);
