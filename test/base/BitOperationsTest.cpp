@@ -158,3 +158,52 @@ TEST(mostSignificantBitOf, Correctness) {
     EXPECT_EQ(actual[i], expected[i]);
   }
 }
+
+
+TEST(getBit, Correctness) {
+  // Arrange
+  chip8::byte b = 0b10101010;
+  vector<chip8::byte> expected = { 1, 0, 1, 0, 1, 0, 1, 0 };
+  vector<chip8::byte> actual(expected.size());
+
+  // Act
+  for (size_t i = 0; i < kBits; i += 1) {
+    auto bit = getBit(b, i);
+    actual[i] = bit;
+  }
+
+  // Assert
+  for (size_t i = 0; i < expected.size(); i += 1) {
+    EXPECT_EQ(actual[i], expected[i]);
+  }
+}
+
+
+TEST(setBit, Correctness) {
+  // Arrange
+  chip8::byte b = 0b10101010;
+  vector<chip8::byte> input = { 0, 1, 0, 1, 0, 1, 0, 1, 0}; 
+  vector<chip8::byte> expected = { 
+    0b00101010,
+    0b01101010,
+    0b01001010,
+    0b01011010,
+    0b01010010,
+    0b01010110,
+    0b01010100,
+    0b01010101,
+  };
+  vector<chip8::byte> actual(expected.size());
+
+  // Act
+  chip8::byte val = b;
+  for (size_t i = 0; i < kBits; i += 1) {
+    val = setBit(val, i, input[i]);
+    actual[i] = val;
+  }
+
+  // Assert
+  for (size_t i = 0; i < expected.size(); i += 1) {
+    EXPECT_EQ(actual[i], expected[i]);
+  }
+}

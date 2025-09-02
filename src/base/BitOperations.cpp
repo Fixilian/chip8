@@ -56,4 +56,21 @@ byte mostSignificantBitOf(byte b) {
 }
 
 
+byte getBit(byte b, size_t pos) {
+  size_t shift = kBits - pos - 1;
+  return 1 & (b >> shift);
+}
+
+
+byte setBit(byte b, size_t pos, byte val) {
+  size_t shift = kBits - pos - 1;
+  if (val) {
+    b |= (1 << shift);
+  } else {
+    b = static_cast<byte>(b & ~(1 << shift));
+  }
+  return b;
+}
+
+
 } // namespace chip8
