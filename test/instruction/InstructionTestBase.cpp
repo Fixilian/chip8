@@ -20,6 +20,18 @@ unique_ptr<KeyboardMonitor> generateKeyboardMonitor() {
 }
 
 
+unique_ptr<KeyboardMonitor> generateKeyboardMonitor(vector<bool> pressed) {
+  auto keyboard = make_unique<HexKeyboardMonitor>();
+  byte len = static_cast<byte>(pressed.size());
+  for (byte i = 0; i < len; i += 1) {
+    if (pressed[i]) {
+      keyboard->onKeyPressed(i);
+    }
+  }
+  return keyboard;
+}
+
+
 unique_ptr<ExecutionContext> generateContext(
   Memory& mem, 
   KeyboardMonitor& keyboard) 

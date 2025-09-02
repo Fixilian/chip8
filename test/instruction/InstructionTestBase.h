@@ -19,6 +19,9 @@ std::unique_ptr<Memory> generateMemory();
 
 std::unique_ptr<KeyboardMonitor> generateKeyboardMonitor();
 
+std::unique_ptr<KeyboardMonitor> generateKeyboardMonitor(
+  std::vector<bool> pressed);
+
 std::unique_ptr<ExecutionContext> generateContext(
   Memory& mem, 
   KeyboardMonitor& keyboard);

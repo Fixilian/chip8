@@ -40,6 +40,7 @@ set(SOURCES
   instruction/SkipIfEqValueInstruction.cpp
   instruction/SkipIfNeRegisterInstruction.cpp
   instruction/SkipIfNeValueInstruction.cpp
+  instruction/SkipIfPressedInstruction.cpp
   instruction/SubnInstruction.cpp
   instruction/SubRegisterInstruction.cpp
   instruction/SysJumpInstruction.cpp
