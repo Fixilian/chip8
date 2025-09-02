@@ -46,6 +46,7 @@ set(SOURCES
   instruction/SubnInstruction.cpp
   instruction/SubRegisterInstruction.cpp
   instruction/SysJumpInstruction.cpp
+  instruction/WaitKeyPressInstruction.cpp
 
   keyboard/HexKeyboardMonitor.cpp
 
