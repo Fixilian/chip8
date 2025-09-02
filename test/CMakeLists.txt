@@ -30,6 +30,7 @@ set(SOURCES
   instruction/SkipIfEqValueInstructionTest.cpp
   instruction/SkipIfNeRegisterInstructionTest.cpp
   instruction/SkipIfNeValueInstructionTest.cpp
+  instruction/SkipIfNotPressedInstructionTest.cpp
   instruction/SkipIfPressedInstructionTest.cpp
   instruction/SubnInstructionTest.cpp
   instruction/SubRegisterInstructionTest.cpp
