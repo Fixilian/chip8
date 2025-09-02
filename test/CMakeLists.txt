@@ -19,6 +19,7 @@ set(SOURCES
   instruction/InstructionTestBase.cpp
   instruction/JumpInstructionTest.cpp
   instruction/JumpWithOffsetInstructionTest.cpp
+  instruction/LoadDtInstructionTest.cpp
   instruction/LoadIRegisterInstructionTest.cpp
   instruction/LoadRegisterInstructionTest.cpp
   instruction/LoadValueInstructionTest.cpp
