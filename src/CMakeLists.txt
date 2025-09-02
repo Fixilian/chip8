@@ -27,6 +27,7 @@ set(SOURCES
   instruction/ClearDisplayInstruction.cpp
   instruction/DrawInstruction.cpp
   instruction/ExecutionContext.cpp
+  instruction/GetSpriteLocationInstruction.cpp
   instruction/Instruction.cpp
   instruction/JumpInstruction.cpp
   instruction/JumpWithOffsetInstruction.cpp

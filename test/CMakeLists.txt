@@ -17,6 +17,7 @@ set(SOURCES
   instruction/CallInstructionTest.cpp
   instruction/ClearDisplayInstructionTest.cpp
   instruction/DrawInstructionTest.cpp
+  instruction/GetSpriteLocationInstructionTest.cpp
   instruction/InstructionTestBase.cpp
   instruction/JumpInstructionTest.cpp
   instruction/JumpWithOffsetInstructionTest.cpp
