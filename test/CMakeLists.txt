@@ -32,6 +32,8 @@ set(SOURCES
   instruction/SubnInstructionTest.cpp
   instruction/SubRegisterInstructionTest.cpp
 
+  keyboard/HexKeyboardMonitorTest.cpp
+
   memory/FixedMemoryTest.cpp
 )
 

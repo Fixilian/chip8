@@ -12,6 +12,7 @@ set(SOURCES
   exception/SegFaultException.cpp
   exception/SemanticException.cpp
   exception/SyntaxException.cpp
+  exception/UnknownKeyException.cpp
 
   graphics/Frame.cpp
   graphics/MonochromeDisplay.cpp
@@ -41,6 +42,8 @@ set(SOURCES
   instruction/SubnInstruction.cpp
   instruction/SubRegisterInstruction.cpp
   instruction/SysJumpInstruction.cpp
+
+  keyboard/HexKeyboardMonitor.cpp
 
   memory/FixedMemory.cpp
 )
