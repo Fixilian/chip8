@@ -24,6 +24,7 @@ set(SOURCES
   instruction/BitwiseXorInstruction.cpp
   instruction/CallInstruction.cpp
   instruction/ClearDisplayInstruction.cpp
+  instruction/DrawInstruction.cpp
   instruction/ExecutionContext.cpp
   instruction/Instruction.cpp
   instruction/JumpInstruction.cpp

@@ -15,6 +15,7 @@ set(SOURCES
   instruction/BitwiseXorInstructionTest.cpp
   instruction/CallInstructionTest.cpp
   instruction/ClearDisplayInstructionTest.cpp
+  instruction/DrawInstructionTest.cpp
   instruction/InstructionTestBase.cpp
   instruction/JumpInstructionTest.cpp
   instruction/JumpWithOffsetInstructionTest.cpp
