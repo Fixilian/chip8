@@ -36,6 +36,7 @@ set(SOURCES
   instruction/RandomInstruction.cpp
   instruction/ReturnInstruction.cpp
   instruction/SetDelayTimerInstruction.cpp
+  instruction/SetSoundTimerInstruction.cpp
   instruction/ShiftLeftInstruction.cpp
   instruction/ShiftRightInstruction.cpp
   instruction/SkipIfEqRegisterInstruction.cpp

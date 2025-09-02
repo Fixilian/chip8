@@ -26,6 +26,7 @@ set(SOURCES
   instruction/RandomInstructionTest.cpp
   instruction/ReturnInstructionTest.cpp
   instruction/SetDelayTimerInstructionTest.cpp
+  instruction/SetSoundTimerInstructionTest.cpp
   instruction/ShiftLeftInstructionTest.cpp
   instruction/ShiftRightInstructionTest.cpp
   instruction/SkipIfEqRegisterInstructionTest.cpp
