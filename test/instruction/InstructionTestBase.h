@@ -17,6 +17,8 @@ generateInstructions(std::vector<word> opcodes);
 
 std::unique_ptr<Memory> generateMemory();
 
+std::unique_ptr<Memory> generateMemory(int size, int reserve);
+
 std::unique_ptr<KeyboardMonitor> generateKeyboardMonitor();
 
 std::unique_ptr<KeyboardMonitor> generateKeyboardMonitor(

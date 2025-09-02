@@ -11,7 +11,12 @@ namespace chip8 {
 unique_ptr<Memory> generateMemory() {
   int mem_size = 1024;
   int mem_reserve = 512;
-  return make_unique<FixedMemory>(mem_size, mem_reserve);
+  return generateMemory(mem_size, mem_reserve);
+}
+
+
+unique_ptr<Memory> generateMemory(int size, int reserve) {
+  return make_unique<FixedMemory>(size, reserve);
 }
 
 

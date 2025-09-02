@@ -207,3 +207,27 @@ TEST(setBit, Correctness) {
     EXPECT_EQ(actual[i], expected[i]);
   }
 }
+
+
+TEST(writeBcdOf, Correctness) {
+  // Arrange
+  vector<chip8::byte> nums = {      0, 1, 2, 4, 8, 16, 32, 64, 128, 255 };
+  vector<chip8::byte> expected1 = { 0, 0, 0, 0, 0, 0,  0,  0,  1,   2 };
+  vector<chip8::byte> expected2 = { 0, 0, 0, 0, 0, 1,  3,  6,  2,   5 };
+  vector<chip8::byte> expected3 = { 0, 1, 2, 4, 8, 6,  2,  4,  8,   5 };
+  vector<chip8::byte> actual1(nums.size());
+  vector<chip8::byte> actual2(nums.size());
+  vector<chip8::byte> actual3(nums.size());
+
+  // Act
+  for (size_t i = 0; i < nums.size(); i += 1) {
+    writeBcdOf(nums[i], actual1[i], actual2[i], actual3[i]);
+  }
+
+  // Assert
+  for (size_t i = 0; i < nums.size(); i += 1) {
+    EXPECT_EQ(actual1[i], expected1[i]);
+    EXPECT_EQ(actual2[i], expected2[i]);
+    EXPECT_EQ(actual3[i], expected3[i]);
+  }
+}

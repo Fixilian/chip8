@@ -47,6 +47,14 @@ byte getBit(byte b, std::size_t pos);
  */
 byte setBit(byte b, std::size_t pos, byte val);
 
+
+/**
+ * Writes Binary-Coded Decimal representation of b to dst1, dst2, dst3.
+ * Places hundreds digit in dst1, tens digit in dst2, ones digit in dst3. 
+ */
+void writeBcdOf(byte b, byte& dst1, byte& dst2, byte& dst3);
+
+
 } // namespace chip8
 
 #endif // CHIP8_BITOPERATIONS_H

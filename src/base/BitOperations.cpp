@@ -73,4 +73,14 @@ byte setBit(byte b, size_t pos, byte val) {
 }
 
 
+void writeBcdOf(byte b, byte& dst1, byte& dst2, byte& dst3) {
+  const byte kDecimal = 10;
+  dst3 = b % kDecimal;
+  b /= kDecimal;
+  dst2 = b % kDecimal;
+  b /= kDecimal;
+  dst1 = b; 
+}
+
+
 } // namespace chip8

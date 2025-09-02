@@ -37,6 +37,7 @@ set(SOURCES
   instruction/SkipIfNeValueInstructionTest.cpp
   instruction/SkipIfNotPressedInstructionTest.cpp
   instruction/SkipIfPressedInstructionTest.cpp
+  instruction/StoreBcdInstructionTest.cpp
   instruction/SubnInstructionTest.cpp
   instruction/SubRegisterInstructionTest.cpp
 
