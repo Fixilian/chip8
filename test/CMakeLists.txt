@@ -8,6 +8,7 @@ set(SOURCES
 
   graphics/FrameTest.cpp
 
+  instruction/AddIInstructionTest.cpp
   instruction/AddRegisterInstructionTest.cpp
   instruction/AddValueInstructionTest.cpp
   instruction/BitwiseAndInstructionTest.cpp
