@@ -32,6 +32,7 @@ set(SOURCES
   instruction/JumpInstruction.cpp
   instruction/JumpWithOffsetInstruction.cpp
   instruction/LoadDtInstruction.cpp
+  instruction/LoadInstruction.cpp
   instruction/LoadIRegisterInstruction.cpp
   instruction/LoadRegisterInstruction.cpp
   instruction/LoadValueInstruction.cpp
