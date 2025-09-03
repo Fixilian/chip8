@@ -1,4 +1,5 @@
 set(SOURCES
+  base/Allocator.cpp
   base/BitOperations.cpp
   base/Rom.cpp
   base/Spinlock.cpp
