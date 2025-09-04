@@ -8,6 +8,7 @@ set(SOURCES
   compiler/RomBuilderTest.cpp
 
   execution/Chip8DecoderTest.cpp
+  execution/EndOfProgramDetectorTest.cpp
 
   graphics/FrameTest.cpp
 

@@ -16,6 +16,7 @@ set(SOURCES
   exception/UnknownKeyException.cpp
 
   execution/Chip8Decoder.cpp
+  execution/EndOfProgramDetector.cpp
 
   graphics/Frame.cpp
   graphics/MonochromeDisplay.cpp
