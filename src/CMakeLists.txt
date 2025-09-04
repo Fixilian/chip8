@@ -3,6 +3,7 @@ set(SOURCES
   base/BitOperations.cpp
   base/Rom.cpp
   base/Spinlock.cpp
+  base/Timer.cpp
 
   compiler/Compiler.cpp
   compiler/HexRomParser.cpp
@@ -16,6 +17,7 @@ set(SOURCES
   exception/UnknownKeyException.cpp
 
   execution/Chip8Decoder.cpp
+  execution/Cpu.cpp
   execution/EndOfProgramDetector.cpp
 
   graphics/Frame.cpp
