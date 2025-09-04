@@ -13,6 +13,11 @@ class Allocator {
 
   ~Allocator();
 
+  Allocator(const Allocator&) = delete;
+  Allocator& operator=(const Allocator&) = delete;
+  Allocator(Allocator&&) = delete;
+  Allocator& operator=(Allocator&&) = delete;
+
   /**
    * Returns pointer to the block.
    * @returns pointer to the block.

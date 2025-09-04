@@ -20,9 +20,8 @@ InstructionPtr::InstructionPtr(InstructionPtr&& other)
 
 
 InstructionPtr& InstructionPtr::operator=(InstructionPtr&& other) {
-  allocator_ = other.allocator_;
-  ptr_ = other.ptr_;
-  other.ptr_ = nullptr;
+  this->~InstructionPtr();
+  new (this) InstructionPtr(std::move(other));
   return *this;
 }
 
