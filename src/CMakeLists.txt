@@ -15,6 +15,8 @@ set(SOURCES
   exception/SyntaxException.cpp
   exception/UnknownKeyException.cpp
 
+  execution/Chip8Decoder.cpp
+
   graphics/Frame.cpp
   graphics/MonochromeDisplay.cpp
 
@@ -30,6 +32,7 @@ set(SOURCES
   instruction/ExecutionContext.cpp
   instruction/GetSpriteLocationInstruction.cpp
   instruction/Instruction.cpp
+  instruction/InstructionPtr.cpp
   instruction/JumpInstruction.cpp
   instruction/JumpWithOffsetInstruction.cpp
   instruction/LoadDtInstruction.cpp

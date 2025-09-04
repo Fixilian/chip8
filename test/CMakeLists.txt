@@ -7,6 +7,8 @@ set(SOURCES
   compiler/HexRomParserTest.cpp
   compiler/RomBuilderTest.cpp
 
+  execution/Chip8DecoderTest.cpp
+
   graphics/FrameTest.cpp
 
   instruction/AddIInstructionTest.cpp
@@ -19,6 +21,7 @@ set(SOURCES
   instruction/ClearDisplayInstructionTest.cpp
   instruction/DrawInstructionTest.cpp
   instruction/GetSpriteLocationInstructionTest.cpp
+  instruction/InstructionPtrTest.cpp
   instruction/InstructionTestBase.cpp
   instruction/JumpInstructionTest.cpp
   instruction/JumpWithOffsetInstructionTest.cpp
