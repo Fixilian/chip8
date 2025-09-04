@@ -36,7 +36,6 @@ class EndOfProgramDetector {
  private:
   Memory& memory_;
   ExecutionContext& ctx_;
-  const byte* previous_pc_;
 
   bool endOfRom();
   bool infiniteLoop(word opcode);

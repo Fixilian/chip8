@@ -7,8 +7,7 @@ namespace chip8 {
 
 EndOfProgramDetector::EndOfProgramDetector(Memory& memory, ExecutionContext& ctx)
     : memory_(memory),
-      ctx_(ctx),
-      previous_pc_(ctx.pc)
+      ctx_(ctx)
 {}
 
 
