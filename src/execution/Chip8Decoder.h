@@ -1,5 +1,5 @@
-#ifndef CHIP8_EMULATOR_CHIP8DECODER_H
-#define CHIP8_EMULATOR_CHIP8DECODER_H
+#ifndef CHIP8_EXECUTION_CHIP8DECODER_H
+#define CHIP8_EXECUTION_CHIP8DECODER_H
 
 #include "base/Allocator.h"
 #include "Decoder.h"
@@ -44,4 +44,4 @@ InstructionPtr Chip8Decoder::create(word op) {
 
 } // namespace chip8
 
-#endif // CHIP8_EMULATOR_CHIP8DECODER_H
+#endif // CHIP8_EXECUTION_CHIP8DECODER_H

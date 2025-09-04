@@ -1,5 +1,5 @@
-#ifndef CHIP8_EMULATOR_DECODER_H
-#define CHIP8_EMULATOR_DECODER_H
+#ifndef CHIP8_EXECUTION_DECODER_H
+#define CHIP8_EXECUTION_DECODER_H
 
 #include "base/Aliases.h"
 #include "instruction/InstructionPtr.h"
@@ -18,4 +18,4 @@ class Decoder {
 
 } // namespace chip8
 
-#endif // CHIP8_EMULATOR_DECODER_H
+#endif // CHIP8_EXECUTION_DECODER_H
