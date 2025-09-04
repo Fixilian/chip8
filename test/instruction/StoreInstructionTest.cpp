@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/StoreInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -18,9 +18,9 @@ TEST(StoreInstructionTest, Store) {
   vector<chip8::byte> regs = { 0, 1, 2, 4, 8, 16, 32, 64, 128, 255 };
   int n = static_cast<int>(regs.size());
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory(mem_size, mem_reserve);
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory(mem_size, mem_reserve);
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
   ctx->i = static_cast<word>(mem_reserve);
 
   // Act

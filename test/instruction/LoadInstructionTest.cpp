@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/LoadInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -18,9 +18,9 @@ TEST(LoadInstructionTest, Load) {
   vector<chip8::byte> expected = { 0, 1, 2, 4, 8, 16, 32, 64, 128, 255 };
   int n = static_cast<int>(expected.size());
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory(mem_size, mem_reserve);
-  auto ctx = generateContext(*mem, *keyboard);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory(mem_size, mem_reserve);
+  auto ctx = createContext(*mem, *keyboard);
   ctx->i = static_cast<word>(mem_reserve);
   for (int i = 0; i < n; i += 1) {
     ctx->ram[ctx->i + i] = expected[i];

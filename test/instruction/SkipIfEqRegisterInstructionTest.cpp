@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/SkipIfEqRegisterInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -17,10 +17,10 @@ TEST(SkipIfEqRegisterInstructionTest, Skip) {
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<SkipIfEqRegisterInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<SkipIfEqRegisterInstruction>(opcodes);
   
   vector<const chip8::byte*> expected = {
     ctx->pc, ctx->pc + kPcStep, 

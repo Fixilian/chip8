@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/AddIInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -17,10 +17,10 @@ TEST(AddIInstructionTest, Add) {
   vector<word> expected = { 0x10, 0x15, 0x18, 0x28, 0x58 };
   vector<word> actual(opcodes.size());
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<AddIInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<AddIInstruction>(opcodes);
 
   // Act
   for (size_t i = 0; i < ins.size(); i += 1) {

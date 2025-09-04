@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/ClearDisplayInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -14,9 +14,9 @@ TEST(ClearDisplayInstructionTest, ClearFrame) {
   // Arrange
   int w = 2;
   int h = 5;
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContext(w * kBits, h, *mem, *keyboard);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContext(w * kBits, h, *mem, *keyboard);
   ClearDisplayInstruction cls_ins(0x00E0);
   
   vector<chip8::byte> input = { 

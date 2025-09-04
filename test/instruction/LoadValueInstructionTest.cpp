@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/LoadValueInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -17,10 +17,10 @@ TEST(LoadValueInstructionTest, Load) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContext(*mem, *keyboard);
-  auto ins = generateInstructions<LoadValueInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContext(*mem, *keyboard);
+  auto ins = createInstructions<LoadValueInstruction>(opcodes);
 
   // Act
   for (size_t i = 0; i < n; i += 1) {

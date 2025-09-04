@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/StoreBcdInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -27,10 +27,10 @@ TEST(StoreBcdInstructionTest, Store) {
   vector<chip8::byte> actual3(regs.size());
   int n = static_cast<int>(opcodes.size());
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory(mem_size, mem_reserve);
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<StoreBcdInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory(mem_size, mem_reserve);
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<StoreBcdInstruction>(opcodes);
 
   // Act
   for (int i = 0; i < n; i += 1) {

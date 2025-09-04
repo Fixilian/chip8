@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/AddRegisterInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -18,10 +18,10 @@ TEST(AddRegisterInstructionTest, Add) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<AddRegisterInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<AddRegisterInstruction>(opcodes);
 
   for (size_t i = 0; i < n; i += 1) {
     expected[i] = static_cast<chip8::byte>(regs[i] + regs[i + 1]);
@@ -48,10 +48,10 @@ TEST(AddRegisterInstructionTest, Flag) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<AddRegisterInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<AddRegisterInstruction>(opcodes);
 
   // Act
   for (size_t i = 0; i < n; i += 1) {

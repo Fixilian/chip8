@@ -22,7 +22,6 @@ set(SOURCES
   instruction/DrawInstructionTest.cpp
   instruction/GetSpriteLocationInstructionTest.cpp
   instruction/InstructionPtrTest.cpp
-  instruction/InstructionTestBase.cpp
   instruction/JumpInstructionTest.cpp
   instruction/JumpWithOffsetInstructionTest.cpp
   instruction/LoadDtInstructionTest.cpp
@@ -50,6 +49,8 @@ set(SOURCES
   keyboard/HexKeyboardMonitorTest.cpp
 
   memory/FixedMemoryTest.cpp
+
+  TestObjectFactory.cpp
 )
 
 add_executable(chiptests ${SOURCES})
@@ -58,6 +59,8 @@ target_link_libraries(chiptests PRIVATE
   GTest::gtest_main
   libchip8
 )
+
+include_directories("./")
 
 include(GoogleTest)
 gtest_discover_tests(chiptests)

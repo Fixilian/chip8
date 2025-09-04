@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/JumpWithOffsetInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -18,10 +18,10 @@ TEST(JumpWithOffsetInstructionTest, Jump) {
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<JumpWithOffsetInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<JumpWithOffsetInstruction>(opcodes);
   
   for (size_t i = 0; i < n; i += 1) {
     word jmp = lowest12BitsOf(opcodes[i]);

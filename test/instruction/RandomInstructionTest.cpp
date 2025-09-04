@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/RandomInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -18,10 +18,10 @@ TEST(RandomInstruction, Jump) {
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor();
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<RandomInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor();
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<RandomInstruction>(opcodes);
 
   // Act
   for (size_t i = 0; i < n; i += 1) {

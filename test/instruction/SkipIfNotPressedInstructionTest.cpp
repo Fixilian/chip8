@@ -4,7 +4,7 @@
 
 #include "base/BitOperations.h"
 #include "instruction/SkipIfNotPressedInstruction.h"
-#include "InstructionTestBase.h"
+#include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
@@ -18,10 +18,10 @@ TEST(SkipIfNotPressedInstructionTest, Skip) {
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
 
-  auto keyboard = generateKeyboardMonitor(pressed);
-  auto mem = generateMemory();
-  auto ctx = generateContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = generateInstructions<SkipIfNotPressedInstruction>(opcodes);
+  auto keyboard = createKeyboardMonitor(pressed);
+  auto mem = createMemory();
+  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
+  auto ins = createInstructions<SkipIfNotPressedInstruction>(opcodes);
 
   vector<const chip8::byte*> expected = {
     ctx->pc, ctx->pc + kPcStep, 
