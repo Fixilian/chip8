@@ -9,7 +9,11 @@ set(SOURCES
   compiler/HexRomParser.cpp
   compiler/RomBuilder.cpp
 
+  configuration/Configuration.cpp
+
   exception/Exception.cpp
+  exception/InvalidArgumentException.cpp
+  exception/InvalidConfigException.cpp
   exception/OutOfRangeException.cpp
   exception/SegFaultException.cpp
   exception/SemanticException.cpp

@@ -5,8 +5,8 @@
 #include <unordered_set>
 
 #include "base/Aliases.h"
-#include "base/Configuration.h"
 #include "base/Rom.h"
+#include "configuration/Configuration.h"
 
 namespace chip8 {
 

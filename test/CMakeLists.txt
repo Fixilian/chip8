@@ -7,6 +7,8 @@ set(SOURCES
   compiler/HexRomParserTest.cpp
   compiler/RomBuilderTest.cpp
 
+  configuration/ConfigurationTest.cpp
+
   execution/Chip8DecoderTest.cpp
   execution/CpuTest.cpp
   execution/EndOfProgramDetectorTest.cpp

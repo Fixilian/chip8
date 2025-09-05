@@ -27,7 +27,7 @@ Compiler::Compiler(const Configuration& cfg, bool enable_checks)
 
 Rom Compiler::compile(string_view text) {
   unique_ptr<Parser> parser = make_unique<HexRomParser>(text);
-  RomBuilder builder(cfg_.kMemorySize);
+  RomBuilder builder(cfg_.getMemorySize());
 
   try {
     word w;
@@ -39,7 +39,7 @@ Rom Compiler::compile(string_view text) {
       builder.push(w);
     }
 
-  } catch(OutOfRangeException ex) {
+  } catch(const OutOfRangeException& ex) {
     throw SemanticException("ROM is too big for current configuration");
   }
 
@@ -63,7 +63,7 @@ void Compiler::checkOpcode(word op, Context ctx) {
 
 void Compiler::check0(word op, Context ctx) {
   word addr = lowest12BitsOf(op);
-  if (addr < cfg_.kReservedMemorySize) {
+  if (addr < cfg_.getReservedMemorySize()) {
     if (addr != 0xE0 && addr != 0xEE) {
       throw SemanticException(ctx.line, ctx.column, "Unknown opcode");
     }
