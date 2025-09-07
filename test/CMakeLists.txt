@@ -7,7 +7,9 @@ set(SOURCES
   compiler/HexRomParserTest.cpp
   compiler/RomBuilderTest.cpp
 
-  configuration/ConfigurationTest.cpp
+  configuration/JsonConfigTest.cpp
+  configuration/KeybindTableTest.cpp
+  configuration/MachineSpecificationTest.cpp
 
   execution/Chip8DecoderTest.cpp
   execution/CpuTest.cpp
@@ -61,6 +63,7 @@ add_executable(chiptests ${SOURCES})
 
 target_link_libraries(chiptests PRIVATE
   GTest::gtest_main
+  nlohmann_json::nlohmann_json
   libchip8
 )
 

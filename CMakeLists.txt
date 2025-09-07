@@ -10,6 +10,10 @@ endif()
 
 include_directories("src/")
 
+include(FetchContent)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 add_subdirectory(src)
 
 option(CHIP8_TESTING "Unit tests are enable" OFF)
@@ -17,7 +21,6 @@ option(CHIP8_TESTING "Unit tests are enable" OFF)
 if(NOT CHIP8_TESTING)
   message(STATUS "Unit tests are disable")
 else()
-  include(FetchContent)
   FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip

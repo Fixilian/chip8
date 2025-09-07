@@ -19,15 +19,15 @@ unordered_set<word> Compiler::allowed_f_opcodes_ = {
 };
 
 
-Compiler::Compiler(const Configuration& cfg, bool enable_checks)
+Compiler::Compiler(const MachineSpecification& spec, bool enable_checks)
     : enable_checks_(enable_checks),
-      cfg_(cfg)
+      spec_(spec)
 {}
 
 
 Rom Compiler::compile(string_view text) {
   unique_ptr<Parser> parser = make_unique<HexRomParser>(text);
-  RomBuilder builder(cfg_.getMemorySize());
+  RomBuilder builder(spec_.getMemorySize());
 
   try {
     word w;
@@ -63,7 +63,7 @@ void Compiler::checkOpcode(word op, Context ctx) {
 
 void Compiler::check0(word op, Context ctx) {
   word addr = lowest12BitsOf(op);
-  if (addr < cfg_.getReservedMemorySize()) {
+  if (addr < spec_.getReservedMemorySize()) {
     if (addr != 0xE0 && addr != 0xEE) {
       throw SemanticException(ctx.line, ctx.column, "Unknown opcode");
     }

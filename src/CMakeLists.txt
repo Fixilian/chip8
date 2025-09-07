@@ -9,7 +9,10 @@ set(SOURCES
   compiler/HexRomParser.cpp
   compiler/RomBuilder.cpp
 
-  configuration/Configuration.cpp
+  configuration/Config.cpp
+  configuration/JsonConfig.cpp
+  configuration/KeybindTable.cpp
+  configuration/MachineSpecification.cpp
 
   exception/Exception.cpp
   exception/InvalidArgumentException.cpp
@@ -72,6 +75,10 @@ set(SOURCES
 )
 
 add_library(libchip8 ${SOURCES})
+
+target_link_libraries(libchip8 PRIVATE
+  nlohmann_json::nlohmann_json
+)
 
 target_compile_options(libchip8 PRIVATE
   -Werror

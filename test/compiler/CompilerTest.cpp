@@ -14,9 +14,9 @@ TEST(CompilerTest, Correctness) {
   // Arrange
   string text = "00E0AABB00EECCDD1133EEA1";
   vector<word> expected = { 0x00E0, 0xAABB, 0x00EE, 0xCCDD, 0x1133, 0xEEA1};
-  Configuration cfg;
+  MachineSpecification spec;
   bool enable_checks = true;
-  Compiler compiler(cfg, enable_checks);
+  Compiler compiler(spec, enable_checks);
 
   // Act
   Rom rom = compiler.compile(text);
@@ -33,9 +33,9 @@ TEST(CompilerTest, Correctness) {
 TEST(CompilerTest, UnexpectedOpcode) {
   // Arrange
   string text = "0011";
-  Configuration cfg;
+  MachineSpecification spec;
   bool enable_checks = true;
-  Compiler compiler(cfg, enable_checks);
+  Compiler compiler(spec, enable_checks);
 
   // Act
   // Assert
@@ -49,9 +49,9 @@ TEST(CompilerTest, DisableChecks) {
   // Arrange
   string text = "0000AABB0011CCDD0033EE55";
   vector<word> expected = { 0x0000, 0xAABB, 0x0011, 0xCCDD, 0x0033, 0xEE55};
-  Configuration cfg;
+  MachineSpecification spec;
   bool enable_checks = false;
-  Compiler compiler(cfg, enable_checks);
+  Compiler compiler(spec, enable_checks);
 
   // Act
   Rom rom = compiler.compile(text);

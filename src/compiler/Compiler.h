@@ -6,7 +6,7 @@
 
 #include "base/Aliases.h"
 #include "base/Rom.h"
-#include "configuration/Configuration.h"
+#include "configuration/MachineSpecification.h"
 
 namespace chip8 {
 
@@ -16,7 +16,7 @@ namespace chip8 {
  */
 class Compiler {
  public:
-  Compiler(const Configuration& cfg, bool enable_checks);
+  Compiler(const MachineSpecification& spec, bool enable_checks);
 
   Compiler(const Compiler&) = delete;
   Compiler& operator=(const Compiler&) = delete;
@@ -34,7 +34,7 @@ class Compiler {
  private:
   static std::unordered_set<word> allowed_f_opcodes_;
   bool enable_checks_;
-  Configuration cfg_;
+  MachineSpecification spec_;
 
   struct Context {
     int line;
