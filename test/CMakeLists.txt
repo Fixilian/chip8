@@ -1,6 +1,7 @@
 set(SOURCES
   base/AllocatorTest.cpp
   base/BitOperationsTest.cpp
+  base/FileIOTest.cpp
   base/StackTest.cpp
   
   compiler/CompilerTest.cpp

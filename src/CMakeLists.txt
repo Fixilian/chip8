@@ -1,6 +1,7 @@
 set(SOURCES
   base/Allocator.cpp
   base/BitOperations.cpp
+  base/FileIO.cpp
   base/Rom.cpp
   base/Spinlock.cpp
   base/Timer.cpp
@@ -17,6 +18,7 @@ set(SOURCES
   exception/Exception.cpp
   exception/InvalidArgumentException.cpp
   exception/InvalidConfigException.cpp
+  exception/IOException.cpp
   exception/OutOfRangeException.cpp
   exception/SegFaultException.cpp
   exception/SemanticException.cpp
