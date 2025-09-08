@@ -16,6 +16,7 @@ set(SOURCES
   configuration/MachineSpecification.cpp
 
   emulator/Cli.cpp
+  emulator/Emulator.cpp
 
   exception/Exception.cpp
   exception/InvalidArgumentException.cpp
@@ -103,4 +104,10 @@ target_compile_options(libchip8 PRIVATE
   -Woverloaded-virtual
   -Wredundant-decls
   -Wsign-promo
+)
+
+add_executable(chip8 main.cpp)
+
+target_link_libraries(chip8 PRIVATE
+  libchip8
 )
