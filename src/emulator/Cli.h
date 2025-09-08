@@ -7,6 +7,7 @@ namespace chip8 {
 
 struct CommandLineArguments {
   int err = 0;
+  bool exit = false;
   std::string rom_file = "";
   bool is_binary_rom = true;
   std::string cfg_file = "default.cfg";

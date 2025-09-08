@@ -2,6 +2,8 @@
 
 #include <CLI/CLI.hpp>
 
+#include "Version.h"
+
 using namespace std;
 
 namespace chip8 {
@@ -12,7 +14,7 @@ CommandLineArguments parse(int argc, char** argv) {
   argv = cli.ensure_utf8(argv);
   CommandLineArguments args;
 
-  cli.set_version_flag("--version", string("")); // TODO
+  cli.set_version_flag("--version", string(CHIP8_VERSION));
 
   auto* rom_opt = cli.add_option("rom", args.rom_file, "ROM file name");
   rom_opt->required();
@@ -39,6 +41,7 @@ CommandLineArguments parse(int argc, char** argv) {
     cli.parse(argc, argv);
   } catch (const CLI::ParseError& e) {
     args.err = cli.exit(e);
+    args.exit = true;
   }
 
   if (is_text_rom) {
