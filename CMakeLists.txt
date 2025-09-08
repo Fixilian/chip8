@@ -8,37 +8,17 @@ if(NOT CMAKE_CXX_EXTENSIONS)
   set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
 
+option(CHIP8_TESTING "Unit tests are enable" OFF)
+
 include_directories("src/")
 
-include(FetchContent)
-
-FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
-FetchContent_MakeAvailable(json)
-
-FetchContent_Declare(
-  cli11_proj
-  QUIET
-  GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-  GIT_TAG v2.5.0
-)
-FetchContent_MakeAvailable(cli11_proj)
+add_subdirectory(external)
 
 add_subdirectory(src)
-
-option(CHIP8_TESTING "Unit tests are enable" OFF)
 
 if(NOT CHIP8_TESTING)
   message(STATUS "Unit tests are disable")
 else()
-  FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-  )
-  # For Windows: Prevent overriding the parent project's compiler/linker settings
-  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-  FetchContent_MakeAvailable(googletest)
-
   enable_testing()
-
   add_subdirectory(test)
 endif()
