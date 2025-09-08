@@ -12,6 +12,8 @@ set(SOURCES
   configuration/KeybindTableTest.cpp
   configuration/MachineSpecificationTest.cpp
 
+  emulator/CliTest.cpp
+
   execution/Chip8DecoderTest.cpp
   execution/CpuTest.cpp
   execution/EndOfProgramDetectorTest.cpp

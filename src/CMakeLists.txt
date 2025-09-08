@@ -15,6 +15,9 @@ set(SOURCES
   configuration/KeybindTable.cpp
   configuration/MachineSpecification.cpp
 
+  emulator/Cli.cpp
+  emulator/CommandLineArguments.cpp
+
   exception/Exception.cpp
   exception/InvalidArgumentException.cpp
   exception/InvalidConfigException.cpp
@@ -80,6 +83,7 @@ add_library(libchip8 ${SOURCES})
 
 target_link_libraries(libchip8 PRIVATE
   nlohmann_json::nlohmann_json
+  CLI11::CLI11
 )
 
 target_compile_options(libchip8 PRIVATE
