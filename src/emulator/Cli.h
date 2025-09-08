@@ -1,15 +1,26 @@
 #ifndef CHIP8_EMULATOR_CLI_H
 #define CHIP8_EMULATOR_CLI_H
 
-#include "CommandLineArguments.h"
+#include <string>
 
 namespace chip8 {
+
+struct CommandLineArguments {
+  int err = 0;
+  std::string rom_file = "";
+  bool is_binary_rom = true;
+  std::string cfg_file = "default.cfg";
+  int memory_size = 0;
+  int stack_size = 0;
+  int display_width = 0;
+  int display_height = 0;
+};
 
 /**
  * Parses command line arguments.
  * @param[out] err - > 0 if some error occur, otherwise = 0.
  */
-CommandLineArguments parse(int argc, char** argv, int& err);
+CommandLineArguments parse(int argc, char** argv);
 
 } // namespace chip8
 

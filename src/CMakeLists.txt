@@ -16,7 +16,6 @@ set(SOURCES
   configuration/MachineSpecification.cpp
 
   emulator/Cli.cpp
-  emulator/CommandLineArguments.cpp
 
   exception/Exception.cpp
   exception/InvalidArgumentException.cpp
