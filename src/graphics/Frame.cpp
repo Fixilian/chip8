@@ -1,5 +1,7 @@
 #include "Frame.h"
 
+#include <algorithm>
+
 #include "base/BitOperations.h"
 
 using namespace std;
@@ -66,6 +68,11 @@ void Frame::clear() {
   for (auto& x : frame_) {
     x = 0;
   }
+}
+
+
+void Frame::copy(const Frame& frame) {
+  std::copy(frame.frame_.begin(), frame.frame_.end(), frame_.begin());
 }
 
 

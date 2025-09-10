@@ -3,50 +3,47 @@
 #include "exception/InvalidArgumentException.h"
 #include "exception/UnknownKeyException.h"
 #include "keyboard/HexKeyboardMonitor.h"
+#include "keyboard/SdlKeyAdapter.h"
 
 using namespace std;
 
 namespace chip8 {
 
 
-unordered_map<string, byte> KeybindTable::aliases = {
-  {"ESC", 27},
-  {"ESCAPE", 27},
-  {"ENTER", 13},
-  {"TAB", 9},
-  {"SPACE", 32},
-  {"BACKSPACE", 8},
-  {"DELETE", 127},
-};
-
-
 KeybindTable::KeybindTable()
-    : quit_key_(aliases["ESC"])
+    : adapter_(make_shared<SdlKeyAdapter>()),
+      quit_key_(adapter_->convert("ESCAPE"))
 {}
 
 
-void KeybindTable::setQuitKey(byte key) {
+void KeybindTable::setQuitKey(const std::string& key) {
+  quit_key_ = adapter_->convert(key);
+}
+
+
+void KeybindTable::setQuitKey(int key) {
   quit_key_ = key;
 }
 
 
-byte KeybindTable::getQuitKey() const {
+int KeybindTable::getQuitKey() const {
   return quit_key_;
 }
 
 
-void KeybindTable::bindKey(byte key, byte to) {
+void KeybindTable::bindKey(int key, byte to) {
   checkHexKey(to);
   binds_[key] = to;
 }
 
 
 void KeybindTable::bindKey(const std::string& key, byte to) {
-  bindKey(stringToKeyCode(key), to);
+  int key_code = adapter_->convert(key);
+  bindKey(key_code, to);
 }
 
 
-byte KeybindTable::operator[](byte key) const {
+byte KeybindTable::operator[](int key) const {
   if (!binds_.contains(key)) {
     throw InvalidArgumentException("Key without any bind");
   }
@@ -54,21 +51,13 @@ byte KeybindTable::operator[](byte key) const {
 }
 
 
-const unordered_map<byte, byte>& KeybindTable::getTable() const {
+const unordered_map<int, byte>& KeybindTable::getTable() const {
   return binds_;
 }
 
 
-byte KeybindTable::stringToKeyCode(const std::string &s) {
-  if (s.length() > 1) {
-    if (aliases.contains(s)) {
-      return aliases[s];
-    } else {
-      throw UnknownKeyException(s[0], "Unknown key alias");
-    }
-  } else {
-    return s[0];
-  }
+const KeyAdapter& KeybindTable::getAdapter() const {
+  return *adapter_;
 }
 
 

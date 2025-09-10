@@ -1,5 +1,6 @@
 #include "JsonConfig.h"
 
+#include <algorithm>
 #include <exception>
 #include <nlohmann/json.hpp>
 #include <unordered_map>
@@ -14,16 +15,24 @@ namespace chip8 {
 using json = nlohmann::json;
 
 
+static string toUpper(const string& s) {
+  string str(s);
+  transform(s.begin(), s.end(), str.begin(),
+            [](unsigned char c) { return toupper(c); });
+  return str;
+}
+
+
 static KeybindTable readKeybinds(json& j) {
   KeybindTable binds;
   if (j.contains("quit_key")) {
     string quit_key = j["quit_key"].template get<string>();
-    binds.setQuitKey(KeybindTable::stringToKeyCode(quit_key));
+    binds.setQuitKey(toUpper(quit_key));
   }
   if (j.contains("keybinds")) {
     auto str_binds = j["keybinds"].template get<unordered_map<string, byte>>();
     for (const auto&[key, to] : str_binds) {
-      binds.bindKey(key, to);
+      binds.bindKey(toUpper(key), to);
     }
   }
   return binds;
@@ -82,36 +91,21 @@ string defaultConfig() {
 }
 
 
-static string keyToString(byte key) {
-  byte minCommonKey = 33;
-  byte maxCommonKey = 126;
-  if (key >= minCommonKey && key <= maxCommonKey) {
-    char ch = static_cast<char>(key);
-    return string(1, ch); 
-  } else {
-    for (const auto&[alias, to] : KeybindTable::aliases) {
-      if (key == to) {
-        return alias;
-      }
-    }
-  }
-  throw UnknownKeyException(key, "Can not convert key to string");
-}
-
-
 static unordered_map<string, byte> getStringBinds(const KeybindTable& keybinds) {
-  auto binds = keybinds.getTable();
+  auto& binds = keybinds.getTable();
+  auto& adapter = keybinds.getAdapter();
   unordered_map<string, byte> string_binds;
   for (const auto&[key, to] : binds) {
-    string_binds[keyToString(key)] = to;
+    string_binds[adapter.convert(key)] = to;
   }
   return string_binds;
 }
 
 
 static void to_json(json& j, const Config &cfg) {
-  auto spec = cfg.getSpecification();
-  auto keybinds = cfg.getKeyBinds();
+  auto& spec = cfg.getSpecification();
+  auto& keybinds = cfg.getKeyBinds();
+  auto& adapter = keybinds.getAdapter();
   auto string_binds = getStringBinds(keybinds);
   j = json{
     { "specification", {
@@ -124,7 +118,7 @@ static void to_json(json& j, const Config &cfg) {
       }
     },
     { "keybind_table", {
-        {"quit_key", keyToString(keybinds.getQuitKey())},
+        {"quit_key", adapter.convert(keybinds.getQuitKey())},
         {"keybinds", string_binds},
       }
     },

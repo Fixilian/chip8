@@ -33,7 +33,6 @@ set(SOURCES
   execution/EndOfProgramDetector.cpp
 
   graphics/Frame.cpp
-  graphics/MonochromeDisplay.cpp
 
   instruction/AddIInstruction.cpp
   instruction/AddRegisterInstruction.cpp
@@ -75,6 +74,7 @@ set(SOURCES
   instruction/WaitKeyPressInstruction.cpp
 
   keyboard/HexKeyboardMonitor.cpp
+  keyboard/SdlKeyAdapter.cpp
 
   memory/FixedMemory.cpp
 )

@@ -151,3 +151,31 @@ TEST(FrameTest, Clear) {
     }
   }
 }
+
+
+TEST(FrameTest, Copy) {
+  // Arrange
+  vector<chip8::byte> input = { 0xF0, 0x90, 0x90, 0x90, 0xF0};
+  int w = 1;
+  int h = 5;
+  int pw = w * kBits;
+  Frame f(pw, h);
+  Frame f2(pw, h);
+  for (int x = 0; x < w; x += 1) {
+    for (int y = 0; y < h; y += 1) {
+      f.setByte(x, y, input[x + y * w]);
+    }
+  }
+
+  // Act
+  f2.copy(f);
+
+  // Assert
+  for (int x = 0; x < pw; x += 1) {
+    for (int y = 0; y < h; y += 1) {
+      auto p = f.getPixel(x, y);
+      auto p2 = f2.getPixel(x, y);
+      EXPECT_EQ(p, p2);
+    }
+  }
+}

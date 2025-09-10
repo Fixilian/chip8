@@ -26,7 +26,7 @@ TEST(JsonConfigTest, ReadFromJson) {
           "timer_frequency" : 144
         },                          
         "keybind_table" : {
-          "quit_key" : "ESC",
+          "quit_key" : "ESCAPE",
           "keybinds" : {
             "a" : 0,
             "b" : 1,
@@ -55,38 +55,39 @@ TEST(JsonConfigTest, ReadFromJson) {
   int display_height = 64;
   int timer_frequency = 144;
   string quit_key = "ESC";
-  unordered_map<chip8::byte, chip8::byte> binds;
-  binds['a'] = 0x0;
-  binds['b'] = 0x1;
-  binds['c'] = 0x2;
-  binds['d'] = 0x3;
-  binds['e'] = 0x4;
-  binds['f'] = 0x5;
-  binds['g'] = 0x6;
-  binds['h'] = 0x7;
-  binds['i'] = 0x8;
-  binds['j'] = 0x9;
-  binds['k'] = 0xA;
-  binds['l'] = 0xB;
-  binds['m'] = 0xC;
-  binds['n'] = 0xD;
-  binds['o'] = 0xE;
-  binds['p'] = 0xF;
+  unordered_map<string, chip8::byte> binds;
+  binds["A"] = 0x0;
+  binds["B"] = 0x1;
+  binds["C"] = 0x2;
+  binds["D"] = 0x3;
+  binds["E"] = 0x4;
+  binds["F"] = 0x5;
+  binds["G"] = 0x6;
+  binds["H"] = 0x7;
+  binds["I"] = 0x8;
+  binds["J"] = 0x9;
+  binds["K"] = 0xA;
+  binds["L"] = 0xB;
+  binds["M"] = 0xC;
+  binds["N"] = 0xD;
+  binds["O"] = 0xE;
+  binds["P"] = 0xF;
 
   // Act
   Config cfg = readFromJson(s);
 
   // Assert
-  auto spec = cfg.getSpecification();
+  auto& spec = cfg.getSpecification();
   EXPECT_EQ(spec.getMemorySize(), memory_size);
   EXPECT_EQ(spec.getReservedMemorySize(), reserved_memory_size);
   EXPECT_EQ(spec.getStackSize(), stack_size);
   EXPECT_EQ(spec.getDisplayWidth(), display_width);
   EXPECT_EQ(spec.getDisplayHeight(), display_height);
   EXPECT_EQ(spec.getTimerFrequency(), timer_frequency);
-  auto keybinds = cfg.getKeyBinds();
+  auto& keybinds = cfg.getKeyBinds();
+  auto& adapter = keybinds.getAdapter();
   for (const auto&[key, to] : binds) {
-    EXPECT_EQ(keybinds[key], to);
+    EXPECT_EQ(keybinds[adapter.convert(key)], to);
   } 
 }
 

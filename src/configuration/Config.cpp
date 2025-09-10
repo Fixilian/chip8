@@ -21,22 +21,22 @@ Config::Config(const MachineSpecification& spec)
   // A 0 B F
 
   // default keybinds for WASD keyboard
-  keybinds_.bindKey('1', 0x1);
-  keybinds_.bindKey('2', 0x2);
-  keybinds_.bindKey('3', 0x3);
-  keybinds_.bindKey('4', 0xC);
-  keybinds_.bindKey('q', 0x4);
-  keybinds_.bindKey('w', 0x5);
-  keybinds_.bindKey('e', 0x6);
-  keybinds_.bindKey('r', 0xD);
-  keybinds_.bindKey('a', 0x7);
-  keybinds_.bindKey('s', 0x8);
-  keybinds_.bindKey('d', 0x9);
-  keybinds_.bindKey('f', 0xE);
-  keybinds_.bindKey('z', 0xA);
-  keybinds_.bindKey('x', 0x0);
-  keybinds_.bindKey('c', 0xB);
-  keybinds_.bindKey('v', 0xF);
+  keybinds_.bindKey("1", 0x1);
+  keybinds_.bindKey("2", 0x2);
+  keybinds_.bindKey("3", 0x3);
+  keybinds_.bindKey("4", 0xC);
+  keybinds_.bindKey("Q", 0x4);
+  keybinds_.bindKey("W", 0x5);
+  keybinds_.bindKey("E", 0x6);
+  keybinds_.bindKey("R", 0xD);
+  keybinds_.bindKey("A", 0x7);
+  keybinds_.bindKey("S", 0x8);
+  keybinds_.bindKey("D", 0x9);
+  keybinds_.bindKey("F", 0xE);
+  keybinds_.bindKey("Z", 0xA);
+  keybinds_.bindKey("X", 0x0);
+  keybinds_.bindKey("C", 0xB);
+  keybinds_.bindKey("V", 0xF);
 }
 
 

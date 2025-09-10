@@ -43,6 +43,8 @@ class Frame {
    */
   void clear();
 
+  void copy(const Frame& frame);
+
  private:
   std::vector<byte> frame_;
   int width_;

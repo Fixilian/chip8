@@ -12,10 +12,9 @@ class Display {
  public:
   virtual ~Display() {}
 
-  virtual int getHeight() = 0;
-  virtual int getWidth() = 0;
+  virtual bool init() = 0;
 
-  virtual const Frame& getFrame() = 0;
+  virtual void render(const Frame& frame) = 0;
 };
 
 } // namespace chip8

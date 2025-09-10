@@ -56,6 +56,7 @@ set(SOURCES
   instruction/SubRegisterInstructionTest.cpp
 
   keyboard/HexKeyboardMonitorTest.cpp
+  keyboard/SdlKeyAdapterTest.cpp
 
   memory/FixedMemoryTest.cpp
 

@@ -1,10 +1,12 @@
 #ifndef CHIP8_CONFIGURATION_KEYBINDTABLE_H
 #define CHIP8_CONFIGURATION_KEYBINDTABLE_H
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 
 #include "base/Aliases.h"
+#include "keyboard/KeyAdapter.h"
 
 namespace chip8 {
 
@@ -14,8 +16,6 @@ namespace chip8 {
  */
 class KeybindTable {
  public:
-  static std::unordered_map<std::string, byte> aliases;
-
   KeybindTable();
 
   KeybindTable(const KeybindTable&) = default;
@@ -23,31 +23,29 @@ class KeybindTable {
   KeybindTable(KeybindTable&&) = default;
   KeybindTable& operator=(KeybindTable&&) = default;
 
-  void setQuitKey(byte key);
-  byte getQuitKey() const;
+  void setQuitKey(const std::string& key);
+  void setQuitKey(int key);
+  int getQuitKey() const;
 
   /**
    * @throws UnknownKeyException when 'to' is invalid key. 
    */
-  void bindKey(byte key, byte to);
+  void bindKey(int key, byte to);
   void bindKey(const std::string& key, byte to);
 
   /**
    * @throws InvalidArgumentException when key is not bound
    */
-  byte operator[](byte key) const;
+  byte operator[](int key) const;
 
-  const std::unordered_map<byte, byte>& getTable() const;
+  const std::unordered_map<int, byte>& getTable() const;
 
-  /**
-   * Converts string representation of code to actual key code.
-   * Not supports arrows and functional keys (F1, F2, etc...).
-   */
-  static byte stringToKeyCode(const std::string &s);
+  const KeyAdapter& getAdapter() const;
 
  private:
-  std::unordered_map<byte, byte> binds_;
-  byte quit_key_;
+  std::unordered_map<int, byte> binds_;
+  std::shared_ptr<KeyAdapter> adapter_;
+  int quit_key_;
 
   void checkHexKey(byte key);
 };
