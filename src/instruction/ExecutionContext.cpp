@@ -61,4 +61,16 @@ void ExecutionContext::updateTimers() {
 }
 
 
+void ExecutionContext::addFrameListener(FrameListener& listener) {
+  frame_listeners_.push_back(&listener);
+}
+
+
+void ExecutionContext::notifyFrameListeners() {
+  for (size_t i = 0; i < frame_listeners_.size(); i += 1) {
+    frame_listeners_[i]->onChange(frame);
+  }
+}
+
+
 } // namespace chip8

@@ -18,6 +18,7 @@ void DrawInstruction::execute(ExecutionContext& ctx) {
   byte x0 = ctx.registers[x];
   byte y0 = ctx.registers[y];
   ctx.frame.draw(sprite, nibble, x0, y0);
+  ctx.notifyFrameListeners();
 }
 
 

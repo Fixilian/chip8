@@ -8,6 +8,7 @@
 #include "base/Spinlock.h"
 #include "base/Stack.h"
 #include "graphics/Frame.h"
+#include "graphics/FrameListener.h"
 #include "keyboard/KeyboardMonitor.h"
 #include "memory/Ram.h"
 
@@ -50,10 +51,15 @@ class ExecutionContext {
 
   void updateTimers();
 
+  void addFrameListener(FrameListener& listener);
+
+  void notifyFrameListeners();
+
  private:
   std::atomic<byte> dt_;
   std::atomic<byte> st_;
   Spinlock spin;
+  std::vector<FrameListener*> frame_listeners_;
 };
 
 } // namespace chip8

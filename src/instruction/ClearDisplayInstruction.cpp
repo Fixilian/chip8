@@ -10,6 +10,7 @@ ClearDisplayInstruction::ClearDisplayInstruction(word opcode)
 
 void ClearDisplayInstruction::execute(ExecutionContext& ctx) {
   ctx.frame.clear();
+  ctx.notifyFrameListeners();
 }
 
 
