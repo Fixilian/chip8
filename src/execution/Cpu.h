@@ -1,6 +1,7 @@
 #ifndef CHIP8_EXECUTION_CPU_H
 #define CHIP8_EXECUTION_CPU_H
 
+#include <atomic>
 #include <memory>
 
 #include "base/Allocator.h"
@@ -20,11 +21,14 @@ class Cpu {
 
   void execute(Rom rom);
 
+  void stop();
+
  private:
   Memory& memory_;
   ExecutionContext& ctx_;
   Allocator allocator_;
   std::unique_ptr<Decoder> decoder_;
+  std::atomic<bool> running_;
 };
 
 } // namespace chip8
