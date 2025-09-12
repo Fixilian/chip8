@@ -19,7 +19,7 @@ static streamsize fileSize(ifstream& file) {
 
 
 string readFile(const string& name, int max_size) {
-  ifstream file(name, ios::binary);
+  ifstream file(name, ios::in | ios::binary);
   if (!file) {
     throw IOException("Cannot open file: " + name);
   }
@@ -39,7 +39,7 @@ string readFile(const string& name, int max_size) {
 
 
 Rom fromFile(const string& name, int max_size) {
-  ifstream file(name, std::ios::binary);
+  ifstream file(name, ios::in | ios::binary);
   if (!file) {
     throw IOException("Cannot open file: " + name);
   }
@@ -63,7 +63,7 @@ Rom fromFile(const string& name, int max_size) {
 
 
 void writeFile(const string& name, const string& src) {
-  ofstream file(name, ios::binary);
+  ofstream file(name, ios::out |ios::binary);
   if (!file) {
     throw IOException("Cannot open file for writing: " + name);
   }

@@ -24,6 +24,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(sdl)
 
+FetchContent_Declare(
+  spdlog
+  QUIET
+  GIT_REPOSITORY https://github.com/gabime/spdlog.git
+  GIT_TAG v1.15.3
+)
+FetchContent_MakeAvailable(spdlog)
+
 if (CHIP8_TESTING) 
   FetchContent_Declare(
     googletest

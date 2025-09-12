@@ -2,6 +2,7 @@ set(SOURCES
   base/Allocator.cpp
   base/BitOperations.cpp
   base/FileIO.cpp
+  base/Log.cpp
   base/Rom.cpp
   base/Spinlock.cpp
   base/Timer.cpp
@@ -84,6 +85,8 @@ add_library(libchip8 ${SOURCES})
 target_link_libraries(libchip8 PRIVATE
   nlohmann_json::nlohmann_json
   CLI11::CLI11
+  SDL3::SDL3
+  spdlog::spdlog
 )
 
 target_compile_options(libchip8 PRIVATE
@@ -100,14 +103,17 @@ target_compile_options(libchip8 PRIVATE
   -Wenum-compare
   -Wfloat-equal
   -Wnon-virtual-dtor
-  -Wold-style-cast
+
+  # SDL is written in С
+  # -Wold-style-cast
+  
   -Woverloaded-virtual
   -Wredundant-decls
   -Wsign-promo
 )
 
-add_executable(chip8 main.cpp)
+add_executable(${CMAKE_PROJECT_NAME} main.cpp)
 
-target_link_libraries(chip8 PRIVATE
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
   libchip8
 )
