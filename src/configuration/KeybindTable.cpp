@@ -51,6 +51,11 @@ byte KeybindTable::operator[](int key) const {
 }
 
 
+bool KeybindTable::contains(int key) const {
+  return binds_.contains(key);
+}
+
+
 const unordered_map<int, byte>& KeybindTable::getTable() const {
   return binds_;
 }

@@ -38,6 +38,8 @@ class KeybindTable {
    */
   byte operator[](int key) const;
 
+  bool contains(int key) const;
+
   const std::unordered_map<int, byte>& getTable() const;
 
   const KeyAdapter& getAdapter() const;
