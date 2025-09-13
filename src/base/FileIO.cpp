@@ -46,19 +46,16 @@ Rom fromFile(const string& name, int max_size) {
 
   auto file_size = fileSize(file);
   if (max_size > 0 && file_size > max_size) {
-      throw IOException("File exceeds max_size: " + name);
+    throw IOException("File exceeds max_size: " + name);
   }
   if (file_size % sizeof(word) != 0) {
-      throw IOException("ROM file size is not aligned to word size");
+    throw IOException("ROM file size is not aligned to word size");
   }
 
-  int word_count = static_cast<int>(file_size / sizeof(word));
-  vector<word> buffer(word_count);
-  if (!file.read(reinterpret_cast<char*>(buffer.data()), file_size)) {
-      throw IOException("Failed to read file: " + name);
-  }
+  vector<unsigned char> buffer(istreambuf_iterator<char>(file), {});
+  word* words = reinterpret_cast<word*>(buffer.data());
 
-  return Rom(buffer.data(), static_cast<int>(file_size));
+  return Rom(words, static_cast<int>(file_size));
 }
 
 
