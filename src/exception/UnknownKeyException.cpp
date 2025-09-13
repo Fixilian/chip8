@@ -11,8 +11,8 @@ UnknownKeyException::UnknownKeyException(int key, const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const UnknownKeyException& ex) {
-  out << "UnknownKeyException: " << ex.what_ <<  ", key = " << ex.key_ << '\n';
+ostream& operator<<(ostream& out, const UnknownKeyException& ex) {
+  out << "UnknownKeyException: " << ex.what_ <<  ", key = " << ex.key_;
   return out;
 }
 

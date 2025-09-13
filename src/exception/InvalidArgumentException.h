@@ -17,11 +17,11 @@ class InvalidArgumentException : public Exception {
   InvalidArgumentException(InvalidArgumentException&&) = default;
   InvalidArgumentException& operator=(InvalidArgumentException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, 
+  friend std::ostream& operator<<(std::ostream& out, 
                                     const InvalidArgumentException& ex);
 };
 
-std::ostream& operator<< (std::ostream& out, const InvalidArgumentException& ex);
+std::ostream& operator<<(std::ostream& out, const InvalidArgumentException& ex);
 
 } // namespace chip8
 

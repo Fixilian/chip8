@@ -10,8 +10,8 @@ OutOfRangeException::OutOfRangeException(const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const OutOfRangeException& ex) {
-  out << "OutOfRangeException: " << ex.what_ << '\n';
+ostream& operator<<(ostream& out, const OutOfRangeException& ex) {
+  out << "OutOfRangeException: " << ex.what_;
   return out;
 }
 

@@ -17,11 +17,11 @@ class IOException : public Exception {
   IOException(IOException&&) = default;
   IOException& operator=(IOException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, 
+  friend std::ostream& operator<<(std::ostream& out, 
                                     const IOException& ex);
 };
 
-std::ostream& operator<< (std::ostream& out, const IOException& ex);
+std::ostream& operator<<(std::ostream& out, const IOException& ex);
 
 } // namespace chip8
 

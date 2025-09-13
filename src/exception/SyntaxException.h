@@ -17,14 +17,14 @@ class SyntaxException : public Exception {
   SyntaxException(SyntaxException&&) = default;
   SyntaxException& operator=(SyntaxException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, const SyntaxException& ex);
+  friend std::ostream& operator<<(std::ostream& out, const SyntaxException& ex);
 
  private:
   int line_;
   int column_;
 };
 
-std::ostream& operator<< (std::ostream& out, const SyntaxException& ex);
+std::ostream& operator<<(std::ostream& out, const SyntaxException& ex);
 
 } // namespace chip8
 

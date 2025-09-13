@@ -10,8 +10,8 @@ IOException::IOException(const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const IOException& ex) {
-  out << "IOException: " << ex.what_ << '\n';
+ostream& operator<<(ostream& out, const IOException& ex) {
+  out << "IOException: " << ex.what_;
   return out;
 }
 

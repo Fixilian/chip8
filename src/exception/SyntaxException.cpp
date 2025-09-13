@@ -12,9 +12,9 @@ SyntaxException::SyntaxException(int line, int col, const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const SyntaxException& ex) {
+ostream& operator<<(ostream& out, const SyntaxException& ex) {
   out << "SyntaxException: " << ex.what_ <<  " at " 
-    << ex.line_ << ':' << ex.column_ << '\n';
+    << ex.line_ << ':' << ex.column_;
   return out;
 }
 

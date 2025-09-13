@@ -19,12 +19,12 @@ SemanticException::SemanticException(const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const SemanticException& ex) {
+ostream& operator<<(ostream& out, const SemanticException& ex) {
   if (ex.include_postion_) {
     out << "SemanticException: " << ex.what_ <<  " at " 
-      << ex.line_ << ':' << ex.column_ << '\n';
+      << ex.line_ << ':' << ex.column_;
   } else {
-    out << "SemanticException: " << ex.what_ << '\n';
+    out << "SemanticException: " << ex.what_;
   }
   return out;
 }

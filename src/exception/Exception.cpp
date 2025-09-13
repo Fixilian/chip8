@@ -1,5 +1,7 @@
 #include "Exception.h"
 
+#include <sstream>
+
 using namespace std;
 
 namespace chip8 {
@@ -15,8 +17,15 @@ const char* Exception::what() const noexcept {
 }
 
 
-ostream& operator<< (ostream& out, const Exception& ex) {
-  out << ex.what_ << '\n';
+string Exception::message() const {
+  stringstream ss;
+  ss << *this;
+  return ss.str();
+}
+
+
+ostream& operator<<(ostream& out, const Exception& ex) {
+  out << ex.what_;
   return out;
 }
 

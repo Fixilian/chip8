@@ -10,8 +10,8 @@ InvalidArgumentException::InvalidArgumentException(const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const InvalidArgumentException& ex) {
-  out << "InvalidArgumentException: " << ex.what_ << '\n';
+ostream& operator<<(ostream& out, const InvalidArgumentException& ex) {
+  out << "InvalidArgumentException: " << ex.what_;
   return out;
 }
 

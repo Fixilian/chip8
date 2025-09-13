@@ -17,13 +17,13 @@ class UnknownKeyException : public Exception {
   UnknownKeyException(UnknownKeyException&&) = default;
   UnknownKeyException& operator=(UnknownKeyException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, const UnknownKeyException& ex);
+  friend std::ostream& operator<<(std::ostream& out, const UnknownKeyException& ex);
 
  private:
   int key_;
 };
 
-std::ostream& operator<< (std::ostream& out, const UnknownKeyException& ex);
+std::ostream& operator<<(std::ostream& out, const UnknownKeyException& ex);
 
 } // namespace chip8
 

@@ -20,13 +20,15 @@ class Exception : public std::exception {
 
   virtual const char* what() const noexcept override;
 
-  friend std::ostream& operator<< (std::ostream& out, const Exception& ex);
+  virtual std::string message() const;
+
+  friend std::ostream& operator<<(std::ostream& out, const Exception& ex);
 
  protected:
   std::string what_;
 };
 
-std::ostream& operator<< (std::ostream& out, const Exception& ex);
+std::ostream& operator<<(std::ostream& out, const Exception& ex);
 
 } // namespace chip8
 

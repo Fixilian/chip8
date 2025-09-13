@@ -18,7 +18,7 @@ class SemanticException : public Exception {
   SemanticException(SemanticException&&) = default;
   SemanticException& operator=(SemanticException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, const SemanticException& ex);
+  friend std::ostream& operator<<(std::ostream& out, const SemanticException& ex);
 
  private:
   int line_;
@@ -26,7 +26,7 @@ class SemanticException : public Exception {
   bool include_postion_;
 };
 
-std::ostream& operator<< (std::ostream& out, const SemanticException& ex);
+std::ostream& operator<<(std::ostream& out, const SemanticException& ex);
 
 } // namespace chip8
 

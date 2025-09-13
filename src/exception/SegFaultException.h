@@ -17,11 +17,11 @@ class SegFaultException : public Exception {
   SegFaultException(SegFaultException&&) = default;
   SegFaultException& operator=(SegFaultException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, 
+  friend std::ostream& operator<<(std::ostream& out, 
                                     const SegFaultException& ex);
 };
 
-std::ostream& operator<< (std::ostream& out, const SegFaultException& ex);
+std::ostream& operator<<(std::ostream& out, const SegFaultException& ex);
 
 } // namespace chip8
 

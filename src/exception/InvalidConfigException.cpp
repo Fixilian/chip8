@@ -10,8 +10,8 @@ InvalidConfigException::InvalidConfigException(const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const InvalidConfigException& ex) {
-  out << "InvalidConfigException: " << ex.what_ << '\n';
+ostream& operator<<(ostream& out, const InvalidConfigException& ex) {
+  out << "InvalidConfigException: " << ex.what_;
   return out;
 }
 

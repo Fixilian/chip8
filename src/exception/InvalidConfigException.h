@@ -17,11 +17,11 @@ class InvalidConfigException : public Exception {
   InvalidConfigException(InvalidConfigException&&) = default;
   InvalidConfigException& operator=(InvalidConfigException&&) = default;
 
-  friend std::ostream& operator<< (std::ostream& out, 
+  friend std::ostream& operator<<(std::ostream& out, 
                                     const InvalidConfigException& ex);
 };
 
-std::ostream& operator<< (std::ostream& out, const InvalidConfigException& ex);
+std::ostream& operator<<(std::ostream& out, const InvalidConfigException& ex);
 
 } // namespace chip8
 

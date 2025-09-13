@@ -10,8 +10,8 @@ SegFaultException::SegFaultException(const string& what)
 {}
 
 
-ostream& operator<< (ostream& out, const SegFaultException& ex) {
-  out << "SegFaultException: " << ex.what_ << '\n';
+ostream& operator<<(ostream& out, const SegFaultException& ex) {
+  out << "SegFaultException: " << ex.what_;
   return out;
 }
 
