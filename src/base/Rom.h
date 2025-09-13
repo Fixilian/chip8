@@ -28,6 +28,8 @@ class Rom {
 
   int size() const;
 
+  void fixEndianess();
+
  private:
   word* opcodes_;
   int size_;
