@@ -1,7 +1,6 @@
 set(SOURCES
   base/Allocator.cpp
   base/BitOperations.cpp
-  base/Endian.cpp
   base/FileIO.cpp
   base/Log.cpp
   base/Rom.cpp

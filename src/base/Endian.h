@@ -1,6 +1,7 @@
 #ifndef CHIP8_BASE_ENDIAN_H
 #define CHIP8_BASE_ENDIAN_H
 
+#include <bit>
 #include <cstdint>
 #include <type_traits>
 
@@ -8,14 +9,25 @@
 
 namespace chip8 {
 
-constexpr bool isBigEndian();
-
 enum class Endianness {
   LittleEndian,
   BigEndian,
 };
 
-constexpr Endianness getSystemEndianess();
+
+constexpr bool isBigEndian() {
+  return std::endian::native == std::endian::big;
+}
+
+
+constexpr Endianness getSystemEndianess() {
+  if (isBigEndian()) {
+    return Endianness::BigEndian;
+  } else {
+    return Endianness::LittleEndian;
+  }
+}
+
 
 template<Endianness to, class T>
 inline T byte_swap_to(T value);
@@ -102,7 +114,7 @@ inline T byte_swap_to(T value) {
   // ensure we're only swapping arithmetic types
   static_assert(std::is_arithmetic<T>::value);
 
-  Endianness system_endianess = getSystemEndianess();
+  constexpr auto system_endianess = getSystemEndianess();
 
   return do_byte_swap<system_endianess, to, T>()(value);
 }
