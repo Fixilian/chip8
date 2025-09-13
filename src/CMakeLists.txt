@@ -35,6 +35,7 @@ set(SOURCES
 
   graphics/Frame.cpp
   graphics/SdlDisplay.cpp
+  graphics/SdlEventLoop.cpp
 
   instruction/AddIInstruction.cpp
   instruction/AddRegisterInstruction.cpp
