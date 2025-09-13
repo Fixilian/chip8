@@ -29,6 +29,7 @@ class Log {
 
   static void error(const char* s);
   static void error(const std::string& s);
+  static void error(const char* s, const char* arg);
 };
 
 } // namespace chip8

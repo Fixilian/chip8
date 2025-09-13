@@ -1,5 +1,7 @@
 #include "Log.h"
 
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+
 #include <iostream>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_sinks.h>
@@ -12,13 +14,16 @@ namespace chip8 {
 
 bool Log::init(bool enable_console) {
   try {
+    spdlog::set_pattern("[%^%=7l%$] [t %t] %v");
     if (enable_console) {
       spdlog::stdout_logger_mt("console_log"); 
     }
     spdlog::basic_logger_mt("file_log", "log.txt"); 
   } catch (const spdlog::spdlog_ex &ex) {
     std::cout << "Log init failed: " << ex.what() << '\n';
+    return false;
   }
+  return true;
 }
 
 
@@ -69,6 +74,11 @@ void Log::error(const char* s) {
 
 void Log::error(const std::string& s) {
   error(s.c_str());
+}
+
+
+void Log::error(const char* s, const char* arg) {
+  spdlog::error(fmt::runtime(s), arg);
 }
 
 
