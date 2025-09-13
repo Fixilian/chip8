@@ -3,6 +3,7 @@
 *.debuglog
 *.stderr
 *.stdout
+log*
 
 # ignore build files
 /build
