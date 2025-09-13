@@ -2,6 +2,7 @@
 
 #include <CLI/CLI.hpp>
 
+#include "base/Log.h"
 #include "Version.h"
 
 using namespace std;
@@ -38,6 +39,7 @@ CommandLineArguments parse(int argc, char** argv) {
   cli.add_option("--display_height", args.display_height, "Display height");
 
   try {
+    Log::debug("Starting argv parsing");
     cli.parse(argc, argv);
   } catch (const CLI::ParseError& e) {
     args.err = cli.exit(e);
@@ -48,6 +50,7 @@ CommandLineArguments parse(int argc, char** argv) {
     args.is_binary_rom = false;
   }
 
+  Log::info("Argv successfully parsed");
   return args;
 }
 
