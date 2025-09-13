@@ -34,6 +34,7 @@ set(SOURCES
   execution/EndOfProgramDetector.cpp
 
   graphics/Frame.cpp
+  graphics/SdlDisplay.cpp
 
   instruction/AddIInstruction.cpp
   instruction/AddRegisterInstruction.cpp
