@@ -1,6 +1,7 @@
 #ifndef CHIP8_GRAPHICS_FRAME_H
 #define CHIP8_GRAPHICS_FRAME_H
 
+#include <string>
 #include <vector>
 
 #include "base/Aliases.h"
@@ -45,10 +46,15 @@ class Frame {
 
   void copy(const Frame& frame);
 
+  std::string toString() const;
+
  private:
   std::vector<byte> frame_;
   int width_;
   int height_;
+
+  bool drawAligned(const byte* sprite, int sh, int x0, int y0);
+  bool drawNotAligned(const byte* sprite, int sh, int x0, int y0);
 };
 
 } // namespace chip8
