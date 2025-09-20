@@ -17,6 +17,13 @@ class Rom {
    */
   Rom(const word* opcodes, int size);
 
+  /**
+   * Creates ROM from array of bytes. 
+   * @param bytes - array of bytes.
+   * @param size - size in bytes.
+   */
+  Rom(const byte* bytes, int size);
+
   ~Rom();
 
   Rom(const Rom&);
@@ -24,14 +31,16 @@ class Rom {
   Rom(Rom&&);
   Rom& operator=(Rom&&);
 
-  const word* raw() const;
+  const byte* raw() const;
+
+  const word* opcodes() const;
 
   int size() const;
 
   void fixEndianess();
 
  private:
-  word* opcodes_;
+  byte* opcodes_;
   int size_;
 };
 

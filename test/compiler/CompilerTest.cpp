@@ -23,7 +23,7 @@ TEST(CompilerTest, Correctness) {
 
   // Assert
   size_t len = rom.size() / sizeof(word);
-  const word* actual = rom.raw();
+  const word* actual = rom.opcodes();
   for (size_t i = 0; i < len; i += 1) {
     EXPECT_EQ(actual[i], expected[i]);
   }
@@ -58,7 +58,7 @@ TEST(CompilerTest, DisableChecks) {
 
   // Assert
   size_t len = rom.size() / sizeof(word);
-  const word* actual = rom.raw();
+  const word* actual = rom.opcodes();
   for (size_t i = 0; i < len; i += 1) {
     EXPECT_EQ(actual[i], expected[i]);
   }

@@ -103,21 +103,6 @@ TEST_F(FileIOTest, FromFileSuccess) {
   // Assert
   EXPECT_EQ(rom.size(), opcodes.size() * sizeof(word));
   for (int i = 0; i < rom.size(); i++) {
-    EXPECT_EQ(rom.raw()[i], opcodes[i]);
+    EXPECT_EQ(rom.opcodes()[i], opcodes[i]);
   }
-}
-
-
-TEST_F(FileIOTest, FromFileInvalidSize) {
-  // Arrange
-  string badData = "123"; // file size is not aligned to word size
-  {
-    ofstream out(tmpFile, ios::binary);
-    out.write(badData.data(), badData.size());
-  }
-
-  // Act
-
-  // Assert
-  EXPECT_THROW(fromFile(tmpFile, 1024), IOException);
 }

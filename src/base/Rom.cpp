@@ -12,8 +12,16 @@ namespace chip8 {
 Rom::Rom(const word* opcodes, int size)
     : size_(size)
 {
-  opcodes_ = new word[size_ / sizeof(word)];
+  opcodes_ = new byte[size_];
   memcpy(opcodes_, opcodes, size_);
+}
+
+
+Rom::Rom(const byte* bytes, int size)
+    : size_(size)
+{
+  opcodes_ = new byte[size_];
+  memcpy(opcodes_, bytes, size_);
 }
 
 
@@ -26,7 +34,7 @@ Rom::~Rom() {
 Rom::Rom(const Rom& other) 
     : size_(other.size_)
 {
-  opcodes_ = new word[size_ / sizeof(word)];
+  opcodes_ = new byte[size_];
   memcpy(opcodes_, other.opcodes_, size_);
 }
 
@@ -35,7 +43,7 @@ Rom& Rom::operator=(const Rom& other) {
   this->~Rom();
   size_ = other.size_;
 
-  opcodes_ = new word[size_ / sizeof(word)];
+  opcodes_ = new byte[size_];
   memcpy(opcodes_, other.opcodes_, size_);
   
   return *this;
@@ -61,8 +69,13 @@ Rom& Rom::operator=(Rom&& other) {
 }
 
 
-const word* Rom::raw() const {
+const byte* Rom::raw() const {
   return opcodes_;
+}
+
+
+const word* Rom::opcodes() const {
+  return reinterpret_cast<const word*>(opcodes_);
 }
 
 
