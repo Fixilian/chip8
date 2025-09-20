@@ -15,12 +15,13 @@ namespace chip8 {
 constexpr int kInstructionsCount = 16;
 
 
-Cpu::Cpu(Memory& memory, ExecutionContext& ctx)
+Cpu::Cpu(Memory& memory, ExecutionContext& ctx, Endianness endian)
     : memory_(memory),
       ctx_(ctx),
       allocator_(sizeof(Instruction), kInstructionsCount),
       decoder_(make_unique<Chip8Decoder>(allocator_)),
-      running_(false)
+      running_(false),
+      endian_(endian)
 {}
 
 
@@ -38,6 +39,7 @@ void Cpu::execute(Rom rom) {
   while (running_) {
     auto pc = reinterpret_cast<const word*>(ctx_.pc);
     word opcode = *pc;
+    opcode = byte_swap_to(endian_, opcode);
     if (detector.endOfProgram(opcode)) {
       break;
     }

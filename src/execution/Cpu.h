@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "base/Allocator.h"
+#include "base/Endian.h"
 #include "base/Rom.h"
 #include "execution/Decoder.h"
 #include "instruction/ExecutionContext.h"
@@ -17,7 +18,7 @@ namespace chip8 {
  */
 class Cpu {
  public:
-  Cpu(Memory& memory, ExecutionContext& ctx);
+  Cpu(Memory& memory, ExecutionContext& ctx, Endianness endian);
 
   void execute(Rom rom);
 
@@ -29,6 +30,7 @@ class Cpu {
   Allocator allocator_;
   std::unique_ptr<Decoder> decoder_;
   std::atomic<bool> running_;
+  Endianness endian_;
 };
 
 } // namespace chip8

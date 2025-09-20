@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "base/Endian.h"
 #include "execution/Cpu.h"
 #include "TestObjectFactory.h"
 
@@ -55,7 +56,7 @@ TEST(CpuTest, Execute) {
   auto keyboard = createKeyboardMonitor();
   auto mem = createMemory();
   auto ctx = createContext(*mem, *keyboard);
-  Cpu cpu(*mem, *ctx);
+  Cpu cpu(*mem, *ctx, Endianness::LittleEndian);
 
   // Act
   cpu.execute(rom);
