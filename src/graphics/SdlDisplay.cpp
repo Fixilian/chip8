@@ -29,7 +29,7 @@ SdlDisplay::~SdlDisplay() {
 
 bool SdlDisplay::init() {
   bool success = SDL_CreateWindowAndRenderer(
-    "Chip8", kScreenWidth, kScreenHeight, 
+    "Chip8 emulator", kScreenWidth, kScreenHeight, 
     0, &window_, &renderer_); 
   if (!success) {
     Log::error("Window/renderer could not be created! SDL error: {}", SDL_GetError());
@@ -44,6 +44,7 @@ void SdlDisplay::render(const Frame& frame) {
   // start with a blank canvas
   SDL_RenderClear(renderer_);
 
+  //Log::debug("Frame:\n{}", frame.toString().c_str());
   int cell_w = kScreenWidth / width_;
   int cell_h = kScreenHeight / height_;
   SDL_FRect rect;
