@@ -33,6 +33,10 @@ template<Endianness to, class T>
 inline T byte_swap_to(T value);
 
 
+template<class T>
+inline T byte_swap_to(Endianness endian, T value);
+
+
 template<typename T, std::size_t sz>
 struct swap_bytes {
   inline T operator()(T val) {
@@ -118,6 +122,19 @@ inline T byte_swap_to(T value) {
 
   return do_byte_swap<system_endianess, to, T>()(value);
 }
+
+
+template<class T>
+inline T byte_swap_to(Endianness endian, T value) {
+  switch (endian) {
+    case Endianness::BigEndian: 
+      return byte_swap_to<Endianness::BigEndian>(value);
+    case Endianness::LittleEndian: 
+      return byte_swap_to<Endianness::LittleEndian>(value);
+    default: return value;
+  }
+}
+
 
 } // namespace chip8
 
