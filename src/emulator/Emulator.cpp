@@ -4,6 +4,7 @@
 #include <memory>
 #include <thread>
 
+#include "base/Endian.h"
 #include "base/FileIO.h"
 #include "base/Log.h"
 #include "base/Rom.h"
@@ -116,7 +117,7 @@ static void startEventLoopAndCpu(EventLoop& event_loop, Cpu& cpu, Rom rom) {
 }
 
 
-static void execute(Rom rom, const Config& cfg) {
+static void execute(Rom rom, const Config& cfg, Endianness endian) {
   auto& spec = cfg.getSpecification();
   auto& keybinds = cfg.getKeyBinds();
 
@@ -136,7 +137,7 @@ static void execute(Rom rom, const Config& cfg) {
     *keyboard
   ); 
 
-  Cpu cpu(*memory, ctx);
+  Cpu cpu(*memory, ctx, endian);
 
   auto event_loop = make_unique<SdlEventLoop>(
     spec.getDisplayWidth(),
@@ -177,8 +178,7 @@ int Emulator::run(int argc, char** argv) {
 
       Log::info("Starting binary ROM execution");
       Rom rom = fromFile(args.rom_file, spec.getMemorySize());
-      rom.fixEndianess();
-      execute(rom, cfg);
+      execute(rom, cfg, Endianness::BigEndian);
 
     } else {
 
@@ -187,7 +187,7 @@ int Emulator::run(int argc, char** argv) {
       Rom rom = compiler.compile(args.rom_file);
 
       Log::info("Starting ROM execution");
-      execute(rom, cfg);
+      execute(rom, cfg, Endianness::LittleEndian);
 
     }
 
