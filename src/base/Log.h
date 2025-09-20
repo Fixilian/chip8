@@ -20,12 +20,15 @@ class Log {
 
   static void debug(const char* s);
   static void debug(const std::string& s);
+  static void debug(const char* s, const char* arg);
 
   static void info(const char* s);
   static void info(const std::string& s);
+  static void info(const char* s, const char* arg);
 
   static void warn(const char* s);
   static void warn(const std::string& s);
+  static void warn(const char* s, const char* arg);
 
   static void error(const char* s);
   static void error(const std::string& s);

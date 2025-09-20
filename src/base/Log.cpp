@@ -48,6 +48,11 @@ void Log::debug(const std::string& s) {
 }
 
 
+void Log::debug(const char* s, const char* arg) {
+  spdlog::debug(fmt::runtime(s), arg);
+}
+
+
 void Log::info(const char* s) {
   spdlog::info(s);
 }
@@ -58,6 +63,11 @@ void Log::info(const std::string& s) {
 }
 
 
+void Log::info(const char* s, const char* arg) {
+  spdlog::info(fmt::runtime(s), arg);
+}
+
+
 void Log::warn(const char* s) {
   spdlog::warn(s);
 }
@@ -65,6 +75,11 @@ void Log::warn(const char* s) {
 
 void Log::warn(const std::string& s) {
   warn(s.c_str());
+}
+
+
+void Log::warn(const char* s, const char* arg) {
+  spdlog::warn(fmt::runtime(s), arg);
 }
 
 
