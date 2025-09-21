@@ -38,6 +38,53 @@ class Stack {
 
   int size() const;
 
+  class const_iterator {
+   public:
+    using iterator_category = std::forward_iterator_tag;
+    using value_type        = T;
+    using difference_type   = std::ptrdiff_t;
+    using pointer           = const T*;
+    using reference         = const T&;
+
+    const_iterator(const T* ptr) : ptr_(ptr) {}
+
+    reference operator*() const { return *ptr_; }
+    pointer operator->() const { return ptr_; }
+
+    const_iterator& operator++() { // prefix ++
+      --ptr_;
+      return *this;
+    }
+
+    const_iterator operator++(int) { // postfix ++
+      const_iterator tmp = *this;
+      --(*this);
+      return tmp;
+    }
+
+    bool operator==(const const_iterator& other) const {
+      return ptr_ == other.ptr_;
+    }
+
+    bool operator!=(const const_iterator& other) const {
+      return ptr_ != other.ptr_;
+    }
+
+   private:
+    const T* ptr_;
+  };
+
+  const_iterator cbegin() const {
+    return const_iterator(values_.data() + cur_ - 1);
+  }
+
+  const_iterator cend() const {
+    return const_iterator(values_.data() - 1);
+  }
+
+  const_iterator begin() const { return cbegin(); }
+  const_iterator end() const { return cend(); }
+
  private:
   int size_;
   int cur_;
