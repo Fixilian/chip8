@@ -2,6 +2,7 @@
 
 #include <cstring>
 
+#include "base/Log.h"
 #include "exception/SegFaultException.h"
 #include "exception/OutOfRangeException.h"
 
@@ -73,17 +74,17 @@ const byte* FixedMemory::getRomEnd() {
 
 
 byte& FixedMemory::operator[](int index) {
-  if (index < user_mem_begin_ || index >= size_) {
+  if (index < reserve_ || index >= size_) {
     throw SegFaultException("Attempt to access system memory");
+  }
+  if (index < user_mem_begin_) {
+    Log::warn("Rewriting rom in runtime");
   }
   return mem_[index];
 }
 
 
 const byte& FixedMemory::operator[](int index) const {
-  if (index < user_mem_begin_ || index >= size_) {
-    throw SegFaultException("Attempt to access system memory");
-  }
   return mem_[index];
 }
 
