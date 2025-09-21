@@ -162,7 +162,7 @@ int Emulator::run(int argc, char** argv) {
   if (!success) {
     return 1;
   }
-  Log::setLevel(LogLevel::Debug);
+  Log::setLevel(LogLevel::Trace);
 
   auto args = parse(argc, argv);
   if (args.exit) {

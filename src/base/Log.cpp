@@ -1,6 +1,6 @@
 #include "Log.h"
 
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
 #include <iostream>
 #include <spdlog/sinks/basic_file_sink.h>
@@ -18,7 +18,7 @@ bool Log::init(bool enable_console) {
     if (enable_console) {
       spdlog::stdout_logger_mt("console_log"); 
     }
-    spdlog::basic_logger_mt("file_log", "log.txt"); 
+    // spdlog::basic_logger_mt("file_log", "log.txt"); 
   } catch (const spdlog::spdlog_ex &ex) {
     std::cout << "Log init failed: " << ex.what() << '\n';
     return false;
@@ -29,12 +29,28 @@ bool Log::init(bool enable_console) {
 
 void Log::setLevel(LogLevel level) {
   switch (level) {
+    case LogLevel::Trace: spdlog::set_level(spdlog::level::trace); break;
     case LogLevel::Debug: spdlog::set_level(spdlog::level::debug); break;
     case LogLevel::Info: spdlog::set_level(spdlog::level::info); break;
     case LogLevel::Warn: spdlog::set_level(spdlog::level::warn); break;
     case LogLevel::Error: spdlog::set_level(spdlog::level::err); break;
     default:  break;
   }
+}
+
+
+void Log::trace(const char* s) {
+  SPDLOG_TRACE(s);
+}
+
+
+void Log::trace(const std::string& s) {
+  trace(s.c_str());
+}
+
+
+void Log::trace(const char* s, const char* arg) {
+  spdlog::trace(fmt::runtime(s), arg);
 }
 
 

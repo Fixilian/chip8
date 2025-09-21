@@ -6,6 +6,7 @@
 namespace chip8 {
 
 enum class LogLevel {
+  Trace,
   Debug,
   Info,
   Warn,
@@ -17,6 +18,10 @@ class Log {
   static bool init(bool enable_console);
 
   static void setLevel(LogLevel level);
+
+  static void trace(const char* s);
+  static void trace(const std::string& s);
+  static void trace(const char* s, const char* arg);
 
   static void debug(const char* s);
   static void debug(const std::string& s);
