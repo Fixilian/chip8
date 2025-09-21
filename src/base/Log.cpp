@@ -1,5 +1,6 @@
 #include "Log.h"
 
+#undef SPDLOG_ACTIVE_LEVEL
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
 #include <iostream>
@@ -40,7 +41,7 @@ void Log::setLevel(LogLevel level) {
 
 
 void Log::trace(const char* s) {
-  SPDLOG_TRACE(s);
+  spdlog::trace(s);
 }
 
 
@@ -49,23 +50,13 @@ void Log::trace(const std::string& s) {
 }
 
 
-void Log::trace(const char* s, const char* arg) {
-  spdlog::trace(fmt::runtime(s), arg);
-}
-
-
 void Log::debug(const char* s) {
-  SPDLOG_DEBUG(s);
+  spdlog::debug(s);
 }
 
 
 void Log::debug(const std::string& s) {
   debug(s.c_str());
-}
-
-
-void Log::debug(const char* s, const char* arg) {
-  spdlog::debug(fmt::runtime(s), arg);
 }
 
 
@@ -79,11 +70,6 @@ void Log::info(const std::string& s) {
 }
 
 
-void Log::info(const char* s, const char* arg) {
-  spdlog::info(fmt::runtime(s), arg);
-}
-
-
 void Log::warn(const char* s) {
   spdlog::warn(s);
 }
@@ -94,22 +80,12 @@ void Log::warn(const std::string& s) {
 }
 
 
-void Log::warn(const char* s, const char* arg) {
-  spdlog::warn(fmt::runtime(s), arg);
-}
-
-
 void Log::error(const char* s) {
   spdlog::error(s);
 }
 
 void Log::error(const std::string& s) {
   error(s.c_str());
-}
-
-
-void Log::error(const char* s, const char* arg) {
-  spdlog::error(fmt::runtime(s), arg);
 }
 
 
