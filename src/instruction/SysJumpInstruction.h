@@ -15,6 +15,8 @@ class SysJumpInstruction : public Instruction {
   virtual ~SysJumpInstruction() {};
 
   virtual void execute(ExecutionContext& ctx) override;
+
+  virtual std::string toString() const override;
 };
 
 } // namespace chip8

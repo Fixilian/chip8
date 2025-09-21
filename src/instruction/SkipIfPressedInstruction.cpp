@@ -1,6 +1,11 @@
 #include "SkipIfPressedInstruction.h"
 
+#include <iostream>
+#include <sstream>
+
 #include "base/BitOperations.h"
+
+using namespace std;
 
 namespace chip8 {
 
@@ -16,6 +21,15 @@ void SkipIfPressedInstruction::execute(ExecutionContext& ctx) {
   if (ctx.keyboard.pressed(key)) {
     ctx.pc += kPcStep;
   }
+}
+
+
+string SkipIfPressedInstruction::toString() const {
+  stringstream stream;
+  word x = getXFrom(opcode_);
+  stream << "Skip if not x [0x" << hex << opcode_ << "]" << dec;
+  stream << " x=" << x << '\n';
+  return stream.str();
 }
 
 

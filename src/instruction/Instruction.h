@@ -1,6 +1,8 @@
 #ifndef CHIP8_INSTRUCTION_INSTRUCTION_H
 #define CHIP8_INSTRUCTION_INSTRUCTION_H
 
+#include <string>
+
 #include "base/Aliases.h"
 #include "ExecutionContext.h"
 
@@ -16,6 +18,8 @@ class Instruction {
   virtual ~Instruction() {};
 
   virtual void execute(ExecutionContext& ctx) = 0;
+
+  virtual std::string toString() const = 0;
 
  protected:
   word opcode_;

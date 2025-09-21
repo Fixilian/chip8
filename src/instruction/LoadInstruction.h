@@ -15,6 +15,8 @@ class LoadInstruction : public Instruction {
   virtual ~LoadInstruction() {};
 
   virtual void execute(ExecutionContext& ctx) override;
+
+  virtual std::string toString() const override;
 };
 
 } // namespace chip8

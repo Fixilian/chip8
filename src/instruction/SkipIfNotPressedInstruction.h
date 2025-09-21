@@ -15,6 +15,8 @@ class SkipIfNotPressedInstruction : public Instruction {
   virtual ~SkipIfNotPressedInstruction() {};
 
   virtual void execute(ExecutionContext& ctx) override;
+
+  virtual std::string toString() const override;
 };
 
 } // namespace chip8

@@ -2,6 +2,8 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <sstream>
 
 #include "base/BitOperations.h"
 
@@ -21,6 +23,17 @@ void RandomInstruction::execute(ExecutionContext& ctx) {
   srand(static_cast<unsigned int>(time({})));
   int r = rand() % kByteMax;
   ctx.registers[x] = static_cast<byte>(r & kk);
+}
+
+
+string RandomInstruction::toString() const {
+  stringstream stream;
+  word x = getXFrom(opcode_);
+  word kk = lowest8BitsOf(opcode_);
+  stream << "Vx = rand & kk [0x" << hex << opcode_ << "]" << dec;
+  stream << " x=" << x;
+  stream << " kk=" << kk << '\n';
+  return stream.str();
 }
 
 

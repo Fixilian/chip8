@@ -1,5 +1,8 @@
 #include "ExecutionContext.h"
 
+#include <iomanip>
+#include <sstream>
+
 using namespace std;
 
 namespace chip8 {
@@ -70,6 +73,30 @@ void ExecutionContext::notifyFrameListeners() {
   for (size_t i = 0; i < frame_listeners_.size(); i += 1) {
     frame_listeners_[i]->onChange(frame);
   }
+}
+
+
+string ExecutionContext::toString() const {
+  stringstream stream;
+  word cur_pc = static_cast<word>(pc - ram.mem());
+  stream << "PC=" << cur_pc << " I=" << i << '\n';
+  stream << setw(6);
+  int n = static_cast<int>(registers.size());
+  for (int i = 0; i < n; i += 1) {
+    stream << i;
+  }
+  stream << '\n';
+  for (int i = 0; i < n; i += 1) {
+    stream << registers[i];
+  }
+  stream << '\n';
+  stream << setw(1);
+  stream << "Stack: {\n";
+  for (auto val : stack) {
+    stream << val << '\n';
+  } 
+  stream << "}\n";
+  return stream.str();
 }
 
 

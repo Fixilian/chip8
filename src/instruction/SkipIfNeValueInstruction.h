@@ -15,6 +15,8 @@ class SkipIfNeValueInstruction : public Instruction {
   virtual ~SkipIfNeValueInstruction() {};
 
   virtual void execute(ExecutionContext& ctx) override;
+
+  virtual std::string toString() const override;
 };
 
 } // namespace chip8

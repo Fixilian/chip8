@@ -2,6 +2,7 @@
 #define CHIP8_INSTRUCTION_EXECUTIONCONTEXT_H
 
 #include <atomic>
+#include <string>
 #include <vector>
 
 #include "base/Aliases.h"
@@ -54,6 +55,8 @@ class ExecutionContext {
   void addFrameListener(FrameListener& listener);
 
   void notifyFrameListeners();
+
+  std::string toString() const;
 
  private:
   std::atomic<byte> dt_;

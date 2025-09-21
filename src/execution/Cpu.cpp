@@ -2,6 +2,7 @@
 
 #include <chrono>
 
+#include "base/Log.h"
 #include "base/Timer.h"
 #include "execution/Chip8Decoder.h"
 #include "execution/EndOfProgramDetector.h"
@@ -44,7 +45,9 @@ void Cpu::execute(Rom rom) {
       break;
     }
     InstructionPtr ins = decoder_->decode(opcode);
+    Log::trace(ins->toString());
     ins->execute(ctx_);
+    Log::trace(ctx_.toString());
     ctx_.pc += kPcStep;
   }
   

@@ -1,6 +1,11 @@
 #include "SkipIfEqRegisterInstruction.h"
 
+#include <iostream>
+#include <sstream>
+
 #include "base/BitOperations.h"
+
+using namespace std;
 
 namespace chip8 {
 
@@ -16,6 +21,17 @@ void SkipIfEqRegisterInstruction::execute(ExecutionContext& ctx) {
   if (ctx.registers[x] == ctx.registers[y]) {
     ctx.pc += kPcStep;
   }
+}
+
+
+string SkipIfEqRegisterInstruction::toString() const {
+  stringstream stream;
+  word x = getXFrom(opcode_);
+  word y = getYFrom(opcode_);
+  stream << "Skip if Vx=Vy [0x" << hex << opcode_ << "]" << dec;
+  stream << " x=" << x;
+  stream << " y=" << y << '\n';
+  return stream.str();
 }
 
 
