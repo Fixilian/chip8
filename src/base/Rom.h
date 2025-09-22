@@ -37,8 +37,6 @@ class Rom {
 
   int size() const;
 
-  void fixEndianess();
-
  private:
   byte* opcodes_;
   int size_;

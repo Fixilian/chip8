@@ -2,8 +2,6 @@
 
 #include <cstring>
 
-#include "base/Endian.h"
-
 using namespace std;
 
 namespace chip8 {
@@ -81,14 +79,6 @@ const word* Rom::opcodes() const {
 
 int Rom::size() const {
   return size_;
-}
-
-
-void Rom::fixEndianess() {
-  int opcodes_count = size_ / sizeof(word);
-  for (int i = 0; i < opcodes_count; i += 1) {
-    opcodes_[i] = byte_swap_to<Endianness::BigEndian>(opcodes_[i]);
-  }
 }
 
 
