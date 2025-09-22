@@ -40,7 +40,7 @@ void Cpu::execute(Rom rom) {
   while (running_) {
     auto pc = reinterpret_cast<const word*>(ctx_.pc);
     word opcode = *pc;
-    opcode = byte_swap_to(endian_, opcode);
+    opcode = byteSwapTo(endian_, opcode);
     if (detector.endOfProgram(opcode)) {
       break;
     }

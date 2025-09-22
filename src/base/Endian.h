@@ -30,15 +30,15 @@ constexpr Endianness getSystemEndianess() {
 
 
 template<Endianness to, class T>
-inline T byte_swap_to(T value);
+inline T byteSwapTo(T value);
 
 
 template<class T>
-inline T byte_swap_to(Endianness endian, T value);
+inline T byteSwapTo(Endianness endian, T value);
 
 
 template<typename T, std::size_t sz>
-struct swap_bytes {
+struct swapBytes {
   inline T operator()(T val) {
     throw OutOfRangeException("Invalid data size for swap bytes");
   }
@@ -46,7 +46,7 @@ struct swap_bytes {
 
 
 template<typename T>
-struct swap_bytes<T, 1> {
+struct swapBytes<T, 1> {
   inline T operator()(T val) {
     return val;
   }
@@ -54,7 +54,7 @@ struct swap_bytes<T, 1> {
 
 
 template<typename T>
-struct swap_bytes<T, 2> {
+struct swapBytes<T, 2> {
   inline T operator()(T val) {
     return ((((val) >> 8) & 0xff) | (((val) & 0xff) << 8));
   }
@@ -62,7 +62,7 @@ struct swap_bytes<T, 2> {
 
 
 template<typename T>
-struct swap_bytes<T, 4> {
+struct swapBytes<T, 4> {
   inline T operator()(T val) {
     return ((((val) & 0xff000000) >> 24) |
             (((val) & 0x00ff0000) >>  8) |
@@ -73,7 +73,7 @@ struct swap_bytes<T, 4> {
 
 
 template<typename T>
-struct swap_bytes<T, 8> {
+struct swapBytes<T, 8> {
   inline T operator()(T val) {
     return ((((val) & 0xff00000000000000ull) >> 56) |
             (((val) & 0x00ff000000000000ull) >> 40) |
@@ -88,15 +88,15 @@ struct swap_bytes<T, 8> {
 
 
 template<Endianness from, Endianness to, class T>
-struct do_byte_swap {
+struct doByteSwap {
   inline T operator()(T value) {
-    return swap_bytes<T, sizeof(T)>()(value);
+    return swapBytes<T, sizeof(T)>()(value);
   }
 };
 
 // specialisations when attempting to swap to the same endianess
 template<class T> 
-struct do_byte_swap<Endianness::LittleEndian, Endianness::LittleEndian, T> { 
+struct doByteSwap<Endianness::LittleEndian, Endianness::LittleEndian, T> { 
   inline T operator()(T value) { 
     return value; 
   } 
@@ -104,7 +104,7 @@ struct do_byte_swap<Endianness::LittleEndian, Endianness::LittleEndian, T> {
 
 
 template<class T> 
-struct do_byte_swap<Endianness::BigEndian, Endianness::BigEndian, T> {
+struct doByteSwap<Endianness::BigEndian, Endianness::BigEndian, T> {
   inline T operator()(T value) { 
     return value; 
   } 
@@ -112,7 +112,7 @@ struct do_byte_swap<Endianness::BigEndian, Endianness::BigEndian, T> {
 
 
 template<Endianness to, class T>
-inline T byte_swap_to(T value) {
+inline T byteSwapTo(T value) {
   // ensure the data is only 1, 2, 4 or 8 bytes
   static_assert(sizeof(T) == 1 || sizeof(T) == 2 || sizeof(T) == 4 || sizeof(T) == 8);
   // ensure we're only swapping arithmetic types
@@ -120,17 +120,17 @@ inline T byte_swap_to(T value) {
 
   constexpr auto system_endianess = getSystemEndianess();
 
-  return do_byte_swap<system_endianess, to, T>()(value);
+  return doByteSwap<system_endianess, to, T>()(value);
 }
 
 
 template<class T>
-inline T byte_swap_to(Endianness endian, T value) {
+inline T byteSwapTo(Endianness endian, T value) {
   switch (endian) {
     case Endianness::BigEndian: 
-      return byte_swap_to<Endianness::BigEndian>(value);
+      return byteSwapTo<Endianness::BigEndian>(value);
     case Endianness::LittleEndian: 
-      return byte_swap_to<Endianness::LittleEndian>(value);
+      return byteSwapTo<Endianness::LittleEndian>(value);
     default: return value;
   }
 }
