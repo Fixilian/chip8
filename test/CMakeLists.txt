@@ -61,6 +61,8 @@ set(SOURCES
 
   memory/FixedMemoryTest.cpp
 
+  programs/ProgramsTest.cpp
+
   TestObjectFactory.cpp
 )
 
@@ -96,3 +98,5 @@ target_compile_options(chiptests PRIVATE
   -Wredundant-decls
   -Wsign-promo
 )
+
+file(COPY programs/roms DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
