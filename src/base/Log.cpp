@@ -1,21 +1,45 @@
 #include "Log.h"
 
-#undef SPDLOG_ACTIVE_LEVEL
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-
 #include <iostream>
+#include <memory>
+#include <spdlog/pattern_formatter.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_sinks.h>
 #include <spdlog/spdlog.h>
+
+#include "base/ThreadRegistry.h"
+
+#undef SPDLOG_ACTIVE_LEVEL
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
 using namespace std;
 
 namespace chip8 {
 
 
+class ThreadNameFormatterFlag : public spdlog::custom_flag_formatter {
+ public:
+  void format(
+    const spdlog::details::log_msg &, 
+    const tm &, 
+    spdlog::memory_buf_t &dest) override 
+  {
+    auto thread_name = ThreadRegistry::getThreadName();
+    dest.append(thread_name.data(), thread_name.data() + thread_name.size());
+  }
+
+  unique_ptr<custom_flag_formatter> clone() const override {
+    return spdlog::details::make_unique<ThreadNameFormatterFlag>();
+  }
+};
+
+
 bool Log::init(bool enable_console) {
   try {
-    spdlog::set_pattern("[%^%=7l%$] [t %t] %v");
+    auto formatter = make_unique<spdlog::pattern_formatter>();
+    formatter->add_flag<ThreadNameFormatterFlag>('*');
+    formatter->set_pattern("[%^%=7l%$] [%*] %v");
+    spdlog::set_formatter(std::move(formatter));
     if (enable_console) {
       spdlog::stdout_logger_mt("console_log"); 
     }

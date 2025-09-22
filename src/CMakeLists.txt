@@ -5,6 +5,7 @@ set(SOURCES
   base/Log.cpp
   base/Rom.cpp
   base/Spinlock.cpp
+  base/ThreadRegistry.cpp
   base/Timer.cpp
 
   compiler/Compiler.cpp

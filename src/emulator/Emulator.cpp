@@ -8,6 +8,7 @@
 #include "base/FileIO.h"
 #include "base/Log.h"
 #include "base/Rom.h"
+#include "base/ThreadRegistry.h"
 #include "Cli.h"
 #include "compiler/Compiler.h"
 #include "configuration/Config.h"
@@ -79,6 +80,7 @@ static Config getConfig(const CommandLineArguments& args) {
 
 static void startEventLoopAndCpu(EventLoop& event_loop, Cpu& cpu, Rom rom) {
   thread event_thread([&]() {
+    ThreadRegistry::setThreadName("event loop");
     try {
       Log::debug("Initializing event loop");
       bool success = event_loop.init();
@@ -90,6 +92,7 @@ static void startEventLoopAndCpu(EventLoop& event_loop, Cpu& cpu, Rom rom) {
 
       Log::info("Starting cpu thread");
       thread cpu_thread([&]() {
+        ThreadRegistry::setThreadName("cpu");
         try {
           Log::info("Starting execution");
           cpu.execute(rom);
@@ -157,6 +160,7 @@ static void execute(Rom rom, const Config& cfg, Endianness endian) {
 
 
 int Emulator::run(int argc, char** argv) {
+  ThreadRegistry::setThreadName("main");
   bool enable_console = true;
   bool success = Log::init(enable_console);
   if (!success) {
