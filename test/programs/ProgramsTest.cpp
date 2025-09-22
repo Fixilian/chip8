@@ -82,6 +82,8 @@ TEST_F(ProgramTest, Correctness) {
   vector<pair<string, string>> roms = {
     {"logo.ch8", "logo.txt"},
     {"ibm_logo.ch8", "ibm_logo.txt"},
+    {"corax+.ch8", "corax+.txt"},
+    {"flags.ch8", "flags.txt"},
   };
   vector<bool> actual;
 

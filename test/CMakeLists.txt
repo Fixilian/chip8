@@ -99,4 +99,9 @@ target_compile_options(chiptests PRIVATE
   -Wsign-promo
 )
 
-file(COPY programs/roms DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_target(copy-files ALL
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${CMAKE_CURRENT_SOURCE_DIR}/programs/roms
+  ${CMAKE_CURRENT_BINARY_DIR}/roms
+)
+add_dependencies(chiptests copy-files)
