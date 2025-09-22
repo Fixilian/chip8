@@ -13,8 +13,6 @@ TEST(HexKeyboardMonitorTest, AllReleased) {
   // Arrange
   HexKeyboardMonitor keyboard;
 
-  // Act
-
   // Assert
   for (chip8::byte i = 0; i < keyboard.kNumberOfKeys; i += 1) {
     EXPECT_FALSE(keyboard.pressed(i));
@@ -49,8 +47,6 @@ TEST(HexKeyboardMonitorTest, PressRelease) {
 TEST(HexKeyboardMonitorTest, UnsupportedKey) {
   // Arrange
   HexKeyboardMonitor keyboard;
-
-  // Act
 
   // Assert
   EXPECT_THROW({

@@ -1,24 +1,15 @@
-#include <gtest/gtest.h>
-
-#include <vector>
+#include "InstructionFixture.h"
 
 #include "instruction/ReturnInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(ReturnInstructionTest, Return) {
+TEST_F(InstructionTest, Return) {
   // Arrange
   vector<word> input = { 600, 700, 800, 900, 1000 };
   vector<const chip8::byte*> expected(input.size());
   vector<const chip8::byte*> actual(input.size());
   size_t n = input.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContext(*mem, *keyboard);
+  setupContext();
   ReturnInstruction ret_ins(0x00EE);
 
   for (size_t i = 0; i < n; i += 1) {

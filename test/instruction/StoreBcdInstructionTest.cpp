@@ -1,16 +1,9 @@
-#include <gtest/gtest.h>
+#include "InstructionFixture.h"
 
-#include <vector>
-
-#include "base/BitOperations.h"
 #include "instruction/StoreBcdInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(StoreBcdInstructionTest, Store) {
+TEST_F(InstructionTest, StoreBcd) {
   // Arrange
   int mem_size = 1024;
   int mem_reserve = 512;
@@ -26,11 +19,7 @@ TEST(StoreBcdInstructionTest, Store) {
   vector<chip8::byte> actual2(regs.size());
   vector<chip8::byte> actual3(regs.size());
   int n = static_cast<int>(opcodes.size());
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory(mem_size, mem_reserve);
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<StoreBcdInstruction>(opcodes);
+  setupContextWithMemory<StoreBcdInstruction>(mem_size, mem_reserve, regs, opcodes);
 
   // Act
   for (int i = 0; i < n; i += 1) {

@@ -1,26 +1,15 @@
-#include <gtest/gtest.h>
+#include "InstructionFixture.h"
 
-#include <vector>
-
-#include "base/BitOperations.h"
 #include "instruction/SkipIfNeValueInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(SkipIfNeValueInstructionTest, Skip) {
+TEST_F(InstructionTest, SkipIfNeValue) {
   // Arrange
   vector<word> opcodes = { 0x4020, 0x4100, 0x4203, 0x4320, 0x4499 };
   vector<chip8::byte> regs = { 0x20, 0x01, 0x03, 0x01, 0x99 };
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<SkipIfNeValueInstruction>(opcodes);
+  setupContext<SkipIfNeValueInstruction>(regs, opcodes);
 
   vector<const chip8::byte*> expected = {
     ctx->pc, ctx->pc + kPcStep, 

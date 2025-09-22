@@ -1,25 +1,17 @@
-#include <gtest/gtest.h>
-
-#include <vector>
+#include "InstructionFixture.h"
 
 #include "base/BitOperations.h"
 #include "instruction/DrawInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(DrawInstructionTest, Draw) {
+TEST_F(InstructionTest, Draw) {
   // Arrange
   int spriteNumber = 1;
   int w = 2 * kBits;
   int h = 10;
   int sw = kBits;
   int sh = 5;
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContext(w, h, *mem, *keyboard);
+  setupContextWithFrame(w * kBits, h);
   DrawInstruction draw_ins(0xD015);
   auto sprite = mem->getDigitSprite(spriteNumber);
   chip8::byte x0 = 3;

@@ -29,12 +29,33 @@ TEST(StackTest, PushPop) {
 }
 
 
+TEST(StackTest, ConstIterator) {
+  // Arrange
+  vector<int> input = { 1, 2, 3, 4, 5 };
+  vector<int> expected = { 5, 4, 3, 2, 1 };
+  vector<int> actual;
+  int n = static_cast<int>(input.size());
+  Stack<int> stack(n);
+  for (auto x : input) {
+    stack.push(x);
+  }
+
+  // Act
+  for (const auto x : stack) {
+    actual.push_back(x);
+  }
+
+  // Assert
+  for (int i = 0; i < n; i += 1) {
+    EXPECT_EQ(actual[i], expected[i]);
+  }
+}
+
+
 TEST(StackTest, PopFromEmptyStack) {
   // Arrange
   int size = 5;
   Stack<int> stack(size);
-
-  // Act
 
   // Assert
   EXPECT_TRUE(stack.empty());
@@ -49,8 +70,6 @@ TEST(StackTest, PushToFullStack) {
   int input_size = 5;
   vector<int> input = { 1, 2, 3, 4, 5 };
   Stack<int> stack(input_size - 1);
-
-  // Act
 
   // Assert
   EXPECT_THROW( { 

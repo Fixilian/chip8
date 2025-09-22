@@ -1,26 +1,39 @@
 #include <gtest/gtest.h>
 
+#include <memory>
 #include <vector>
 
 #include "execution/EndOfProgramDetector.h"
 #include "instruction/ExecutionContext.h"
-#include "memory/FixedMemory.h"
+#include "keyboard/KeyboardMonitor.h"
+#include "memory/Memory.h"
 #include "TestObjectFactory.h"
 
 using namespace std;
 using namespace chip8;
 
 
-TEST(EndOfProgramDetectorTest, EndOfRom) {
+class EndOfProgramDetectorTest : public testing::Test {
+ protected:
+  unique_ptr<KeyboardMonitor> keyboard;
+  unique_ptr<Memory> mem;
+  unique_ptr<ExecutionContext> ctx;
+
+  void setupContext(const word* rom, int opcodes_count) {
+    keyboard = createKeyboardMonitor();
+    mem = createMemoryWithRom(rom, opcodes_count);
+    ctx = createContext(*mem, *keyboard);
+  }
+};
+
+
+TEST_F(EndOfProgramDetectorTest, EndOfRom) {
   // Arrange
   constexpr int kRomSize = 6;
   word rom_source[kRomSize] = { 0x0000, 0xAABB, 0x0011, 0xCCDD, 0x0033, 0xEE55 };
   vector<bool> expected = { false, false, false, false, false, false, true };
   vector<bool> actual(expected.size());
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemoryWithRom(rom_source, kRomSize);
-  auto ctx = createContext(*mem, *keyboard);
+  setupContext(rom_source, kRomSize);
   EndOfProgramDetector detector(*mem, *ctx);
 
   // Act
@@ -38,17 +51,14 @@ TEST(EndOfProgramDetectorTest, EndOfRom) {
 }
 
 
-TEST(EndOfProgramDetectorTest, InfiniteLoop) {
+TEST_F(EndOfProgramDetectorTest, InfiniteLoop) {
   // Arrange
   constexpr int kRomSize = 6;
   word rom_source[kRomSize] = { 0x0000, 0xAABB, 0x0011, 0xCCDD, 0x0033, 0xEE55 };
   int loop_start_index = 3;
   vector<bool> expected = { false, false, false, true};
   vector<bool> actual(expected.size());
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemoryWithRom(rom_source, kRomSize);
-  auto ctx = createContext(*mem, *keyboard);
+  setupContext(rom_source, kRomSize);
   EndOfProgramDetector detector(*mem, *ctx);
 
   word loop_addr = static_cast<word>(ctx->pc - mem->mem());
@@ -70,17 +80,14 @@ TEST(EndOfProgramDetectorTest, InfiniteLoop) {
 
 
 
-TEST(EndOfProgramDetectorTest, ReturnFromMain) {
+TEST_F(EndOfProgramDetectorTest, ReturnFromMain) {
   // Arrange
   constexpr int kRomSize = 6;
   word rom_source[kRomSize] = { 0x0000, 0xAABB, 0x0011, 0x00EE, 0x0033, 0xEE55 };
   vector<bool> expected = { false, false, false, true};
   vector<bool> actual(expected.size());
   int n = static_cast<int>(expected.size());
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemoryWithRom(rom_source, kRomSize);
-  auto ctx = createContext(*mem, *keyboard);
+  setupContext(rom_source, kRomSize);
   EndOfProgramDetector detector(*mem, *ctx);
 
   // Act

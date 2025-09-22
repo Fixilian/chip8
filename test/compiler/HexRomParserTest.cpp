@@ -116,7 +116,6 @@ TEST(HexRomParserTest, UnexpectedChar) {
   string text = "00ZZ";
   HexRomParser parser(text);
 
-  // Act
   // Assert
   EXPECT_THROW( { 
     parser.next();
@@ -129,7 +128,6 @@ TEST(HexRomParserTest, IncorrectOpcode) {
   string text = "00A";
   HexRomParser parser(text);
 
-  // Act
   // Assert
   EXPECT_THROW( { 
     parser.next();

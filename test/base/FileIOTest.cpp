@@ -47,18 +47,12 @@ TEST_F(FileIOTest, ReadFileTooLarge) {
     out.write(data.data(), data.size());
   }
 
-  // Act
-
   // Assert
   EXPECT_THROW(readFile(tmpFile, 2), IOException);
 }
 
 
 TEST_F(FileIOTest, ReadFileNotExists) {
-  // Arrange
-
-  // Act
-
   // Assert
   EXPECT_THROW(readFile("no_such_file.bin", 1024), IOException);
 }
@@ -79,10 +73,6 @@ TEST_F(FileIOTest, WriteFileAndReadBack) {
 
 
 TEST_F(FileIOTest, WriteFileToInvalidDir) {
-  // Arrange
-
-  // Act
-
   // Assert
   EXPECT_THROW(writeFile("/invalid_path/file.bin", "abc"), IOException);
 }

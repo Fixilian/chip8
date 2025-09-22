@@ -1,22 +1,14 @@
-#include <gtest/gtest.h>
-
-#include <vector>
+#include "InstructionFixture.h"
 
 #include "base/BitOperations.h"
 #include "instruction/ClearDisplayInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(ClearDisplayInstructionTest, ClearFrame) {
+TEST_F(InstructionTest, ClearDisplay) {
   // Arrange
   int w = 2;
   int h = 5;
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContext(w * kBits, h, *mem, *keyboard);
+  setupContextWithFrame(w * kBits, h);
   ClearDisplayInstruction cls_ins(0x00E0);
   
   vector<chip8::byte> input = { 

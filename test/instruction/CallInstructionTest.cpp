@@ -1,27 +1,17 @@
-#include <gtest/gtest.h>
-
-#include <vector>
+#include "InstructionFixture.h"
 
 #include "base/BitOperations.h"
 #include "instruction/CallInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(CallInstructionTest, Call) {
+TEST_F(InstructionTest, Call) {
   // Arrange
   vector<word> opcodes = { 0x2600, 0x2700, 0x2800, 0x2900, 0x2999 };
   vector<const chip8::byte*> expected(opcodes.size());
   vector<word> expected_stack(opcodes.size());
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContext(*mem, *keyboard);
-  auto ins = createInstructions<CallInstruction>(opcodes);
+  setupContext<CallInstruction>(opcodes);
 
   for (size_t i = 0; i < n; i += 1) {
     word jmp = lowest12BitsOf(opcodes[i]);

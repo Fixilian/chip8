@@ -37,9 +37,7 @@ TEST(AllocatorTest, SegFault) {
   int block_size = sizeof(long long);
   int block_count = 2;
   Allocator allocator(block_size, block_count);
-
-  // Act
-
+  
   // Assert
   EXPECT_THROW({
     for (int i = 0; i <= block_count; i += 1) {

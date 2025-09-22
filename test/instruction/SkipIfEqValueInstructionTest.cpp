@@ -1,26 +1,15 @@
-#include <gtest/gtest.h>
+#include "InstructionFixture.h"
 
-#include <vector>
-
-#include "base/BitOperations.h"
 #include "instruction/SkipIfEqValueInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(SkipIfEqValueInstructionTest, Skip) {
+TEST_F(InstructionTest, SkipIfEqValue) {
   // Arrange
   vector<word> opcodes = { 0x3020, 0x3100, 0x3203, 0x3320, 0x3499 };
   vector<chip8::byte> regs = { 0x20, 0x01, 0x03, 0x01, 0x99 };
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<SkipIfEqValueInstruction>(opcodes);
+  setupContext<SkipIfEqValueInstruction>(regs, opcodes);
 
   vector<const chip8::byte*> expected = {
     ctx->pc + kPcStep, ctx->pc + kPcStep, 

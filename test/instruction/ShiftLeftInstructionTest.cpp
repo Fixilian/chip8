@@ -1,27 +1,16 @@
-#include <gtest/gtest.h>
+#include "InstructionFixture.h"
 
-#include <vector>
-
-#include "base/BitOperations.h"
 #include "instruction/ShiftLeftInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(ShiftLeftInstructionTest, Shift) {
+TEST_F(InstructionTest, ShiftLeft) {
   // Arrange
   vector<word> opcodes = { 0x801E, 0x812E, 0x823E, 0x834E, 0x845E };
   vector<chip8::byte> regs = { 0x60, 0x50, 0x40, 0x40, 0x20, 0x01};
   vector<chip8::byte> expected(opcodes.size());
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<ShiftLeftInstruction>(opcodes);
+  setupContext<ShiftLeftInstruction>(regs, opcodes);
 
   for (size_t i = 0; i < n; i += 1) {
     expected[i] = static_cast<chip8::byte>(regs[i] << 1);
@@ -40,18 +29,14 @@ TEST(ShiftLeftInstructionTest, Shift) {
 }
 
 
-TEST(ShiftLeftInstructionTest, Flag) {
+TEST_F(InstructionTest, ShiftLeftFlag) {
   // Arrange
   vector<word> opcodes = { 0x801E, 0x812E, 0x823E, 0x834E, 0x845E };
   vector<chip8::byte> regs = { 0xF0, 0xF1, 0x01, 0x40, 0xD0, 0x60};
   vector<chip8::byte> expected = { 1, 1, 0, 0, 1};
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<ShiftLeftInstruction>(opcodes);
+  setupContext<ShiftLeftInstruction>(regs, opcodes);
 
   // Act
   for (size_t i = 0; i < n; i += 1) {

@@ -36,8 +36,7 @@ TEST(CompilerTest, UnexpectedOpcode) {
   MachineSpecification spec;
   bool enable_checks = true;
   Compiler compiler(spec, enable_checks);
-
-  // Act
+  
   // Assert
   EXPECT_THROW( { 
     compiler.compile(text);

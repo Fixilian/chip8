@@ -5,15 +5,10 @@
 #include <vector>
 
 #include "instruction/ExecutionContext.h"
-#include "instruction/Instruction.h"
 #include "keyboard/KeyboardMonitor.h"
 #include "memory/Memory.h"
 
 namespace chip8 {
-
-template <typename T>
-std::vector<std::unique_ptr<Instruction>> 
-createInstructions(std::vector<word> opcodes);
 
 std::unique_ptr<Memory> createMemory();
 std::unique_ptr<Memory> createMemory(int size, int reserve);
@@ -37,17 +32,6 @@ std::unique_ptr<ExecutionContext> createContextWithRegisters(
   std::vector<byte> regs, 
   Memory& mem, 
   KeyboardMonitor& keyboard);
-
-
-template <typename T>
-std::vector<std::unique_ptr<Instruction>> 
-createInstructions(std::vector<word> opcodes) {
-  std::vector<std::unique_ptr<Instruction>> ins(opcodes.size());
-  for (size_t i = 0; i < opcodes.size(); i += 1) {
-    ins[i] = std::make_unique<T>(opcodes[i]);
-  }
-  return ins;
-}
 
 
 } // namespace chip8

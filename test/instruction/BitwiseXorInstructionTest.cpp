@@ -1,27 +1,16 @@
-#include <gtest/gtest.h>
+#include "InstructionFixture.h"
 
-#include <vector>
-
-#include "base/BitOperations.h"
 #include "instruction/BitwiseXorInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(BitwiseXorInstructionTest, BitwiseXor) {
+TEST_F(InstructionTest, BitwiseXor) {
   // Arrange
   vector<word> opcodes = { 0x8013, 0x8123, 0x8233, 0x8343, 0x8453 };
   vector<chip8::byte> regs = { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60};
   vector<chip8::byte> expected(opcodes.size());
   vector<chip8::byte> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<BitwiseXorInstruction>(opcodes);
+  setupContext<BitwiseXorInstruction>(regs, opcodes);
 
   for (size_t i = 0; i < n; i += 1) {
     expected[i] = static_cast<chip8::byte>(regs[i] ^ regs[i + 1]);

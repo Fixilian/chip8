@@ -1,27 +1,16 @@
-#include <gtest/gtest.h>
+#include "InstructionFixture.h"
 
-#include <vector>
-
-#include "base/BitOperations.h"
 #include "instruction/SkipIfNotPressedInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(SkipIfNotPressedInstructionTest, Skip) {
+TEST_F(InstructionTest, SkipIfNotPressed) {
   // Arrange
   vector<word> opcodes = { 0xE0A1, 0xE1A1, 0xE2A1, 0xE3A1, 0xE4A1 };
   vector<chip8::byte> regs = { 0x00, 0x01, 0x02, 0x03, 0x04 };
   vector<bool> pressed = {1, 0, 0, 1, 1};
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor(pressed);
-  auto mem = createMemory();
-  auto ctx = createContextWithRegisters(regs, *mem, *keyboard);
-  auto ins = createInstructions<SkipIfNotPressedInstruction>(opcodes);
+  setupContext<SkipIfNotPressedInstruction>(pressed, regs, opcodes);
 
   vector<const chip8::byte*> expected = {
     ctx->pc, ctx->pc + kPcStep, 

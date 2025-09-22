@@ -1,26 +1,16 @@
-#include <gtest/gtest.h>
-
-#include <vector>
+#include "InstructionFixture.h"
 
 #include "base/BitOperations.h"
 #include "instruction/JumpInstruction.h"
-#include "TestObjectFactory.h"
-
-using namespace std;
-using namespace chip8;
 
 
-TEST(JumpInstructionTest, Jump) {
+TEST_F(InstructionTest, Jump) {
   // Arrange
   vector<word> opcodes = { 0x1600, 0x1700, 0x1800, 0x1900, 0x1999 };
   vector<const chip8::byte*> expected(opcodes.size());
   vector<const chip8::byte*> actual(opcodes.size());
   size_t n = opcodes.size();
-
-  auto keyboard = createKeyboardMonitor();
-  auto mem = createMemory();
-  auto ctx = createContext(*mem, *keyboard);
-  auto ins = createInstructions<JumpInstruction>(opcodes);
+  setupContext<JumpInstruction>(opcodes);
   
   for (size_t i = 0; i < n; i += 1) {
     word jmp = lowest12BitsOf(opcodes[i]);
