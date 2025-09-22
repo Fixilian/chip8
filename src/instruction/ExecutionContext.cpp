@@ -80,22 +80,24 @@ string ExecutionContext::toString() const {
   stringstream stream;
   word cur_pc = static_cast<word>(pc - ram.mem());
   stream << "PC=" << cur_pc << " I=" << i << '\n';
-  stream << setw(6);
+  stream << setfill(' ');
   int n = static_cast<int>(registers.size());
   for (int i = 0; i < n; i += 1) {
-    stream << i;
+    stream << setw(6) << i;
   }
   stream << '\n';
   for (int i = 0; i < n; i += 1) {
-    stream << registers[i];
+    unsigned int val = registers[i];
+    stream << setw(6) << to_string(val);
   }
-  stream << '\n';
-  stream << setw(1);
-  stream << "Stack: {\n";
-  for (auto val : stack) {
-    stream << val << '\n';
-  } 
-  stream << '}';
+  if (!stack.empty()) {
+    stream << '\n';
+    stream << "Stack: {\n";
+    for (auto val : stack) {
+      stream << val << '\n';
+    } 
+    stream << '}';
+  }
   return stream.str();
 }
 
