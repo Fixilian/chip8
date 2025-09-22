@@ -18,8 +18,8 @@ ShiftRightInstruction::ShiftRightInstruction(word opcode)
 void ShiftRightInstruction::execute(ExecutionContext& ctx) {
   word x = getXFrom(opcode_);
   byte bit = leastSignificantBitOf(ctx.registers[x]);
-  ctx.registers[kFlagRegister] = bit;
   ctx.registers[x] >>= 1;
+  ctx.registers[kFlagRegister] = bit;
 }
 
 

@@ -19,12 +19,9 @@ void AddRegisterInstruction::execute(ExecutionContext& ctx) {
   word x = getXFrom(opcode_);
   word y = getYFrom(opcode_);
   unsigned int sum = ctx.registers[x] + ctx.registers[y];
-  if (sum > kByteMax) {
-    ctx.registers[kFlagRegister] = 1;
-  } else {
-    ctx.registers[kFlagRegister] = 0;
-  }
+  bool flag = sum > kByteMax;
   ctx.registers[x] += ctx.registers[y];
+  ctx.registers[kFlagRegister] = flag;
 }
 
 
