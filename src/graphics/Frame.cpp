@@ -44,6 +44,16 @@ void Frame::setPixel(int x, int y, byte val) {
 }
 
 
+int Frame::getWidth() const {
+  return width_;
+}
+
+
+int Frame::getHeight() const {
+  return height_;
+}
+
+
 bool Frame::draw(const byte* sprite, int n, int x0, int y0) {
   int sw = kBits;
   int sh = n;
@@ -69,6 +79,7 @@ void Frame::copy(const Frame& frame) {
 
 string Frame::toString() const {
   stringstream stream;
+  stream << '\n';
   for (int y = 0; y < height_; y += 1) {
     for (int x = 0; x < width_; x += 1) {
       auto pixel = getPixel(x, y);
@@ -78,7 +89,9 @@ string Frame::toString() const {
         stream << '-';
       }
     }
-    stream << '\n';
+    if (y != height_ - 1) {
+      stream << '\n';
+    }
   }
   return stream.str();
 }

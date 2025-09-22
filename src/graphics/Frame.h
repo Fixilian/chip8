@@ -31,6 +31,9 @@ class Frame {
   byte getPixel(int x, int y) const;
   void setPixel(int x, int y, byte val);
 
+  int getWidth() const;
+  int getHeight() const;
+
   /**
    * Draws n byte length sprite at coordinates (x, y). 
    * If sprite is positioned so part of it is outside coordinates of frame, 
