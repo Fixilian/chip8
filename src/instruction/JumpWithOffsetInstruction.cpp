@@ -26,7 +26,7 @@ string JumpWithOffsetInstruction::toString() const {
   stringstream stream;
   word addr = lowest12BitsOf(opcode_);
   stream << "Jump addr+V0 [0x" << hex << opcode_ << "]" << dec;
-  stream << " addr=" << addr << '\n';
+  stream << " addr=" << addr;
   return stream.str();
 }
 

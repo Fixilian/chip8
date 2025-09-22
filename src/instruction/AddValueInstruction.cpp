@@ -28,7 +28,7 @@ string AddValueInstruction::toString() const {
   word kk = lowest8BitsOf(opcode_);
   stream << "Vx += kk [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
-  stream << " kk=" << kk << '\n';
+  stream << " kk=" << kk;
   return stream.str();
 }
 

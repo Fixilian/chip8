@@ -21,7 +21,7 @@ void SysJumpInstruction::execute(ExecutionContext& ctx) {
 
 string SysJumpInstruction::toString() const {
   stringstream stream;
-  stream << "Sys jump [0x" << hex << opcode_ << "]" << '\n';
+  stream << "Sys jump [0x" << hex << opcode_ << "]";
   return stream.str();
 }
 

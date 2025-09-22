@@ -26,7 +26,7 @@ string StoreBcdInstruction::toString() const {
   stringstream stream;
   word x = getXFrom(opcode_);
   stream << "Store Vx BCD [0x" << hex << opcode_ << "]" << dec;
-  stream << " x=" << x << '\n';
+  stream << " x=" << x;
   return stream.str();
 }
 

@@ -29,6 +29,8 @@ class FixedMemory : public Memory {
 
   virtual const byte* mem() const override;
 
+  virtual std::string toString() const override;
+
  private:
   int size_;
   int reserve_;

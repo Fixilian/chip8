@@ -28,7 +28,7 @@ string SkipIfPressedInstruction::toString() const {
   stringstream stream;
   word x = getXFrom(opcode_);
   stream << "Skip if not x [0x" << hex << opcode_ << "]" << dec;
-  stream << " x=" << x << '\n';
+  stream << " x=" << x;
   return stream.str();
 }
 

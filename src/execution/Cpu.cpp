@@ -37,6 +37,7 @@ void Cpu::execute(Rom rom) {
   timer.start(interval, [&] () { ctx_.updateTimers(); });
 
   running_ = true;
+  Log::trace(memory_.toString());
   while (running_) {
     auto pc = reinterpret_cast<const word*>(ctx_.pc);
     word opcode = *pc;

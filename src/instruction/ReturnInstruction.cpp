@@ -20,7 +20,7 @@ void ReturnInstruction::execute(ExecutionContext& ctx) {
 
 string ReturnInstruction::toString() const {
   stringstream stream;
-  stream << "Ret [0x" << hex << opcode_ << "]" << '\n';
+  stream << "Ret [0x" << hex << opcode_ << "]";
   return stream.str();
 }
 

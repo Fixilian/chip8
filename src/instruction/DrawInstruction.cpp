@@ -35,7 +35,7 @@ string DrawInstruction::toString() const {
   stream << "Draw (Vx, Vy) [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
   stream << " y=" << y;
-  stream << " len=" << nibble << '\n';
+  stream << " len=" << nibble;
   return stream.str();
 }
 

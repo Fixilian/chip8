@@ -21,7 +21,7 @@ void ClearDisplayInstruction::execute(ExecutionContext& ctx) {
 
 string ClearDisplayInstruction::toString() const {
   stringstream stream;
-  stream << "Clear [0x" << hex << opcode_ << "]" << '\n';
+  stream << "Clear [0x" << hex << opcode_ << "]";
   return stream.str();
 }
 

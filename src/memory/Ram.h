@@ -1,6 +1,8 @@
 #ifndef CHIP8_MEMORY_RAM_H
 #define CHIP8_MEMORY_RAM_H
 
+#include <string>
+
 #include "base/Aliases.h"
 
 namespace chip8 {
@@ -31,6 +33,8 @@ class Ram {
    * @returns raw pointer to memory start.
    */
   virtual const byte* mem() const = 0;
+
+  virtual std::string toString() const = 0;
 };
 
 } // namespace chip8

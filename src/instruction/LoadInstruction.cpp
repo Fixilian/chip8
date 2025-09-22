@@ -28,7 +28,7 @@ string LoadInstruction::toString() const {
   stringstream stream;
   word x = getXFrom(opcode_);
   stream << "Load V0-Vx [0x" << hex << opcode_ << "]" << dec;
-  stream << " x=" << x << '\n';
+  stream << " x=" << x;
   return stream.str();
 }
 

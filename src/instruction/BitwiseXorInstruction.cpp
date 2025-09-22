@@ -28,7 +28,7 @@ string BitwiseXorInstruction::toString() const {
   word y = getYFrom(opcode_);
   stream << "Vx ^= kk [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
-  stream << " y=" << y << '\n';
+  stream << " y=" << y;
   return stream.str();
 }
 

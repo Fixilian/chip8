@@ -95,7 +95,7 @@ string ExecutionContext::toString() const {
   for (auto val : stack) {
     stream << val << '\n';
   } 
-  stream << "}\n";
+  stream << '}';
   return stream.str();
 }
 

@@ -33,7 +33,7 @@ string SubnInstruction::toString() const {
   word y = getYFrom(opcode_);
   stream << "Vx = Vy - Vx [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
-  stream << " y=" << y << '\n';
+  stream << " y=" << y;
   return stream.str();
 }
 

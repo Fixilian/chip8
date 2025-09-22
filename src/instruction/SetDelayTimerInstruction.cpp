@@ -25,7 +25,7 @@ string SetDelayTimerInstruction::toString() const {
   stringstream stream;
   word x = getXFrom(opcode_);
   stream << "DT = Vx [0x" << hex << opcode_ << "]" << dec;
-  stream << " x=" << x << '\n';
+  stream << " x=" << x;
   return stream.str();
 }
 

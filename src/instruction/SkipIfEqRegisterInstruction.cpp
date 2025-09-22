@@ -30,7 +30,7 @@ string SkipIfEqRegisterInstruction::toString() const {
   word y = getYFrom(opcode_);
   stream << "Skip if Vx=Vy [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
-  stream << " y=" << y << '\n';
+  stream << " y=" << y;
   return stream.str();
 }
 

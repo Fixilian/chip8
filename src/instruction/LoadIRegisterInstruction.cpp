@@ -25,7 +25,7 @@ string LoadIRegisterInstruction::toString() const {
   stringstream stream;
   word addr = lowest12BitsOf(opcode_);
   stream << "I = addr [0x" << hex << opcode_ << "]" << dec;
-  stream << " addr=" << addr << '\n';
+  stream << " addr=" << addr;
   return stream.str();
 }
 

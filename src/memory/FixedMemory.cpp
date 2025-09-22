@@ -1,10 +1,13 @@
 #include "FixedMemory.h"
 
 #include <cstring>
+#include <sstream>
 
 #include "base/Log.h"
 #include "exception/SegFaultException.h"
 #include "exception/OutOfRangeException.h"
+
+using namespace std;
 
 namespace chip8 {
 
@@ -99,6 +102,14 @@ const byte* FixedMemory::getDigitSprite(int digit) {
 
 const byte* FixedMemory::mem() const {
   return mem_;
+}
+
+
+string FixedMemory::toString() const {
+  stringstream stream;
+  stream << "Memory [size=" << size_ << ", reserve=" << reserve_;
+  stream << ", user_space_begin=" << user_mem_begin_ << "]";
+  return stream.str();
 }
 
 

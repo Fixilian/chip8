@@ -27,7 +27,7 @@ string CallInstruction::toString() const {
   stringstream stream;
   word addr = lowest12BitsOf(opcode_);
   stream << "Call addr [0x" << hex << opcode_ << "]" << dec;
-  stream << " addr=" << addr << '\n';
+  stream << " addr=" << addr;
   return stream.str();
 }
 

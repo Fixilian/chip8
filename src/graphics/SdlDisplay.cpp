@@ -44,7 +44,7 @@ void SdlDisplay::render(const Frame& frame) {
   // start with a blank canvas
   SDL_RenderClear(renderer_);
 
-  //Log::debug("Frame:\n{}", frame.toString().c_str());
+  Log::trace(frame.toString());
   int cell_w = kScreenWidth / width_;
   int cell_h = kScreenHeight / height_;
   SDL_FRect rect;

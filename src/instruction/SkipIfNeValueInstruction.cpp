@@ -30,7 +30,7 @@ string SkipIfNeValueInstruction::toString() const {
   word kk = lowest8BitsOf(opcode_);
   stream << "Skip if Vx!=kk [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
-  stream << " kk=" << kk << '\n';
+  stream << " kk=" << kk;
   return stream.str();
 }
 

@@ -32,7 +32,7 @@ string RandomInstruction::toString() const {
   word kk = lowest8BitsOf(opcode_);
   stream << "Vx = rand & kk [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
-  stream << " kk=" << kk << '\n';
+  stream << " kk=" << kk;
   return stream.str();
 }
 
