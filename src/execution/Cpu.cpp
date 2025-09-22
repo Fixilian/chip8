@@ -45,11 +45,14 @@ void Cpu::execute(Rom rom) {
     if (detector.endOfProgram(opcode)) {
       break;
     }
+    // we can increase PC only 
+    // after detector.endOfProgram 
+    // and before executing instruction
+    ctx_.pc += kPcStep;
     InstructionPtr ins = decoder_->decode(opcode);
     Log::trace(ins->toString());
     ins->execute(ctx_);
     Log::trace(ctx_.toString());
-    ctx_.pc += kPcStep;
   }
   
   timer.stop();
