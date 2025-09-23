@@ -1,6 +1,7 @@
 #ifndef CHIP8_KEYBOARD_HEXKEYBOARDMONITOR_H
 #define CHIP8_KEYBOARD_HEXKEYBOARDMONITOR_H
 
+#include <atomic>
 #include <condition_variable>
 #include <mutex>
 #include <vector>
@@ -9,6 +10,13 @@
 #include "KeyboardMonitor.h"
 
 namespace chip8 {
+
+enum class KeyState {
+  Requested,
+  Pressed,
+  Released,
+  Received
+};
 
 /**
  * 16-key hexadecimal keyboard monitor.
@@ -34,7 +42,7 @@ class HexKeyboardMonitor : public KeyboardMonitor {
   std::vector<bool> pressed_;
   std::condition_variable cv_;
   std::mutex mtx_;
-  bool key_pressed_;
+  std::atomic<KeyState> key_state_;
   byte last_pressed_key_;
 
   void checkKey(byte key);

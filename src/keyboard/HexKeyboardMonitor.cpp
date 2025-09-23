@@ -8,25 +8,29 @@ namespace chip8 {
 
 
 HexKeyboardMonitor::HexKeyboardMonitor() 
-    : pressed_(kNumberOfKeys)
+    : pressed_(kNumberOfKeys),
+      key_state_(KeyState::Received),
+      last_pressed_key_(kNumberOfKeys)
 {}
 
 
 void HexKeyboardMonitor::onKeyPressed(byte key) {
   checkKey(key);
   pressed_[key] = true;
-  {
-    lock_guard<mutex> lock(mtx_);
+  if (key_state_ == KeyState::Requested) {
     last_pressed_key_ = key;
-    key_pressed_ = true;
+    key_state_ = KeyState::Pressed;
   }
-  cv_.notify_all();
 }
 
 
 void HexKeyboardMonitor::onKeyReleased(byte key) {
   checkKey(key);
   pressed_[key] = false;
+  if (key_state_ == KeyState::Pressed && key == last_pressed_key_) {
+    key_state_ = KeyState::Released;
+    cv_.notify_all();
+  }
 }
 
 
@@ -47,9 +51,10 @@ byte HexKeyboardMonitor::waitKeyPress() {
   byte key = 0;
   {
     unique_lock<mutex> lock(mtx_);
-    cv_.wait(lock, [&] { return key_pressed_; });
+    key_state_ = KeyState::Requested;
+    cv_.wait(lock, [&] { return key_state_ == KeyState::Released; });
     key = last_pressed_key_;
-    key_pressed_ = false;
+    key_state_ = KeyState::Received;
   }
   return key;
 }
