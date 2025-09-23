@@ -132,7 +132,6 @@ void SdlEventLoop::onCustomEvent(const SDL_Event& e) {
 
 
 void SdlEventLoop::onRedraw() {
-  Log::debug("Event loop redraw event");
   spin_.lock();
   display_->render(frame_);
   spin_.unlock();

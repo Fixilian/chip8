@@ -43,7 +43,7 @@ bool Log::init(bool enable_console) {
     if (enable_console) {
       spdlog::stdout_logger_mt("console_log"); 
     }
-    // spdlog::basic_logger_mt("file_log", "log.txt"); 
+    spdlog::basic_logger_mt("file_log", "log.txt"); 
   } catch (const spdlog::spdlog_ex &ex) {
     std::cout << "Log init failed: " << ex.what() << '\n';
     return false;
