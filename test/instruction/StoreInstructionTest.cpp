@@ -17,6 +17,7 @@ TEST_F(InstructionTest, Store) {
   ins.execute(*ctx);
 
   // Assert
+  ctx->i = static_cast<word>(mem_reserve);
   for (int i = 0; i < n; i += 1) {
     EXPECT_EQ(ctx->ram[ctx->i + i], regs[i]);
   }
