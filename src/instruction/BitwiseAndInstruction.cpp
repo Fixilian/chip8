@@ -19,6 +19,7 @@ void BitwiseAndInstruction::execute(ExecutionContext& ctx) {
   word x = getXFrom(opcode_);
   word y = getYFrom(opcode_);
   ctx.registers[x] &= ctx.registers[y];
+  ctx.registers[kFlagRegister] = 0;
 }
 
 
