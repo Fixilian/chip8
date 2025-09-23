@@ -57,6 +57,12 @@ int Frame::getHeight() const {
 bool Frame::draw(const byte* sprite, int n, int x0, int y0) {
   int sw = kBits;
   int sh = n;
+  if (x0 >= width_) {
+    x0 %= width_;
+  }
+  if (y0 >= height_) {
+    y0 %= height_;
+  }
   if (x0 % sw == 0) {
     return drawAligned(sprite, sh, x0 / sw, y0);
   } else {
@@ -101,12 +107,15 @@ bool Frame::drawAligned(const byte* sprite, int sh, int x0, int y0) {
   bool collision_happened = false;
   for (int y = 0; y < sh; y += 1) {
     byte s = sprite[y];
-    byte f = getByte(x0, y0 + y);
-    byte nbyte = f ^ s;
-    if (nbyte ^ s) {
-      collision_happened = true;
+    int fy = y0 + y;
+    if (fy < height_) {
+      byte f = getByte(x0, fy);
+      byte nbyte = f ^ s;
+      if (nbyte ^ s) {
+        collision_happened = true;
+      }
+      setByte(x0, fy, nbyte);
     }
-    setByte(x0, y0 + y, nbyte);
   }
   return collision_happened;
 }
@@ -119,14 +128,16 @@ bool Frame::drawNotAligned(const byte* sprite, int sh, int x0, int y0) {
     byte s = sprite[y];
     for (int x = 0; x < sw; x += 1) {
       byte spixel = getBit(s, x);
-      int fx = (x + x0) % width_;
-      int fy = (y + y0) % height_;
-      byte fpixel = getPixel(fx, fy);
-      byte npixel = spixel ^ fpixel;
-      if (npixel ^ spixel) {
-        collision_happened = true;
+      int fx = x + x0;
+      int fy = y + y0;
+      if (fx < width_ && fy < height_) {
+        byte fpixel = getPixel(fx, fy);
+        byte npixel = spixel ^ fpixel;
+        if (npixel ^ spixel) {
+          collision_happened = true;
+        }
+        setPixel(fx, fy, npixel);
       }
-      setPixel(fx, fy, npixel);
     }
   }
   return collision_happened;

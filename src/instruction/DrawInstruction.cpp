@@ -24,7 +24,8 @@ void DrawInstruction::execute(ExecutionContext& ctx) {
   const byte* sprite = ctx.ram.mem() + ctx.i;
   byte x0 = ctx.registers[x];
   byte y0 = ctx.registers[y];
-  ctx.frame.draw(sprite, nibble, x0, y0);
+  bool collision = ctx.frame.draw(sprite, nibble, x0, y0);
+  ctx.registers[kFlagRegister] = collision;
   ctx.notifyFrameListeners();
   Log::trace(ctx.frame.toString());
 }
