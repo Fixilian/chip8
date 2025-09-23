@@ -17,6 +17,8 @@ ShiftLeftInstruction::ShiftLeftInstruction(word opcode)
 
 void ShiftLeftInstruction::execute(ExecutionContext& ctx) {
   word x = getXFrom(opcode_);
+  word y = getYFrom(opcode_);
+  ctx.registers[x] = ctx.registers[y];
   byte bit = mostSignificantBitOf(ctx.registers[x]);
   ctx.registers[x] <<= 1;
   ctx.registers[kFlagRegister] = bit;
@@ -26,8 +28,10 @@ void ShiftLeftInstruction::execute(ExecutionContext& ctx) {
 string ShiftLeftInstruction::toString() const {
   stringstream stream;
   word x = getXFrom(opcode_);
-  stream << "Vx <<= 1 [0x" << hex << opcode_ << "]" << dec;
+  word y = getYFrom(opcode_);
+  stream << "Vx = Vy << 1 [0x" << hex << opcode_ << "]" << dec;
   stream << " x=" << x;
+  stream << " y=" << y;
   return stream.str();
 }
 
