@@ -56,6 +56,8 @@ class ExecutionContext {
 
   void notifyFrameListeners();
 
+  bool areListenersReady();
+
   std::string toString() const;
 
  private:

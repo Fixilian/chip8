@@ -1,7 +1,9 @@
 #include "SdlEventLoop.h"
 
+#include <chrono>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <thread>
 
 #include "base/Log.h"
 #include "base/Spinlock.h"
@@ -17,7 +19,8 @@ SdlEventLoop::SdlEventLoop(int w, int h, const KeybindTable& binds)
       frame_(w, h),
       running_(false),
       binds_(binds),
-      redraw_event_type_(0)
+      redraw_event_type_(0),
+      drawing_(false)
 {}
 
 
@@ -70,6 +73,7 @@ void SdlEventLoop::stop() {
 
 void SdlEventLoop::onChange(const Frame& frame) {
   spin_.lock();
+  drawing_ = true;
   frame_.copy(frame);
   spin_.unlock();
   SDL_Event e;
@@ -79,6 +83,11 @@ void SdlEventLoop::onChange(const Frame& frame) {
   if (!success) {
     Log::error("Redraw event push failed: {}", SDL_GetError());
   }
+}
+
+
+bool SdlEventLoop::isReady() const {
+  return !drawing_;
 }
 
 
@@ -132,8 +141,11 @@ void SdlEventLoop::onCustomEvent(const SDL_Event& e) {
 
 
 void SdlEventLoop::onRedraw() {
+  constexpr chrono::milliseconds interval(16); // 60 Hz
+  this_thread::sleep_for(interval);
   spin_.lock();
   display_->render(frame_);
+  drawing_ = false;
   spin_.unlock();
 }
 

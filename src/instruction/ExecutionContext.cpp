@@ -76,6 +76,16 @@ void ExecutionContext::notifyFrameListeners() {
 }
 
 
+bool ExecutionContext::areListenersReady() {
+  for (size_t i = 0; i < frame_listeners_.size(); i += 1) {
+    if (!frame_listeners_[i]->isReady()) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
 string ExecutionContext::toString() const {
   stringstream stream;
   word cur_pc = static_cast<word>(pc - ram.mem());

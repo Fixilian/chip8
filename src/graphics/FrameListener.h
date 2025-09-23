@@ -10,6 +10,8 @@ class FrameListener {
   virtual ~FrameListener() {}
 
   virtual void onChange(const Frame& frame) = 0;
+
+  virtual bool isReady() const = 0;
 };
 
 } // namespace chip8

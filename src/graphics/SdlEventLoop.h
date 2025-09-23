@@ -29,6 +29,8 @@ class SdlEventLoop : public EventLoop {
 
   virtual void onChange(const Frame& frame) override;
 
+  virtual bool isReady() const override;
+
   virtual void addEventListener(EventListener& listener) override;
 
   virtual void addKeyListener(KeyListener& listener) override;
@@ -42,6 +44,7 @@ class SdlEventLoop : public EventLoop {
   std::atomic<bool> running_;
   const KeybindTable& binds_;
   Uint32 redraw_event_type_;
+  bool drawing_;
 
   void onQuit();
   void onKeyDown(const SDL_Event& e);

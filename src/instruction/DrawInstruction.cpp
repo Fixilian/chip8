@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "base/BitOperations.h"
+#include "base/Log.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ DrawInstruction::DrawInstruction(word opcode)
 
 
 void DrawInstruction::execute(ExecutionContext& ctx) {
+  while (!ctx.areListenersReady()) { /* wait listeners*/ }
   word x = getXFrom(opcode_);
   word y = getYFrom(opcode_);
   word nibble = lowest4BitsOf(opcode_);
@@ -24,6 +26,7 @@ void DrawInstruction::execute(ExecutionContext& ctx) {
   byte y0 = ctx.registers[y];
   ctx.frame.draw(sprite, nibble, x0, y0);
   ctx.notifyFrameListeners();
+  Log::trace(ctx.frame.toString());
 }
 
 
