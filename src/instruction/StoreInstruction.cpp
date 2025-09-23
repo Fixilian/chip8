@@ -18,7 +18,8 @@ StoreInstruction::StoreInstruction(word opcode)
 void StoreInstruction::execute(ExecutionContext& ctx) {
   word x = getXFrom(opcode_);
   for (word i = 0; i <= x; i += 1) {
-    ctx.ram[ctx.i + i] = ctx.registers[i];
+    ctx.ram[ctx.i] = ctx.registers[i];
+    ctx.i += 1;
   }
 }
 
