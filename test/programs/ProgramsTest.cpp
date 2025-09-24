@@ -1,7 +1,10 @@
 #include <gtest/gtest.h>
 
+#include <chrono>
+#include <functional>
 #include <iostream>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "base/Endian.h"
@@ -14,10 +17,18 @@ using namespace std;
 using namespace chip8;
 
 
+using Callback = function<void(Cpu&, KeyboardMonitor&)>;
+
+
 class ProgramTest : public testing::Test {
  protected:
 
-  bool test(const string& rom_file, const string& expected_file) {
+  bool test(
+    const string& rom_file, 
+    const string& expected_file, 
+    chip8::byte mode, 
+    Callback& cpu_terminate) 
+  {
     // Arrange
     string dir = "roms/";
     string rom_path = dir + rom_file;
@@ -33,13 +44,31 @@ class ProgramTest : public testing::Test {
     ExecutionContext ctx(stack_size, frame_w, frame_h, *mem, *keyboard); 
     Cpu cpu(*mem, ctx, Endianness::BigEndian);
     vector<int> expected = readResultFile(expected_path, 1024 + frame_h * frame_w);
+    thread t;
+    if (mode > 0) {
+      word addr = 0x1FF;
+      mem->setSysMemoryProtectionEnabled(false);
+      (*mem)[addr] = mode;
+      mem->setSysMemoryProtectionEnabled(true);
+      t = thread([&cpu, &keyboard, &cpu_terminate]() {
+        cpu_terminate(cpu, *keyboard);
+      });
+    }
 
     // Act
     cpu.execute(rom);
 
     // Assert
+    if (t.joinable()) {
+      t.join();
+    }
     bool result = check(ctx.frame, expected);
     return result;
+  }
+
+  bool test(const string& rom_file, const string& expected_file) {
+    Callback callback = [] (Cpu&, KeyboardMonitor&) {};
+    return test(rom_file, expected_file, 0, callback);
   }
 
   vector<int> readResultFile(const string& filename, int max_size) {
@@ -97,4 +126,26 @@ TEST_F(ProgramTest, Correctness) {
   for (bool x : actual) {
     EXPECT_TRUE(x);
   }
+}
+
+
+TEST_F(ProgramTest, Quirks) {
+  // Arrange
+  string rom_src = "quirks.ch8";
+  string expected_src = "quirks.txt";
+  vector<bool> actual;
+  chip8::byte mode = 1; // choose CHIP8
+  Callback callback = [] (Cpu& cpu, KeyboardMonitor& keyboard) {
+    chrono::seconds interval{4};
+    this_thread::sleep_for(interval);
+    keyboard.onKeyPressed(0xF);
+    keyboard.onKeyReleased(0xF);
+    cpu.stop();
+  };
+
+  // Act
+  bool result = test(rom_src, expected_src, mode, callback);
+
+  // Assert
+  EXPECT_TRUE(result);
 }
