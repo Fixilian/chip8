@@ -27,7 +27,6 @@ void Timer::start(chrono::milliseconds interval, function<void()> callback) {
       }
     }
   });
-  thread_.detach();
 }
 
 
