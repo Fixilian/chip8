@@ -16,6 +16,7 @@ FixedMemory::FixedMemory(int size, int reserve)
     : size_(size),
       reserve_(reserve),
       user_mem_begin_(reserve),
+      sys_mem_protection_enabled_(true),
       mem_(new byte[size]),
       rom_begin_(nullptr),
       rom_end_(nullptr),
@@ -77,11 +78,13 @@ const byte* FixedMemory::getRomEnd() {
 
 
 byte& FixedMemory::operator[](int index) {
-  if (index < reserve_ || index >= size_) {
-    throw SegFaultException("Attempt to access system memory");
-  }
-  if (index < user_mem_begin_) {
-    Log::warn("Rewriting rom in runtime");
+  if (sys_mem_protection_enabled_) {
+    if (index < reserve_ || index >= size_) {
+      throw SegFaultException("Attempt to access system memory");
+    }
+    if (index < user_mem_begin_) {
+      Log::warn("Rewriting rom in runtime");
+    }
   }
   return mem_[index];
 }
@@ -89,6 +92,16 @@ byte& FixedMemory::operator[](int index) {
 
 const byte& FixedMemory::operator[](int index) const {
   return mem_[index];
+}
+
+
+bool FixedMemory::isSysMemoryProtectionEnabled() const {
+  return sys_mem_protection_enabled_;
+}
+
+
+void FixedMemory::setSysMemoryProtectionEnabled(bool val) {
+  sys_mem_protection_enabled_ = val;
 }
 
 

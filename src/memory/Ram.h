@@ -22,6 +22,9 @@ class Ram {
   virtual byte& operator[](int index) = 0;
   virtual const byte& operator[](int index) const = 0;
 
+  virtual bool isSysMemoryProtectionEnabled() const = 0;
+  virtual void setSysMemoryProtectionEnabled(bool val) = 0;
+
   /**
    * Returns digit sprite begin pointer. 
    * @returns digit sprite begin pointer.

@@ -25,6 +25,9 @@ class FixedMemory : public Memory {
   virtual byte& operator[](int index) override;
   virtual const byte& operator[](int index) const override;
 
+  virtual bool isSysMemoryProtectionEnabled() const override;
+  virtual void setSysMemoryProtectionEnabled(bool val) override;
+
   virtual const byte* getDigitSprite(int digit) override;
 
   virtual const byte* mem() const override;
@@ -35,6 +38,7 @@ class FixedMemory : public Memory {
   int size_;
   int reserve_;
   int user_mem_begin_;
+  bool sys_mem_protection_enabled_;
   byte* mem_;
   byte* rom_begin_;
   byte* rom_end_;
