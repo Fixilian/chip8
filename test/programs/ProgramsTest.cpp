@@ -149,3 +149,75 @@ TEST_F(ProgramTest, Quirks) {
   // Assert
   EXPECT_TRUE(result);
 }
+
+
+TEST_F(ProgramTest, KeyDown) {
+  // Arrange
+  string rom_src = "keypad.ch8";
+  string expected_src = "keypad_highlighted.txt";
+  vector<bool> actual;
+  chip8::byte mode = 1; // choose key DOWN
+  Callback callback = [] (Cpu& cpu, KeyboardMonitor& keyboard) {
+    for (chip8::byte i = 0; i <= 0xF; i += 1) {
+      keyboard.onKeyPressed(i);
+    }
+    chrono::seconds interval{1};
+    this_thread::sleep_for(interval);
+    cpu.stop();
+  };
+
+  // Act
+  bool result = test(rom_src, expected_src, mode, callback);
+
+  // Assert
+  EXPECT_TRUE(result);
+}
+
+
+TEST_F(ProgramTest, KeyUp) {
+  // Arrange
+  string rom_src = "keypad.ch8";
+  string expected_src = "keypad.txt";
+  vector<bool> actual;
+  chip8::byte mode = 2; // choose key UP
+  Callback callback = [] (Cpu& cpu, KeyboardMonitor& keyboard) {
+    for (chip8::byte i = 0; i <= 0xF; i += 1) {
+      keyboard.onKeyPressed(i);
+    }
+    chrono::seconds interval{1};
+    this_thread::sleep_for(interval);
+    cpu.stop();
+  };
+
+  // Act
+  bool result = test(rom_src, expected_src, mode, callback);
+
+  // Assert
+  EXPECT_TRUE(result);
+}
+
+
+TEST_F(ProgramTest, GetKey) {
+  // Arrange
+  string rom_src = "keypad.ch8";
+  string expected_src = "all_good.txt";
+  vector<bool> actual;
+  chip8::byte mode = 3; // choose GETKEY
+  Callback callback = [] (Cpu& cpu, KeyboardMonitor& keyboard) {
+    chrono::milliseconds interval{500};
+    this_thread::sleep_for(interval);
+    keyboard.onKeyPressed(0xF);
+    keyboard.onKeyReleased(0xF);
+    this_thread::sleep_for(interval);
+    keyboard.onKeyPressed(0xF);
+    keyboard.onKeyReleased(0xF);
+    cpu.stop();
+  };
+
+  // Act
+  bool result = test(rom_src, expected_src, mode, callback);
+
+  // Assert
+  EXPECT_TRUE(result);
+}
+
