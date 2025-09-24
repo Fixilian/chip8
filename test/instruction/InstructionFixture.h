@@ -22,6 +22,7 @@ class InstructionTest : public testing::Test {
   {}
 
  protected:
+  Allocator allocator_;
   unique_ptr<KeyboardMonitor> keyboard;
   unique_ptr<Memory> mem;
   unique_ptr<ExecutionContext> ctx;
@@ -93,8 +94,6 @@ class InstructionTest : public testing::Test {
   }
 
  private: 
-  Allocator allocator_;
-
   template <typename T>
   void fillInstructions(vector<word> opcodes) {
     ins.reserve(opcodes.size());

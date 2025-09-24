@@ -91,8 +91,9 @@ TEST_F(FileIOTest, FromFileSuccess) {
   Rom rom = fromFile(tmpFile, 1024);
 
   // Assert
+  int n = static_cast<int>(opcodes.size());
   EXPECT_EQ(rom.size(), opcodes.size() * sizeof(word));
-  for (int i = 0; i < rom.size(); i++) {
+  for (int i = 0; i < n; i++) {
     EXPECT_EQ(rom.opcodes()[i], opcodes[i]);
   }
 }

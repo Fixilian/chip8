@@ -11,7 +11,7 @@ TEST_F(InstructionTest, Draw) {
   int h = 10;
   int sw = kBits;
   int sh = 5;
-  setupContextWithFrame(w * kBits, h);
+  setupContextWithFrame(w, h);
   DrawInstruction draw_ins(0xD015);
   auto sprite = mem->getDigitSprite(spriteNumber);
   chip8::byte x0 = 3;
