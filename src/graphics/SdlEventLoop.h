@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "base/Spinlock.h"
+#include "Buzzer.h"
 #include "configuration/KeybindTable.h"
 #include "Display.h"
 #include "EventLoop.h"
@@ -35,9 +36,16 @@ class SdlEventLoop : public EventLoop {
 
   virtual void addKeyListener(KeyListener& listener) override;
 
+  virtual void onTimerStart() override;
+
+  virtual void onTimerStop() override;
+
+  virtual void onTimerInterrupt() override;
+
  private:
   std::vector<EventListener*> event_listeners_;
   std::vector<KeyListener*> key_listeners_;
+  std::unique_ptr<Buzzer> buzzer_;
   std::unique_ptr<Display> display_;
   Spinlock spin_;
   Frame frame_;
@@ -45,6 +53,7 @@ class SdlEventLoop : public EventLoop {
   const KeybindTable& binds_;
   Uint32 redraw_event_type_;
   bool drawing_;
+  bool buzzer_enabled_;
 
   void onQuit();
   void onKeyDown(const SDL_Event& e);

@@ -35,6 +35,7 @@ set(SOURCES
   execution/EndOfProgramDetector.cpp
 
   graphics/Frame.cpp
+  graphics/SdlBuzzer.cpp
   graphics/SdlDisplay.cpp
   graphics/SdlEventLoop.cpp
 

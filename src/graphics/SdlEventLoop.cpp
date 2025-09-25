@@ -7,6 +7,7 @@
 
 #include "base/Log.h"
 #include "base/Spinlock.h"
+#include "SdlBuzzer.h"
 #include "SdlDisplay.h"
 
 using namespace std;
@@ -15,12 +16,14 @@ namespace chip8 {
 
 
 SdlEventLoop::SdlEventLoop(int w, int h, const KeybindTable& binds) 
-    : display_(make_unique<SdlDisplay>(w, h)),
+    : buzzer_(make_unique<SdlBuzzer>()),
+      display_(make_unique<SdlDisplay>(w, h)),
       frame_(w, h),
       running_(false),
       binds_(binds),
       redraw_event_type_(0),
-      drawing_(false)
+      drawing_(false),
+      buzzer_enabled_(false)
 {}
 
 
@@ -32,18 +35,18 @@ SdlEventLoop::~SdlEventLoop() {
 
 bool SdlEventLoop::init() {
   // Initialize SDL
-  if (SDL_Init(SDL_INIT_VIDEO) == false) {
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == false) {
     Log::error("SDL could not initialize! SDL error: {}", SDL_GetError());
     return false;
-  } else {
-    redraw_event_type_ = SDL_RegisterEvents(1);
-    if (redraw_event_type_ == static_cast<Uint32>(-1)) {
-      Log::error("SDL could not register events");
-      return false;
-    } else {
-      return display_->init();
-    }
+  } 
+
+  redraw_event_type_ = SDL_RegisterEvents(1);
+  if (redraw_event_type_ == static_cast<Uint32>(-1)) {
+    Log::error("SDL could not register events");
+    return false;
   }
+  
+  return display_->init() && buzzer_->init();
 }
 
 
@@ -62,6 +65,13 @@ void SdlEventLoop::start() {
         default: onCustomEvent(e); break;
       }
     }
+
+    if (buzzer_enabled_) {
+      buzzer_->buzz();
+    }
+
+    constexpr chrono::milliseconds interval(16); // 60 Hz
+    this_thread::sleep_for(interval);
   }
 }
 
@@ -99,6 +109,22 @@ void SdlEventLoop::addEventListener(EventListener& listener) {
 void SdlEventLoop::addKeyListener(KeyListener& listener) {
   key_listeners_.push_back(&listener);
 }
+
+
+void SdlEventLoop::onTimerStart() {
+  spin_.lock();
+  buzzer_enabled_ = true;
+  spin_.unlock();
+}
+
+void SdlEventLoop::onTimerStop() {
+  spin_.lock();
+  buzzer_enabled_ = false;
+  spin_.unlock();
+}
+
+
+void SdlEventLoop::onTimerInterrupt() {}
 
 
 void SdlEventLoop::onQuit() {
@@ -141,8 +167,6 @@ void SdlEventLoop::onCustomEvent(const SDL_Event& e) {
 
 
 void SdlEventLoop::onRedraw() {
-  constexpr chrono::milliseconds interval(16); // 60 Hz
-  this_thread::sleep_for(interval);
   spin_.lock();
   display_->render(frame_);
   drawing_ = false;

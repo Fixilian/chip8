@@ -3,11 +3,12 @@
 
 #include "EventListener.h"
 #include "FrameListener.h"
+#include "SoundTimerListener.h"
 #include "keyboard/KeyListener.h"
 
 namespace chip8 {
 
-class EventLoop : public FrameListener {
+class EventLoop : public FrameListener, public SoundTimerListener {
  public:
   virtual ~EventLoop() {}
 

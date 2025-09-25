@@ -10,6 +10,7 @@
 #include "base/Stack.h"
 #include "graphics/Frame.h"
 #include "graphics/FrameListener.h"
+#include "graphics/SoundTimerListener.h"
 #include "keyboard/KeyboardMonitor.h"
 #include "memory/Ram.h"
 
@@ -18,6 +19,12 @@ namespace chip8 {
 constexpr int kPcStep = 2; // programm counter step
 
 constexpr int kFlagRegister = 0xF; // flag register
+
+enum class StState {
+  Started,
+  Stopped,
+  Interrupted
+};
 
 /**
  * Program execution context.
@@ -58,6 +65,8 @@ class ExecutionContext {
 
   bool areListenersReady();
 
+  void addSoundTimerListener(SoundTimerListener& listener);
+
   std::string toString() const;
 
  private:
@@ -65,6 +74,12 @@ class ExecutionContext {
   std::atomic<byte> st_;
   Spinlock spin;
   std::vector<FrameListener*> frame_listeners_;
+  std::vector<SoundTimerListener*> st_listeners_;
+  StState st_state_;
+
+  void updateStState();
+
+  void notifySoundTimerListeners(StState state);
 };
 
 } // namespace chip8

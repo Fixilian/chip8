@@ -24,7 +24,8 @@ ExecutionContext::ExecutionContext(
       stack(stack_size),
       keyboard(keyboard),
       dt_(0),
-      st_(0)
+      st_(0),
+      st_state_(StState::Stopped)
 {}
  
 
@@ -61,6 +62,7 @@ void ExecutionContext::updateTimers() {
     dt_ -= 1;
   }
   spin.unlock();
+  updateStState();
 }
 
 
@@ -83,6 +85,47 @@ bool ExecutionContext::areListenersReady() {
     }
   }
   return true;
+}
+
+
+void ExecutionContext::addSoundTimerListener(SoundTimerListener& listener) {
+  st_listeners_.push_back(&listener);
+}
+
+
+void ExecutionContext::updateStState() {
+  switch (st_state_) {
+    case StState::Started:
+      if (st_ == 0) {
+        st_state_ = StState::Stopped;
+        notifySoundTimerListeners(st_state_);
+      } else {
+        notifySoundTimerListeners(StState::Interrupted);
+      }
+      break;
+
+    case StState::Stopped:
+      if (st_ > 0) {
+        st_state_ = StState::Started;
+        notifySoundTimerListeners(st_state_);
+      }
+      break;
+    
+    default: break;
+  }
+}
+
+
+void ExecutionContext::notifySoundTimerListeners(StState state) {
+  for (size_t i = 0; i < st_listeners_.size(); i += 1) {
+    auto& l = st_listeners_[i];
+    switch (state) {
+      case StState::Started: l->onTimerStart(); break;
+      case StState::Stopped: l->onTimerStop(); break;
+      case StState::Interrupted: l->onTimerInterrupt(); break;
+      default: break;
+    }
+  }
 }
 
 

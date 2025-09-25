@@ -153,6 +153,7 @@ static void execute(Rom rom, const Config& cfg, Endianness endian) {
   event_loop->addEventListener(event_loop_listener);
 
   ctx.addFrameListener(*event_loop);
+  ctx.addSoundTimerListener(*event_loop);
   Log::info("Hardware components successfully initialized");
 
   startEventLoopAndCpu(*event_loop, cpu, rom);
@@ -166,7 +167,7 @@ int Emulator::run(int argc, char** argv) {
   if (!success) {
     return 1;
   }
-  Log::setLevel(LogLevel::Trace);
+  Log::setLevel(LogLevel::Debug);
 
   auto args = parse(argc, argv);
   if (args.exit) {
