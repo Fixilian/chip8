@@ -1,0 +1,24 @@
+#ifndef CHIP8_INSTRUCTION_SKIPIFEQVALUEINSTRUCTION_H
+#define CHIP8_INSTRUCTION_SKIPIFEQVALUEINSTRUCTION_H
+
+#include "Instruction.h"
+
+namespace chip8 {
+
+/**
+ * 3xkk SE Vx, byte instruction.
+ */
+class SkipIfEqValueInstruction : public Instruction {
+ public:
+  SkipIfEqValueInstruction(word opcode);
+
+  virtual ~SkipIfEqValueInstruction() {};
+
+  virtual void execute(ExecutionContext& ctx) override;
+
+  virtual std::string toString() const override;
+};
+
+} // namespace chip8
+
+#endif // CHIP8_INSTRUCTION_SKIPIFEQVALUEINSTRUCTION_H
