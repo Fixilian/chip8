@@ -55,7 +55,7 @@ static Config getConfig(const CommandLineArguments& args) {
     Config c = readFromJson(json_cfg);
     cfg = std::move(c);
   } catch (const IOException& ex) {
-    Log::warn(ex.message());
+    Log::info(ex.message());
     Log::info("Cannot read cfg from file");
   }
 
